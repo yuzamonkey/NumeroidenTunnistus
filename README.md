@@ -5,9 +5,13 @@ Käsin kirjoitettujen numeroiden tunnistusohjelma. Ohjelma on tietorakenteiden j
 ## Dokumentaatio
 
 [Määrittelydokumentti](./documentation/design.md)
+
 [Toteutusdokumentti](./documentation/execution.md)
+
 [Testausdokumentti](./documentation/testing.md)
+
 [Käyttöohje](./documentation/manual.md)
+
 [Työaikakirjanpito](./documentation/worklog.md)
 
 ## Viikkoraportit
