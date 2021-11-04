@@ -1,2 +1,0 @@
-• opinto-ohjelma
-• projektin kieli
