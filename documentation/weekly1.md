@@ -1,6 +1,16 @@
 # Viikon 1 raportti
 
-## Mitä tapahtui
+#### Mitä olen tehnyt tällä viikolla?
 
-## Mitä tulee tapahtumaan
+Eri aiheiden vertailua, aiheen valinta, repositorion alustus
 
+#### Miten ohjelma on edistynyt?
+
+#### Mitä opin tällä viikolla / tänään?
+
+#### Mikä jäi epäselväksi tai tuottanut vaikeuksia?
+
+#### Mitä teen seuraavaksi?
+
+
+[Työaikakirjanpito](./documentation/worklog.md)

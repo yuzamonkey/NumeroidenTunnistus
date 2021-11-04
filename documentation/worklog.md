@@ -4,4 +4,4 @@
 
 Pvm       | h |  |
 -----------|------|--------|
-4.11.2021 | 10min, 1500 | Alusta git repo, määrittelydokumentti |
+4.11.2021 | 1h | Alusta git repo, dokumentaatiota |

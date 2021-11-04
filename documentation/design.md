@@ -14,7 +14,7 @@ Käsin kirjoitettujen numeroiden tunnistusohjelma tunnistaa numerot 0-9, ja pala
 ## Algoritmit ja tietorakenteet
 
 ## Miksi tämä aihe?
-Tavoitteenani on, joskus hamassa tulevaisuudessa, kirjoittaa ohjelma, joka ottaa syötteenään käsin kirjoitetun nuotin, ja palauttaa tiedoston, jota merkittävimmät nuotinkirjoitusohjelmat voivat lukea. Koska koodaustaitoni ei vielä tätä salli, on aloitettava jostakin... eh... "helposta". Tätä aihetta kohtaan on myös tarve lievälle kostolle; IntroToAI-kurssilla aihetta käsiteltiin yhden viikon laskareissa ohimennen, enkä silloin saanut kunnollista otetta aiheesta. 
+Tavoitteenani on, joskus hamassa tulevaisuudessa, kirjoittaa ohjelma, joka ottaa syötteenään käsin kirjoitetun nuotin, ja palauttaa tiedoston, jota merkittävimmät nuotinkirjoitusohjelmat voivat lukea. Koska koodaustaitoni ei vielä tätä salli, on aloitettava jostakin... eh... "helposta". Tätä aihetta kohtaan on myös tarve lievälle kostolle; IntroToAI-kurssilla aihetta käsiteltiin yhden viikon laskareissa ohimennen, enkä silloin saanut kunnollista otetta. 
 
 ## Aikavaativuus, tilavaativuus
 
