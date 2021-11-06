@@ -10,7 +10,7 @@ Eri aiheiden vertailua, aiheen valinta, repositorion alustus, lähteiden hankint
 
 Kynällä ja paperilla pseudokoodia, visualisointia ja yleistä ongelman hahmottamista.
 
-### Mitä opin tällä viikolla / tänään?
+### Mitä opin tällä viikolla?
 
 Tähän(kin) ongelmaan on monta eri ratkaisutapaa, ja olisi hyvä hallita ainakin yksi niistä hyvin tämän kurssin aikana. MNIST-tietokantaa voi käyttää myös jatkossa, kun haluaa treenata muita ratkaisutapoja luokitteluongelmiin.
 
