@@ -1,5 +1,7 @@
 # Viikon 1 raportti
 
+## [Työaikakirjanpito](./documentation/worklog.md)
+
 ### Mitä olen tehnyt tällä viikolla?
 
 Eri aiheiden vertailua, aiheen valinta, repositorion alustus, lähteiden hankintaa, luentojen kuuntelua.
@@ -23,7 +25,3 @@ Jossakin tärkeysjärjestyksessä:
 * MNIST-tietokannasta numerot ja niiden käsittelyä koodissa
 * Ohjelman perusrungon toteuttaminen
 * Mahdollisesti algoritmien toteutusta
-
-
-
-[Työaikakirjanpito](./documentation/worklog.md)
