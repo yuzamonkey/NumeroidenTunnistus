@@ -2,7 +2,7 @@
 
 ### Mitä olen tehnyt tällä viikolla?
 
-Eri aiheiden vertailua, aiheen valinta, repositorion alustus
+Eri aiheiden vertailua, aiheen valinta, repositorion alustus, lähteiden hankintaa
 
 ### Miten ohjelma on edistynyt?
 
