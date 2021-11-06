@@ -17,35 +17,35 @@ Lähteet
 * Opinto-ohjelma: Tietojenkäsittelytieteen kandi (TKT)
 * Ohjelmointikieli: Python
 * Dokumentaation kieli: Suomi
-* Koodi, tiedostojen nimet ja commitit englanniksi
+* Käyttöliittymä, koodi, tiedostojen nimet ja commitit englanniksi
 
 Pystyn tarvittaessa vertaisarvioimaan myös Javalla, JavaScriptillä tai TypeScriptillä kirjoitettuja ohjelmia.
 
 ## Mikä ohjelma
 
-Käsin kirjoitettujen numeroiden tunnistusohjelma tunnistaa numerot 0-9, ja palauttaa NaN, jos syötetteestä ei voida tunnistaa numeroa.
+Käsin kirjoitettujen numeroiden tunnistusohjelma tunnistaa numerot 0-9.
 
 ## Algoritmit ja tietorakenteet
-* Tekoäly koulutetaan käyttämällä MNIST-tietokantaa, ja (ainakin ensin) k:n lähimmän naapurin menetelmällä
+* Tekoäly koulutetaan käyttämällä MNIST-tietokantaa, ja (ainakin ensin) k:n lähimmän naapurin menetelmällä.
 
-## Aikavaativuus, tilavaativuus
+## Aikavaativuus ja tilavaativuus
 
 ## Input/Output
 
-### Input
-* png tai jpg kuvatiedosto
-
-### Output
-* kuvaa vastaava numero tai NaN
-
+<!-- 
 ## Miksi tämä aihe?
-Tavoitteenani on, joskus hamassa tulevaisuudessa, kirjoittaa ohjelma, joka ottaa syötteenään käsin kirjoitetun nuotin, ja palauttaa tiedoston, jota nuotinkirjoitusohjelmat voivat lukea. Koska koodaustaitoni ei vielä tätä salli, on aloitettava jostakin... eh... "helposta". Tätä aihetta kohtaan on myös tarve lievälle kostolle; IntroToAI-kurssilla aihetta käsiteltiin yhden viikon laskareissa ohimennen, enkä silloin saanut kunnollista otetta, joten haluan perehtyä paremmin aiheeseen. 
+Tavoitteenani on, joskus hamassa tulevaisuudessa, kirjoittaa ohjelma, joka ottaa syötteenään käsin kirjoitetun nuotin, ja palauttaa tiedoston, jota nuotinkirjoitusohjelmat voivat lukea. Koska koodaustaitoni ei vielä tätä salli, on aloitettava jostakin... eh... "helposta".  -->
 
 ## Tavoitteita/jatkoideoita
-Kun kurssin aikana itse "tekoäly" on valmis, niin ohjelmaa tulee laajentaa kurssin aikataulun puitteissa. Tässä muutama ehdotus:
-* Käyttöliittymä, johon voi antaa syötteenä kuvatiedoston, jonka ohjelma muuttaa sellaisee muotoon (esim musta-valko, ja resoluution pienennys), josta tekoäly voi tehdä johtopäätöksensä. Ohjelma palauttaa numeron tai tiedon, että syötettä ei voida tunnistaa (NaN, väärän muotoinen tiedosto yms.)
-* Muiden kuvioiden tunnistus, kuten reaaliaikainen arvio mitä käyttäjä piirtää. Helppoja piirroksia voivat olla mm. vene, tuulimylly tai auto. Treenidatan hankinta voi olla hankalaa ja harjoitustyön tarkoituksena ei varmastikaan ole piirtää tunteja erilaisia autoja microsoft paintilla tai vastaavalla.
-* Jos k:n lähimmän naapurin menetelmä on helppo, tee neuroverkko ja vertaa tuloksia kahden menetelmän välillä.
+Kun itse "tekoäly" on valmis, ohjelmaa tulisi laajentaa kurssin aikataulun puitteissa. Tässä muutama ehdotus:
+* Käyttöliittymä, jossa voi reaaliaikaisesti seurata kouluttamista ja vaihtaa parametreja, kuten k:n arvoa tai treenidatan suuruutta.
+* Jos k:n lähimmän naapurin menetelmä tuntuu helpolta, tee neuroverkko tai jokin muu ratkaisutapa, ja vertaa tuloksia menetelmien välillä. Vertailua voi myös tehdä eri etäisyyksien välillä (Euclidian, Chebyshev, Manhattan...).
+* Käyttöliittymä, johon voi antaa syötteenä kuvatiedoston, jonka ohjelma muuttaa sellaiseen muotoon (esim. musta-valko, ja resoluution pienennys), jota algoritmi pystyy käsittelemään. Ohjelma palauttaa numeron tai tiedon, että syötettä ei voida tunnistaa (NaN, väärän muotoinen tiedosto yms.)
+* Muiden kuvioiden tunnistus, kuten reaaliaikainen arvio mitä käyttäjä piirtää. Helppoja piirroksia voivat olla mm. vene, tuulimylly tai auto. Treenidatan hankinta voi olla hankalaa.
+
+Tkinter on tuttu GUI:n toteutusta varten kurssilta Ohjelmistotekniikka, mutta luulen, että haluan etsiä jonkin muun kirjaston käyttöliittymää varten.
 
 
-### Lähteet
+## Lähteet
+* [https://course.elementsofai.com/fi/4/2](https://course.elementsofai.com/fi/4/2)
+* [https://www.youtube.com/watch?v=09mb78oiPkA](https://www.youtube.com/watch?v=09mb78oiPkA)
