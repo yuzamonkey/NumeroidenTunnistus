@@ -1,6 +1,6 @@
 # Viikon 1 raportti
 
-## [Työaikakirjanpito](./documentation/worklog.md)
+## [Työaikakirjanpito](./worklog.md)
 
 ### Mitä olen tehnyt tällä viikolla?
 
