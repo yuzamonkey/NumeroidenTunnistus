@@ -47,5 +47,7 @@ Tkinter on tuttu GUI:n toteutusta varten kurssilta Ohjelmistotekniikka, mutta lu
 
 
 ## Lähteet
+* [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 * [https://course.elementsofai.com/fi/4/2](https://course.elementsofai.com/fi/4/2)
 * [https://www.youtube.com/watch?v=09mb78oiPkA](https://www.youtube.com/watch?v=09mb78oiPkA)
+* [https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf](https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf)
