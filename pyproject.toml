@@ -6,6 +6,7 @@ authors = ["Jusa Mankki <jusamankki@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+python-mnist = "^0.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"

@@ -2,3 +2,4 @@
 htmlcov
 __pycache__
 .vscode
+/documentation/todo.md

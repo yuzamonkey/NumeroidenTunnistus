@@ -4,3 +4,6 @@
 * Suorituskyky- ja O-analyysivertailu (mikäli työ vertailupainotteinen)
 * Työn mahdolliset puutteet ja parannusehdotukset
 * Lähteet
+
+### Kolmikerrosarkkitehtuuri
+UI -> Services -> Repositories

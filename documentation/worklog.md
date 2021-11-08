@@ -11,4 +11,4 @@ Pvm       | h |  |
 
 Pvm       | h |  |
 -----------|------|--------|
-8.11.2021 | 0.5, 1305-1345 | Konfiguraatioita, MNIST-dataan tutustuminen ja datan lukemista koodilla |
+8.11.2021 | 2 | Suunnittelua, konfiguraatioita, MNIST-dataan tutustuminen ja datan tulostamista konsoliin |
