@@ -17,3 +17,5 @@ Käsin kirjoitettujen numeroiden tunnistusohjelma. Ohjelma on tietorakenteiden j
 ## Viikkoraportit
 
 [Viikkoraportti 1](./documentation/weekly1.md)
+
+[Viikkoraportti 2](./documentation/weekly2.md)
