@@ -12,3 +12,4 @@ Pvm       | h |  |
 Pvm       | h |  |
 -----------|------|--------|
 8.11.2021 | 2 | Suunnittelua, konfiguraatioita, MNIST-dataan tutustuminen ja datan tulostamista konsoliin |
+9.11.2021 | 1.5 | Suunnittelua, etäisyyskaavoja (paperilla), sovellusarkkitehtuuria |
