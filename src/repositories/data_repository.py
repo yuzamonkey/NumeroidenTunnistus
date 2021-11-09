@@ -1,5 +1,5 @@
-from mnist import MNIST
 import os
+from mnist import MNIST
 
 
 class DataRepository():
@@ -12,10 +12,9 @@ class DataRepository():
     def _load_mnist_data(self):
         if os.path.isdir("./data"):
             return MNIST("./data")
-        elif os.path.isdir("./src/data"):
+        if os.path.isdir("./src/data"):
             return MNIST("./src/data")
-        else:
-            raise Exception("No data found")
+        raise Exception("No data found")
 
     def get_training_imgs(self):
         return self._train_imgs

@@ -2,7 +2,7 @@ from services.number_classifier import NumberClassifier
 
 
 def main():
-    nc = NumberClassifier()
+    nc = NumberClassifier() # pylint: disable=invalid-name
     nc.train()
 
 

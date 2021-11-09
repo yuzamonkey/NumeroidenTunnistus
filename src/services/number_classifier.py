@@ -18,9 +18,9 @@ class NumberClassifier:
         self.print_image_and_result(imgs[465], 140, labels[465])
 
     def print_image_and_result(self, img, threshold=1, result=-1):
-        for i in range(len(img)):
+        for i, value in enumerate(img):
             to_print = ". "
-            if img[i] >= threshold:
+            if value >= threshold:
                 to_print = "@ "
             if (i+1) % 28 == 0:
                 print(to_print, end="\n")
