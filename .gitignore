@@ -1,5 +1,6 @@
 .coverage
 htmlcov
 __pycache__
+.pytest_cache
 .vscode
 /documentation/todo.md
