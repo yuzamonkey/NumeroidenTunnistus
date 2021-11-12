@@ -13,4 +13,4 @@ Pvm       | h |  |
 -----------|------|--------|
 8.11.2021 | 2 | Suunnittelua, konfiguraatioita, MNIST-dataan tutustuminen ja datan tulostamista konsoliin |
 9.11.2021 | 2 | Suunnittelua, etäisyyskaavoja (paperilla), sovellusarkkitehtuuria, konfiguraatioita |
-12.11.2021 | 1030-1210 | Sandboxaamista |
+12.11.2021 | 3.5 | Sandboxaamista |

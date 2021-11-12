@@ -1,9 +1,13 @@
+import time
 from services.number_classifier import NumberClassifier
 
 
 def main():
+    start_time = time.time()
     nc = NumberClassifier()  # pylint: disable=invalid-name
-    nc.train()
+    # nc.train()
+    nc.sandbox()
+    print("--- %s seconds ---" % (time.time() - start_time))
 
 
 if __name__ == "__main__":
