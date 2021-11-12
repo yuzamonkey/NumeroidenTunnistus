@@ -11,16 +11,25 @@ class NumberClassifier:
         self._train_imgs = images_with_threshold(train_imgs, 140)
         self._test_imgs = images_with_threshold(test_imgs, 140)
 
-    def sandbox(self, test_set_index = 423, number_of_training_imgs = 10_000):
-        random_number = 423  # result: 2
-        test_img, test_label = self._test_imgs[random_number], self._test_labels[random_number]
+    def classify_set_of_numbers(self, k, number_of_test_images, number_of_training_imgs):
+        num_of_errors = 0
+        for i in range(number_of_test_images):
+            label = self._test_labels[i]
+            result = self.classify_number(k, i, number_of_training_imgs)
+            if result != label:
+                num_of_errors += 1
+                # print("RESULT: ", result, " Should have been ", label)
+                # self.print_image_and_result(self._test_imgs[i], self._test_labels[i])
+        percentage = (1 - (num_of_errors / number_of_test_images)) * 100
+        print("PERCENTAGE: ", percentage, "%")
 
-        k = 5
+    def classify_number(self, k, test_set_index, number_of_training_imgs):
+        test_img = self._test_imgs[test_set_index]
         k_nearest = []  # tuples: (value, index)
         for i in range(number_of_training_imgs):
             dist = self._compare_D22(test_img, self._train_imgs[i])
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
-        
+
         result = self._result_from_k_nearest(k_nearest)
         return result
 
@@ -54,19 +63,19 @@ class NumberClassifier:
         N_a = len(A)
         sum_of_distances = 0
         for i in range(len(A)):
-            sum_of_distances += self._point_and_set_dist(A[i], B[i])
+            sum_of_distances += self._point_dist(A[i], B[i])
         return 1/N_a * sum_of_distances
 
-    def _point_and_set_dist(self, a, b):
+    def _point_dist(self, a, b):
         # d(a, B) = min(b∈B)||a-b||
         return abs(a - b)
 
     def print_image_and_result(self, img, result, threshold=1):
         for i, value in enumerate(img):
-            to_print = f"{value} "
-            # to_print = ". "
-            # if value >= threshold:
-            #     to_print = "@ "
+            # to_print = f"{value} "
+            to_print = "  "
+            if value >= threshold:
+                to_print = "@ "
             if (i+1) % 28 == 0:
                 print(to_print, end="\n")
             else:

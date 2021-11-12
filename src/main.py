@@ -5,8 +5,7 @@ from services.number_classifier import NumberClassifier
 def main():
     start_time = time.time()
     nc = NumberClassifier()  # pylint: disable=invalid-name
-    # nc.train()
-    nc.sandbox()
+    nc.classify_set_of_numbers(3, 100, 5_000)
     print("--- %s seconds ---" % (time.time() - start_time))
 
 
