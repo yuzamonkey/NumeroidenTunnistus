@@ -1,7 +1,7 @@
 import unittest
 from services import number_classifier
 
-class TestDataRepository(unittest.TestCase):
+class TestNumberClassifier(unittest.TestCase):
     def setUp(self):
         pass
 

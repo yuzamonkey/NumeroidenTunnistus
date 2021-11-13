@@ -27,7 +27,7 @@ class DataRepository():
             return MNIST("./data")
         if os.path.isdir("./src/data"):
             return MNIST("./src/data")
-        raise Exception("No data found")
+        raise Exception("No data found. Create a 'data' directory under src. Download the MNIST files from http://yann.lecun.com/exdb/mnist/ to 'data' directory")
 
     def get_training_imgs(self):
         """
@@ -43,14 +43,14 @@ class DataRepository():
         """
         return self._train_labels
 
-    def get_test_imgs(self):
+    def get_testing_imgs(self):
         """
         Returns:
             int[][]: 10_000 testing images
         """
         return self._test_imgs
 
-    def get_test_labels(self):
+    def get_testing_labels(self):
         """
         Returns:
             int[]: 10_000 classification values of testing image data

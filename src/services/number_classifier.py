@@ -59,7 +59,7 @@ class NumberClassifier:
         test_img = self._test_imgs[test_set_index]
         k_nearest = []  # tuples: (value, index)
         for i in range(number_of_training_imgs):
-            dist = self._compare_d22(test_img, self._train_imgs[i])
+            dist = self._compare_d23(test_img, self._train_imgs[i])
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
         result = self._result_from_k_nearest(k_nearest)
