@@ -32,10 +32,6 @@ Käsin kirjoitettujen numeroiden tunnistusohjelma tunnistaa numerot 0-9.
 
 ## Input/Output
 
-<!-- 
-## Miksi tämä aihe?
-Tavoitteenani on, joskus hamassa tulevaisuudessa, kirjoittaa ohjelma, joka ottaa syötteenään käsin kirjoitetun nuotin, ja palauttaa tiedoston, jota nuotinkirjoitusohjelmat voivat lukea. Koska koodaustaitoni ei vielä tätä salli, on aloitettava jostakin... eh... "helposta".  -->
-
 ## Tavoitteita/jatkoideoita
 Kun itse "tekoäly" on valmis, ohjelmaa tulisi laajentaa kurssin aikataulun puitteissa. Tässä muutama ehdotus:
 * Käyttöliittymä, jossa voi reaaliaikaisesti seurata kouluttamista ja vaihtaa parametreja, kuten k:n arvoa tai treenidatan suuruutta.

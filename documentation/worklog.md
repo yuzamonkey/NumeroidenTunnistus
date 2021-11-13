@@ -14,4 +14,4 @@ Pvm       | h |  |
 8.11.2021 | 2 | Suunnittelua, konfiguraatioita, MNIST-dataan tutustuminen ja datan tulostamista konsoliin |
 9.11.2021 | 2 | Suunnittelua, etäisyyskaavoja (paperilla), sovellusarkkitehtuuria, konfiguraatioita |
 12.11.2021 | 4.5 | Sandboxaamista |
-13.11.2021 | 1.5, +15min | Docstring, testaus, dokumentaatio |
+13.11.2021 | 2.5,  | Docstring, testausta, dokumentaatiota |
