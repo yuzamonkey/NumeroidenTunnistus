@@ -1,3 +1,7 @@
+"""File with utility functions and constants
+    """
+
+
 def images_with_threshold(images, threshold=1):
     new_images = []
     for image in images:

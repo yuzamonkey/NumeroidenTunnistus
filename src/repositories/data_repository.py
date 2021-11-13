@@ -60,6 +60,8 @@ class DataRepository():
     def get_all_data(self):
         """
         Returns:
-            tuple(int[][], int[], int[][], int[]): 60_000 training images, 60_000 classification values of training images, 10_000 testing images, 10_000 classification values of testing images.
+            tuple(int[][], int[], int[][], int[]): 60_000 training images,
+            60_000 classification values of training images, 10_000 testing images,
+            10_000 classification values of testing images.
         """
         return self._train_imgs, self._train_labels, self._test_imgs, self._test_labels

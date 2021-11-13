@@ -16,8 +16,6 @@ class NumberClassifier:
         """NumberClassifier constructor. Gets data from DataRepository class
         """
         self._dr = DataRepository()
-        # self._train_imgs, self._train_labels, self._test_imgs, self._test_labels = self._dr.get_all_data()
-
         train_imgs, self._train_labels, test_imgs, self._test_labels = self._dr.get_all_data()
         self._train_imgs = images_with_threshold(train_imgs, 140)
         self._test_imgs = images_with_threshold(test_imgs, 140)
@@ -27,8 +25,10 @@ class NumberClassifier:
 
         Args:
             k (int): value of k
-            number_of_test_images (int): number of how many test images are wanted to be tested. Range between 1-10_000
-            number_of_training_imgs (int): number of how many training images are used. Range between 1-60_000
+            number_of_test_images (int): number of how many test images are wanted to be tested.
+            Range between 1-10_000
+            number_of_training_imgs (int): number of how many training images are used.
+            Range between 1-60_000
 
         Returns:
             float: Success percentage
@@ -50,7 +50,8 @@ class NumberClassifier:
         Args:
             k (int): value of k
             test_set_index (int): index of number to be classified from test set
-            number_of_training_imgs (int): number of how many training images are used. Range between 1-60_000
+            number_of_training_imgs (int): number of how many training images are used.
+            Range between 1-60_000
 
         Returns:
             int: classification value
@@ -58,7 +59,7 @@ class NumberClassifier:
         test_img = self._test_imgs[test_set_index]
         k_nearest = []  # tuples: (value, index)
         for i in range(number_of_training_imgs):
-            dist = self._compare_D22(test_img, self._train_imgs[i])
+            dist = self._compare_d22(test_img, self._train_imgs[i])
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
         result = self._result_from_k_nearest(k_nearest)
@@ -82,8 +83,7 @@ class NumberClassifier:
         if dist[0] < sorted_list[0][0]:
             sorted_list[0] = dist
             return sorted_list
-        else:
-            return k_nearest
+        return k_nearest
 
     def _result_from_k_nearest(self, k_nearest):
         """Gives the classification result on k-nearest neighbors
@@ -99,8 +99,9 @@ class NumberClassifier:
             results.append(self._train_labels[item[1]])
         return max(set(results), key=results.count)
 
-    def _compare_D22(self, img1, img2):
-        """Distance measure D22 from https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf
+    def _compare_d22(self, img1, img2):
+        """Distance measure D22 from
+        https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf
 
         Args:
             img1 (int[]): image data
@@ -112,8 +113,9 @@ class NumberClassifier:
         ### f_2 = max(d(A, B), d(B, A))
         return max(self._set_dist(img1, img2), self._set_dist(img2, img1))
 
-    def _compare_D23(self, img1, img2):
-        """Distance measure D23 from https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf
+    def _compare_d23(self, img1, img2):
+        """Distance measure D23 from
+        https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf
 
         Args:
             img1 (int[]): image data
@@ -126,7 +128,8 @@ class NumberClassifier:
         return (self._set_dist(img1, img2) + self._set_dist(img2, img1)) / 2
 
     def _set_dist(self, A, B):
-        """Distance between two datasets A and B. Directed distance measure d6 from https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf
+        """Distance between two datasets A and B. Directed distance measure d6 from
+        https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf
 
         Args:
             A (int[]): dataset
@@ -136,11 +139,10 @@ class NumberClassifier:
             float: distance between two datasets
         """
         # d_6 = 1/N_a * ∑(a ∈ A) d(a, B)
-        N_a = len(A)
         sum_of_distances = 0
-        for i in range(len(A)):
+        for i in range(len(A)): # pylint: disable=consider-using-enumerate
             sum_of_distances += self._point_dist(A[i], B[i])
-        return 1/N_a * sum_of_distances
+        return 1/len(A) * sum_of_distances
 
     def _point_dist(self, a, b):
         """Heuristic distance between two points
@@ -161,7 +163,8 @@ class NumberClassifier:
         Args:
             img (int[]): image data
             result (int): class of the image
-            threshold (int, optional): Grayscale pixel values equal or greater than threshold will be printed. Defaults to 1.
+            threshold (int, optional): Grayscale pixel values equal or greater than threshold
+            will be printed. Defaults to 1.
         """
         for i, value in enumerate(img):
             # to_print = f"{value} "
