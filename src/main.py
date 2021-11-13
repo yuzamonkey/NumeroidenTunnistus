@@ -4,9 +4,9 @@ from services.number_classifier import NumberClassifier
 
 def main():
     start_time = time.time()
-    nc = NumberClassifier()
+    nc = NumberClassifier() # pylint: disable=invalid-name
     nc.classify_set_of_numbers(3, 20, 1_000)
-    print("--- %s seconds ---" % (time.time() - start_time))
+    print(f"--- {(time.time() - start_time)} seconds ---")
 
 
 if __name__ == "__main__":
