@@ -1,6 +1,7 @@
 import unittest
 from repositories.data_repository import DataRepository
 
+
 class TestDataRepository(unittest.TestCase):
     def setUp(self):
         self._dr = DataRepository()
@@ -27,4 +28,3 @@ class TestDataRepository(unittest.TestCase):
         self.assertEqual(len(tr_labels), 60_000)
         self.assertEqual(len(te_imgs), 10_000)
         self.assertEqual(len(te_labels), 10_000)
-

@@ -27,7 +27,9 @@ class DataRepository():
             return MNIST("./data")
         if os.path.isdir("./src/data"):
             return MNIST("./src/data")
-        raise Exception("No data found. Create a 'data' directory under src. Download the MNIST files from http://yann.lecun.com/exdb/mnist/ to 'data' directory")
+        raise Exception(
+            """No data found. Create a 'data' directory under src.
+            Download the MNIST files from http://yann.lecun.com/exdb/mnist/ to 'data' directory""")
 
     def get_training_imgs(self):
         """

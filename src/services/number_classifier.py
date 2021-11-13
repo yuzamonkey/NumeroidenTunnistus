@@ -140,7 +140,7 @@ class NumberClassifier:
         """
         # d_6 = 1/N_a * ∑(a ∈ A) d(a, B)
         sum_of_distances = 0
-        for i in range(len(A)): # pylint: disable=consider-using-enumerate
+        for i in range(len(A)):  # pylint: disable=consider-using-enumerate
             sum_of_distances += self._point_dist(A[i], B[i])
         return 1/len(A) * sum_of_distances
 
