@@ -1,4 +1,4 @@
-"""File with utility functions and constants
+"""File with utility functions
     """
 
 
@@ -15,7 +15,7 @@ def images_with_threshold(images, threshold=1):
     return new_images
 
 
-def print_image_and_result(self, img, result, threshold=1):
+def print_image_and_result(img, result, threshold=1):
     """Prints image and result
 
     Args:

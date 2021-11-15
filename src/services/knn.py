@@ -1,5 +1,5 @@
 from repositories.data_repository import data_repository as dr
-from utils.utils import images_with_threshold
+from utils.utils import images_with_threshold, print_image_and_result
 
 
 class KNN:
@@ -33,15 +33,20 @@ class KNN:
         Returns:
             float: Success percentage
         """
-        num_of_errors = 0
+        errors = []
         for i in range(number_of_test_images):
             label = self._test_labels[i]
             result = self.classify_number(k, i, number_of_training_imgs)
             if result != label:
-                num_of_errors += 1
-                # print("RESULT: ", result, " Should have been ", label)
-        percentage = (1 - (num_of_errors / number_of_test_images)) * 100
-        print("PERCENTAGE: ", percentage, "%")
+                errors.append((i, result))
+
+        # for i, r in errors:
+        #     print("RESULT: ", r, " Should have been ",
+        #           self._test_labels[i], "at index ", i)
+        #     print_image_and_result(self._test_imgs[i], self._test_labels[i])
+        percentage = (1 - (len(errors) / number_of_test_images)) * 100
+        print(
+            f"PERCENTAGE: {percentage}% ({number_of_test_images - len(errors)} / {number_of_test_images})")
         return percentage
 
     def classify_number(self, k, test_set_index, number_of_training_imgs):
@@ -59,7 +64,7 @@ class KNN:
         test_img = self._test_imgs[test_set_index]
         k_nearest = []  # tuples: (value, index)
         for i in range(number_of_training_imgs):
-            dist = self._compare_d23(test_img, self._train_imgs[i])
+            dist = self._compare_d22(test_img, self._train_imgs[i])
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
         result = self._result_from_k_nearest(k_nearest)
@@ -155,6 +160,7 @@ class KNN:
             int: distance between values a and b
         """
         # d(a, B) = min(b∈B)||a-b||
+        # d(a, b) = |a-b|
         return abs(a - b)
 
 

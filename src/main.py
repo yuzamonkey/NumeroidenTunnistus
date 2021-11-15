@@ -1,10 +1,11 @@
 import time
 from services.knn import knn
-
+from services.sandbox import sandbox
 
 def main():
     start_time = time.time()
-    knn.classify_set_of_numbers(3, 10, 300)
+#    knn.classify_set_of_numbers(3, 300, 1000)
+    sandbox.compare_two_numbers()
     print(f"--- {(time.time() - start_time)} seconds ---")
 
 
