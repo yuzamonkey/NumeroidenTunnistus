@@ -67,3 +67,6 @@ class DataRepository():
             10_000 classification values of testing images.
         """
         return self._train_imgs, self._train_labels, self._test_imgs, self._test_labels
+
+
+data_repository = DataRepository()

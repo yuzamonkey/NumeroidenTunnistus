@@ -1,4 +1,4 @@
-from repositories.data_repository import DataRepository
+from repositories.data_repository import data_repository as dr
 from utils.utils import images_with_threshold
 
 
@@ -15,7 +15,7 @@ class NumberClassifier:
     def __init__(self):
         """NumberClassifier constructor. Gets data from DataRepository class
         """
-        self._dr = DataRepository()
+        self._dr = dr
         train_imgs, self._train_labels, test_imgs, self._test_labels = self._dr.get_all_data()
         self._train_imgs = images_with_threshold(train_imgs, 140)
         self._test_imgs = images_with_threshold(test_imgs, 140)

@@ -1,10 +1,10 @@
 import unittest
-from repositories.data_repository import DataRepository
+from repositories.data_repository import data_repository as dr
 
 
 class TestDataRepository(unittest.TestCase):
     def setUp(self):
-        self._dr = DataRepository()
+        self._dr = dr
 
     def test_get_training_imgs_returns_60_000_images(self):
         imgs = self._dr.get_training_imgs()
