@@ -1,11 +1,10 @@
 import time
-from services.number_classifier import NumberClassifier
+from services.knn import knn
 
 
 def main():
     start_time = time.time()
-    nc = NumberClassifier()  # pylint: disable=invalid-name
-    nc.classify_set_of_numbers(3, 20, 1_000)
+    knn.classify_set_of_numbers(3, 10, 300)
     print(f"--- {(time.time() - start_time)} seconds ---")
 
 

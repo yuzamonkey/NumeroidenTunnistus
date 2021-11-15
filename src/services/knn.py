@@ -2,7 +2,7 @@ from repositories.data_repository import data_repository as dr
 from utils.utils import images_with_threshold
 
 
-class NumberClassifier:
+class KNN:
     """Class for number classification
 
     Attributes:
@@ -13,7 +13,7 @@ class NumberClassifier:
     """
 
     def __init__(self):
-        """NumberClassifier constructor. Gets data from DataRepository class
+        """KNN constructor. Gets data from DataRepository class
         """
         self._dr = dr
         train_imgs, self._train_labels, test_imgs, self._test_labels = self._dr.get_all_data()
@@ -157,22 +157,5 @@ class NumberClassifier:
         # d(a, B) = min(b∈B)||a-b||
         return abs(a - b)
 
-    def print_image_and_result(self, img, result, threshold=1):
-        """Prints image and result
 
-        Args:
-            img (int[]): image data
-            result (int): class of the image
-            threshold (int, optional): Grayscale pixel values equal or greater than threshold
-            will be printed. Defaults to 1.
-        """
-        for i, value in enumerate(img):
-            # to_print = f"{value} "
-            to_print = "  "
-            if value >= threshold:
-                to_print = "@ "
-            if (i+1) % 28 == 0:
-                print(to_print, end="\n")
-            else:
-                print(to_print, end="")
-        print("IS: ", result)
+knn = KNN()

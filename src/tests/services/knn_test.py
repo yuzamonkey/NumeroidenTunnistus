@@ -1,23 +1,23 @@
 import unittest
-from services.number_classifier import NumberClassifier
+from services.knn import knn
 
 
 class TestNumberClassifier(unittest.TestCase):
     def setUp(self):
-        self._nc = NumberClassifier()
+        self._knn = knn
 
     def test_classify_set_returns_float(self):
-        percentage = self._nc.classify_set_of_numbers(3, 3, 10)
+        percentage = self._knn.classify_set_of_numbers(3, 3, 10)
         self.assertEqual(type(percentage), float)
 
     def test_classify_number_returns_int(self):
-        result = self._nc.classify_number(3, 0, 10)
+        result = self._knn.classify_number(3, 0, 10)
         self.assertEqual(type(result), int)
 
     def test_update_k_nearest_returns_longer_list(self):
         k_nearest = [(0.8, 8)]
         new_distance = (0.4, 4)
-        new_list = self._nc._update_k_nearest(3, k_nearest, new_distance)
+        new_list = self._knn._update_k_nearest(3, k_nearest, new_distance)
         self.assertEqual(len(new_list), 2)
 
     def test_update_k_nearest_updates_shorter_distance(self):
@@ -26,7 +26,7 @@ class TestNumberClassifier(unittest.TestCase):
         d3 = (0.9, 3)
         k_nearest = [d1, d2, d3]
         new_d = (0.4, 4)
-        new_list = sorted(self._nc._update_k_nearest(3, k_nearest, new_d))
+        new_list = sorted(self._knn._update_k_nearest(3, k_nearest, new_d))
         expected = [new_d, d1, d2]
         self.assertEqual(new_list, expected)
 
@@ -36,7 +36,7 @@ class TestNumberClassifier(unittest.TestCase):
         d3 = (0.9, 3)
         k_nearest = [d1, d2, d3]
         new_d = (0.95, 4)
-        new_list = sorted(self._nc._update_k_nearest(3, k_nearest, new_d))
+        new_list = sorted(self._knn._update_k_nearest(3, k_nearest, new_d))
         expected = [d1, d2, d3]
         self.assertEqual(new_list, expected)
 
@@ -45,5 +45,5 @@ class TestNumberClassifier(unittest.TestCase):
         d2 = (0.8, 2)
         d3 = (0.9, 3)
         k_nearest = [d1, d2, d3]
-        result = self._nc._result_from_k_nearest(k_nearest)
+        result = self._knn._result_from_k_nearest(k_nearest)
         self.assertEqual(type(result), int)

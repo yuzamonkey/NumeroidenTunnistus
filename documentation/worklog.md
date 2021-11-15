@@ -20,4 +20,4 @@ Pvm       | h |  |
 
 Pvm       | h |  |
 -----------|------|--------|
-15.11.2021 | 1320- | hmmm... scikitlearn |
+15.11.2021 | 1320-1405 | hmmm... scikitlearn, luokkainstanssit, knn-luokka |
