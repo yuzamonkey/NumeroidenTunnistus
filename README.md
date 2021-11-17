@@ -1,6 +1,7 @@
 # Numeroiden tunnistus
 
 ![GitHub Actions](https://github.com/yuzamonkey/NumeroidenTunnistus/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/yuzamonkey/NumeroidenTunnistus/branch/main/graph/badge.svg?token=4AKR5CQGZK)](https://codecov.io/gh/yuzamonkey/NumeroidenTunnistus)
 
 Käsin kirjoitettujen numeroiden tunnistusohjelma. Ohjelma on tietorakenteiden ja algoritmien harjoitustyö syksyllä 2021.
 
