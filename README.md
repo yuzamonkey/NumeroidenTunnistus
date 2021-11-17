@@ -1,5 +1,7 @@
 # Numeroiden tunnistus
 
+![GitHub Actions](https://github.com/yuzamonkey/NumeroidenTunnistus/workflows/CI/badge.svg)
+
 Käsin kirjoitettujen numeroiden tunnistusohjelma. Ohjelma on tietorakenteiden ja algoritmien harjoitustyö syksyllä 2021.
 
 ## Dokumentaatio
