@@ -20,4 +20,6 @@ Pvm       | h |  |
 
 Pvm       | h |  |
 -----------|------|--------|
-15.11.2021 | 2.5 | scikitlearn, luokkainstanssit, knn-luokka, etäisyyden ihmettelyä |
+15.11.2021 | 2 | scikitlearn, luokkainstanssit, knn-luokka, etäisyyden ihmettelyä |
+16.11.2021 | 2 | Etäisyys, vihdoinkin tajusin yksinkertaisen jutun... muuta 2d arrayksi, pisteen ja setin välinen ero. TOIMII JEE |
+17.11.2021 | 1510- |  |

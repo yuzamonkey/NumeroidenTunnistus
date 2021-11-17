@@ -1,5 +1,6 @@
+from math import sqrt
 from repositories.data_repository import data_repository as dr
-from utils.utils import images_with_threshold, print_image_and_result
+from utils.utils import as_2d_arrays, images_with_threshold, print_image_and_result
 
 
 class KNN:
@@ -39,6 +40,7 @@ class KNN:
             result = self.classify_number(k, i, number_of_training_imgs)
             if result != label:
                 errors.append((i, result))
+            print(f"{i+1}/{number_of_test_images}")
 
         # for i, r in errors:
         #     print("RESULT: ", r, " Should have been ",
@@ -61,10 +63,10 @@ class KNN:
         Returns:
             int: classification value
         """
-        test_img = self._test_imgs[test_set_index]
+        test_img = as_2d_arrays(self._test_imgs[test_set_index])
         k_nearest = []  # tuples: (value, index)
         for i in range(number_of_training_imgs):
-            dist = self._compare_d22(test_img, self._train_imgs[i])
+            dist = self._compare_d22(test_img, as_2d_arrays(self._train_imgs[i]))
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
         result = self._result_from_k_nearest(k_nearest)
@@ -144,24 +146,44 @@ class KNN:
             float: distance between two datasets
         """
         # d_6 = 1/N_a * ∑(a ∈ A) d(a, B)
-        sum_of_distances = 0
+        sum_of_distances = 0.0
         for i in range(len(A)):  # pylint: disable=consider-using-enumerate
-            sum_of_distances += self._point_dist(A[i], B[i])
+            for j in range(len(A[i])):
+                if A[i][j] == 1:
+                    sum_of_distances += self._point_to_set_dist(i, j, B)
         return 1/len(A) * sum_of_distances
 
-    def _point_dist(self, a, b):
-        """Heuristic distance between two points
+    def _point_to_set_dist(self, A_i, A_j, B):
+        # Danger of looping forever
+        # Is not optimised
+        found = False
+        dist = 999
+        min_i = A_i
+        max_i = A_i
+        min_j = A_j
+        max_j = A_j
+        while not found:
+            for i in range(min_i, max_i):
+                for j in range(min_j, max_j):
+                    if B[i][j] == 1:
+                        found = True
+                        dist = min(dist, self._calc_dist(A_i, A_j, i, j))
+            if not found:
+                if min_i > 0:
+                    min_i -= 1
+                if max_i < 27:
+                    max_i += 1
+                if min_j > 0:
+                    min_j -= 1
+                if max_j < 27:
+                    max_j += 1
+            else: 
+                break
+        return dist
 
-        Args:
-            a (int): integer value
-            b (int): integer value
-
-        Returns:
-            int: distance between values a and b
-        """
-        # d(a, B) = min(b∈B)||a-b||
-        # d(a, b) = |a-b|
-        return abs(a - b)
+    def _calc_dist(self, A_i, A_j, B_i, B_j):
+        # sqrt((xa-xb)^2 + (ya-yb)^2)
+        return sqrt(pow(A_i - B_i, 2) + pow(A_j - B_j, 2))
 
 
 knn = KNN()

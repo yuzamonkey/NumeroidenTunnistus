@@ -28,7 +28,10 @@ def images_with_threshold(images, threshold=1):
 def print_2d_array(array):
     for row in array:
         for val in row:
-            print('{:2}'.format(val), end="")
+            if val == 0:
+                print('  ', end="")
+            else:
+                print('@ ', end="")
         print("")
 
 
