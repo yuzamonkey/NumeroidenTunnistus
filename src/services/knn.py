@@ -1,6 +1,6 @@
 from math import sqrt
 from repositories.data_repository import data_repository as dr
-from utils.utils import as_2d_arrays, images_with_threshold, print_image_and_result
+from utils.utils import as_2d_arrays, images_with_threshold
 
 
 class KNN:
@@ -48,7 +48,8 @@ class KNN:
         #     print_image_and_result(self._test_imgs[i], self._test_labels[i])
         percentage = (1 - (len(errors) / number_of_test_images)) * 100
         print(
-            f"PERCENTAGE: {percentage}% ({number_of_test_images - len(errors)} / {number_of_test_images})")
+            f"""PERCENTAGE: {percentage}%
+            ({number_of_test_images - len(errors)} / {number_of_test_images})""")
         return percentage
 
     def classify_number(self, k, test_set_index, number_of_training_imgs):
@@ -66,7 +67,8 @@ class KNN:
         test_img = as_2d_arrays(self._test_imgs[test_set_index])
         k_nearest = []  # tuples: (value, index)
         for i in range(number_of_training_imgs):
-            dist = self._compare_d22(test_img, as_2d_arrays(self._train_imgs[i]))
+            dist = self._compare_d22(
+                test_img, as_2d_arrays(self._train_imgs[i]))
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
         result = self._result_from_k_nearest(k_nearest)
@@ -154,6 +156,16 @@ class KNN:
         return 1/len(A) * sum_of_distances
 
     def _point_to_set_dist(self, A_i, A_j, B):
+        """Calculates the distance from point to closest point in set B
+
+        Args:
+            A_i (int): First index of set A
+            A_j (int): Second index of set A
+            B (int): Set B
+
+        Returns:
+            float: Distance from A[i][j] to closest point in set B
+        """
         # Danger of looping forever
         # Is not optimised
         found = False
@@ -177,11 +189,22 @@ class KNN:
                     min_j -= 1
                 if max_j < 27:
                     max_j += 1
-            else: 
+            else:
                 break
         return dist
 
     def _calc_dist(self, A_i, A_j, B_i, B_j):
+        """Euclidian distance between two points
+
+        Args:
+            A_i (int): First index of set A
+            A_j (int): Second index of set A
+            B_i (int): First index of set B
+            B_j (int): Second index of set B
+
+        Returns:
+            float: Euclidian distance between two points
+        """
         # sqrt((xa-xb)^2 + (ya-yb)^2)
         return sqrt(pow(A_i - B_i, 2) + pow(A_j - B_j, 2))
 

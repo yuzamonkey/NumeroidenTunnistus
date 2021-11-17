@@ -1,5 +1,6 @@
-import curses
+#import curses
 from curses import wrapper
+
 
 class UI:
     def __init__(self):
@@ -14,5 +15,6 @@ class UI:
         stdscr.addstr(10, 10, "hello world")
         stdscr.refresh()
         stdscr.getch()
+
 
 ui = UI()
