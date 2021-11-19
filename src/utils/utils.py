@@ -25,12 +25,14 @@ def as_2d_arrays(img, w=28, h=28):
 
 
 def images_with_threshold(images, threshold=1):
-    """Takes one-dimensional images with grayscale values as input, returns the images as arrays of ones and zeroes. 
-    Threshold is the grayscale value. Greater numbers than threshold will be one, lower numbers will be zero.
+    """Takes one-dimensional images with grayscale values as input,
+    returns the images as arrays of ones and zeroes.
+    Threshold is the grayscale value.
+    Greater numbers than threshold will be one, lower numbers will be zero.
 
     Args:
         images (list[int[]]): Images as one-dimensional array
-        threshold (int, optional): Greyscale value. Greater numbers than threshold will be one, lower numbers will be zero. Defaults to 1.
+        threshold (int, optional): Greyscale value
 
     Returns:
         list[int[]]: images as lists of ones and zeros
@@ -42,12 +44,14 @@ def images_with_threshold(images, threshold=1):
 
 
 def image_with_threshold(image, threshold=1):
-    """Takes one-dimensional image with grayscale values as input, returns the image as array of ones and zeroes. 
-    Threshold is the grayscale value. Greater numbers than threshold will be one, lower numbers will be zero.
+    """Takes one-dimensional image with grayscale values as input,
+    returns the image as array of ones and zeroes.
+    Threshold is the grayscale value.
+    Greater numbers than threshold will be one, lower numbers will be zero.
 
     Args:
         image (int[]): Image as one-dimensional array
-        threshold (int, optional): Greyscale value. Greater numbers than threshold will be one, lower numbers will be zero. Defaults to 1.
+        threshold (int, optional): Greyscale value
 
     Returns:
         int[]: image as lists of ones and zeros
