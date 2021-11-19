@@ -1,20 +1,24 @@
-#import curses
-from curses import wrapper
+import sys
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 
 class UI:
     def __init__(self):
         pass
 
-    def start(self):
-        print("HALOO UI")
-        wrapper(self.view)
+    def window(self):
+        app = QApplication(sys.argv)
+        win = QMainWindow()
+        win.setGeometry(200, 200, 300, 300)
+        win.setWindowTitle("HELLO WORLD")
 
-    def view(self, stdscr):
-        stdscr.clear()
-        stdscr.addstr(10, 10, "hello world")
-        stdscr.refresh()
-        stdscr.getch()
+        label = QtWidgets.QLabel(win)
+        label.setText("LABEL text")
+        label.move(50, 50)
+        win.show()
+        app.exec_()
+        # sys.exit(app.exec_())
 
 
 ui = UI()
