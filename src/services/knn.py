@@ -156,7 +156,7 @@ class KNN:
         return 1/len(A) * sum_of_distances
 
     def _point_to_set_dist(self, A_i, A_j, B):
-        """Calculates the distance from point to closest point in set B
+        """Calculates the distance from point in set A to closest point in set B
 
         Args:
             A_i (int): First index of set A
