@@ -2,13 +2,22 @@
     """
 
 
-def as_2d_arrays(img):
-    w, h = 28, 28
-    new_img = [[0 for x in range(w)] for y in range(h)]
+def as_2d_arrays(img, w=28, h=28):
+    """Takes one-dimensional array and returns it in two-dimensional array
+
+    Args:
+        img (any[]): One-dimensional array
+        w (int, optional): Width. Defaults to 28
+        h (int, optional): Height. Defaults to 28
+
+    Returns:
+        img (any[][]): Input array as w*h two-dimensional array
+    """
+    new_img = [[0 for j in range(w)] for i in range(h)]
 
     first_index = -1
     for i, value in enumerate(img):
-        second_index = i % 28
+        second_index = i % w
         if second_index == 0:
             first_index += 1
         new_img[first_index][second_index] = value
@@ -16,6 +25,16 @@ def as_2d_arrays(img):
 
 
 def images_with_threshold(images, threshold=1):
+    """Takes one-dimensional images with grayscale values as input, returns the images as arrays of ones and zeroes. 
+    Threshold is the grayscale value. Greater numbers than threshold will be one, lower numbers will be zero.
+
+    Args:
+        images (list[int[]]): Images as one-dimensional array
+        threshold (int, optional): Greyscale value. Greater numbers than threshold will be one, lower numbers will be zero. Defaults to 1.
+
+    Returns:
+        list[int[]]: images as lists of ones and zeros
+    """
     new_images = []
     for image in images:
         new_image = []
@@ -32,9 +51,9 @@ def print_2d_array(array):
     for row in array:
         for val in row:
             if val == 0:
-                print('  ', end="")
+                print("  ", end="")
             else:
-                print('@ ', end="")
+                print("@ ", end="")
         print("")
 
 
