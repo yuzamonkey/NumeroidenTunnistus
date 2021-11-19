@@ -37,14 +37,28 @@ def images_with_threshold(images, threshold=1):
     """
     new_images = []
     for image in images:
-        new_image = []
-        for pixel in image:
-            value = 0
-            if pixel >= threshold:
-                value = 1
-            new_image.append(value)
-        new_images.append(new_image)
+        new_images.append(image_with_threshold(image, threshold))
     return new_images
+
+
+def image_with_threshold(image, threshold=1):
+    """Takes one-dimensional image with grayscale values as input, returns the image as array of ones and zeroes. 
+    Threshold is the grayscale value. Greater numbers than threshold will be one, lower numbers will be zero.
+
+    Args:
+        image (int[]): Image as one-dimensional array
+        threshold (int, optional): Greyscale value. Greater numbers than threshold will be one, lower numbers will be zero. Defaults to 1.
+
+    Returns:
+        int[]: image as lists of ones and zeros
+    """
+    new_image = []
+    for pixel in image:
+        value = 0
+        if pixel >= threshold:
+            value = 1
+        new_image.append(value)
+    return new_image
 
 
 def print_2d_array(array):
