@@ -23,3 +23,4 @@ Pvm       | h |  |
 15.11.2021 | 2 | scikitlearn, luokkainstanssit, knn-luokka, etäisyyden ihmettelyä |
 16.11.2021 | 2 | Vihdoinkin tajusin yksinkertaisen jutun... |
 17.11.2021 | 0.5 | Etäisyyden korjaaminen, nyt toimii. Workflow, codecov |
+19.11.2021 | 11- | UI |
