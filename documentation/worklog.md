@@ -21,6 +21,6 @@ Pvm       | h |  |
 Pvm       | h |  |
 -----------|------|--------|
 15.11.2021 | 2 | luokkainstanssit, knn-luokka, etäisyyden ihmettelyä |
-16.11.2021 | 2 | Vihdoinkin tajusin etäisyyden |
-17.11.2021 | 0.5 | Etäisyyden korjaaminen, nyt toimii. Workflow, codecov |
-19.11.2021 | 11-13 | Testejä, UI (PyQt5), optiomointia |
+16.11.2021 | 2 | Vihdoinkin tajusin etäisyyden... nyt toimii |
+17.11.2021 | 0.5 | Workflow, codecov |
+19.11.2021 | 2.5 | Testejä, UI (PyQt5), optiomointia |
