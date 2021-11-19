@@ -166,31 +166,34 @@ class KNN:
         Returns:
             float: Distance from A[i][j] to closest point in set B
         """
-        # Danger of looping forever
-        # Is not optimised
         found = False
         dist = 999
         min_i = A_i
         max_i = A_i
         min_j = A_j
         max_j = A_j
+        w = len(B[0])
+        h = len(B)
+        visited = [[False for j in range(w)] for i in range(h)]
         while not found:
             for i in range(min_i, max_i):
                 for j in range(min_j, max_j):
-                    if B[i][j] == 1:
-                        found = True
-                        dist = min(dist, self._calc_dist(A_i, A_j, i, j))
+                    if visited[i][j] is False:
+                        visited[i][j] = True
+                        if B[i][j] == 1:
+                            found = True
+                            dist = min(dist, self._calc_dist(A_i, A_j, i, j))
+            if (min_i == 0 and max_i == h and min_j == 0 and max_j == w):
+                break
             if not found:
                 if min_i > 0:
                     min_i -= 1
-                if max_i < 27:
+                if max_i < h:
                     max_i += 1
                 if min_j > 0:
                     min_j -= 1
-                if max_j < 27:
+                if max_j < w:
                     max_j += 1
-            else:
-                break
         return dist
 
     def _calc_dist(self, A_i, A_j, B_i, B_j):
