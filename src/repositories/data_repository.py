@@ -1,4 +1,3 @@
-import os
 from mnist import MNIST
 
 
@@ -14,22 +13,16 @@ class DataRepository():
         self._train_imgs, self._train_labels = self._mndata.load_training()
         self._test_imgs, self._test_labels = self._mndata.load_testing()
 
-    def _load_mnist_data(self):
+    def _load_mnist_data(self, path="./src/data"):
         """Loads the MNIST data using MNIST library. https://github.com/sorki/python-mnist
 
-        Raises:
-            Exception: Raises exception if data is not found
+        Args:
+            path (str, optional): Path to .gz-files. Defaults to "./src/data".
 
         Returns:
             MNIST: MNIST class object
         """
-        if os.path.isdir("./data"):
-            return MNIST("./data")
-        if os.path.isdir("./src/data"):
-            return MNIST("./src/data")
-        raise Exception(
-            """No data found. Create a 'data' directory under src.
-            Download the MNIST files from http://yann.lecun.com/exdb/mnist/ to 'data' directory""")
+        return MNIST(path)
 
     def get_training_imgs(self):
         """
