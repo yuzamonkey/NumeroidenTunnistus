@@ -1,4 +1,5 @@
 import unittest
+from math import sqrt
 from services.knn import knn
 
 
@@ -47,3 +48,13 @@ class TestNumberClassifier(unittest.TestCase):
         k_nearest = [d1, d2, d3]
         result = self._knn._result_from_k_nearest(k_nearest)
         self.assertEqual(type(result), int)
+
+    def test_point_to_set_distance_returns_correct_distance(self):
+        mock = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [
+            0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 1]]
+        result1 = self._knn._point_to_set_dist(4, 4, mock)
+        result2 = self._knn._point_to_set_dist(4, 0, mock)
+        result3 = self._knn._point_to_set_dist(3, 3, mock)
+        self.assertEqual(result1, 0.0)
+        self.assertEqual(result2, 4.0)
+        self.assertEqual(result3, sqrt(2))

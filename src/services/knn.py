@@ -167,7 +167,7 @@ class KNN:
             float: Distance from A[i][j] to closest point in set B
         """
         found = False
-        dist = 999
+        dist = 999.0
         min_i = A_i
         max_i = A_i
         min_j = A_j
