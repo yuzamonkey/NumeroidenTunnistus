@@ -15,6 +15,20 @@ class TestNumberClassifier(unittest.TestCase):
         result = self._knn.classify_number(3, 0, 10)
         self.assertEqual(type(result), int)
 
+    def test_d22_returns_maximum_of_set_distances(self):
+        set1 = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+        set2 = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]
+        result = knn._compare_d22(set1, set2)
+        expected = 1/9
+        self.assertEqual(result, expected)
+
+    def test_d23_returns_average_of_set_distances(self):
+        set1 = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+        set2 = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]
+        result = knn._compare_d23(set1, set2)
+        expected = (1/9) / 2
+        self.assertEqual(result, expected)
+
     def test_update_k_nearest_returns_longer_list(self):
         k_nearest = [(0.8, 8)]
         new_distance = (0.4, 4)
@@ -50,8 +64,12 @@ class TestNumberClassifier(unittest.TestCase):
         self.assertEqual(type(result), int)
 
     def test_point_to_set_distance_returns_correct_distance(self):
-        mock = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [
-            0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 1]]
+        mock = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1]]
         result1 = self._knn._point_to_set_dist(4, 4, mock)
         result2 = self._knn._point_to_set_dist(4, 0, mock)
         result3 = self._knn._point_to_set_dist(3, 3, mock)

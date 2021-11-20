@@ -42,10 +42,6 @@ class KNN:
                 errors.append((i, result))
             print(f"{i+1}/{number_of_test_images}")
 
-        # for i, r in errors:
-        #     print("RESULT: ", r, " Should have been ",
-        #           self._test_labels[i], "at index ", i)
-        #     print_image_and_result(self._test_imgs[i], self._test_labels[i])
         percentage = (1 - (len(errors) / number_of_test_images)) * 100
         print(
             f"""PERCENTAGE: {percentage}%
@@ -148,12 +144,13 @@ class KNN:
             float: distance between two datasets
         """
         # d_6 = 1/N_a * ∑(a ∈ A) d(a, B)
+        N_a = len(A) * len(A[0])
         sum_of_distances = 0.0
         for i in range(len(A)):  # pylint: disable=consider-using-enumerate
             for j in range(len(A[i])):
                 if A[i][j] == 1:
                     sum_of_distances += self._point_to_set_dist(i, j, B)
-        return 1/len(A) * sum_of_distances
+        return 1/N_a * sum_of_distances
 
     def _point_to_set_dist(self, A_i, A_j, B):
         """Calculates the distance from point in set A to closest point in set B
@@ -208,7 +205,6 @@ class KNN:
         Returns:
             float: Euclidian distance between two points
         """
-        # sqrt((xa-xb)^2 + (ya-yb)^2)
         return sqrt(pow(A_i - B_i, 2) + pow(A_j - B_j, 2))
 
 
