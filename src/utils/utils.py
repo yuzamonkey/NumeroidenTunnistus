@@ -76,14 +76,6 @@ def print_2d_array(array):
 
 
 def print_image_and_result(img, result, threshold=1):
-    """Prints image and result
-
-    Args:
-        img (int[]): image data
-        result (int): class of the image
-        threshold (int, optional): Grayscale pixel values equal or greater than threshold
-        will be printed. Defaults to 1.
-    """
     for i, value in enumerate(img):
         # to_print = f"{value} "
         to_print = "  "
