@@ -24,4 +24,4 @@ Pvm       | h |  |
 16.11.2021 | 2 | Vihdoinkin tajusin etäisyyden... nyt toimii |
 17.11.2021 | 0.5 | Workflow, codecov |
 19.11.2021 | 2.5 | Testejä, UI (PyQt5), optimointia |
-20.11.2021 | 0.5,  | Testausdokumentti, UI:n suunnittelua |
+20.11.2021 | 3 | Testausdokumentti, testejä, UI:n suunnittelua |
