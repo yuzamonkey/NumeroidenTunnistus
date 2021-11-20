@@ -3,10 +3,6 @@ from invoke import task
 
 @task
 def start(ctx):
-    # for item in ctx:
-    #     print(item)
-    # print("CTX:\n", ctx["tasks"])
-    # print("\n••••••\n")
     ctx.run("python3 src/main.py")
 
 

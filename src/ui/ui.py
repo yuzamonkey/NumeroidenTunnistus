@@ -7,11 +7,11 @@ class UI:
     def __init__(self):
         pass
 
-    def window(self):
+    def start(self):
         app = QApplication(sys.argv)
         win = QMainWindow()
-        win.setGeometry(200, 200, 300, 300)
-        win.setWindowTitle("HELLO WORLD")
+        win.setGeometry(300, 100, 1200, 900)
+        win.setWindowTitle("Number classifier")
 
         label = QtWidgets.QLabel(win)
         label.setText("LABEL text")
