@@ -24,3 +24,5 @@ Käsin kirjoitettujen numeroiden tunnistusohjelma. Ohjelma on tietorakenteiden j
 [Viikkoraportti 2](./documentation/weekly2.md)
 
 [Viikkoraportti 3](./documentation/weekly3.md)
+
+[Viikkoraportti 4](./documentation/weekly4.md)

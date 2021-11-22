@@ -25,3 +25,9 @@ Pvm       | h |  |
 17.11.2021 | 0.5 | Workflow, codecov |
 19.11.2021 | 2.5 | Testejä, UI (PyQt5), optimointia |
 20.11.2021 | 3 | Testausdokumentti, testejä, UI:n suunnittelua |
+
+## Viikko 4
+
+Pvm       | h |  |
+-----------|------|--------|
+22.11.2021 | 13- | UI |
