@@ -91,8 +91,11 @@ class Window(QDialog):
         self.test_data_size_label.setText(str(self.test_data_size.value()))
 
     def _change_train_data_size(self):
-        print("train DATA SIZE ", self.train_data_size.value())
+        print("TRAIN DATA SIZE ", self.train_data_size.value())
         self.train_data_size_label.setText(str(self.train_data_size.value()))
+
+    def _handle_start_button_click(self):
+        print("START BUTTON CLICKED")
 
     def createTopLeftGroupBox(self):
         self.topLeftGroupBox = QGroupBox()
@@ -122,9 +125,11 @@ class Window(QDialog):
         self.k_value.setSingleStep(1)
         self.k_value.setValue(4)
         self.k_value_label.setText(str(self.k_value.value()))
+
         # distance measure (d22, d23)
         self.distance_measures = QComboBox()
         self.distance_measures.addItems(["D22", "D23"])
+
         # grayscale threshold (1-255)
         self.grayscale_threshold = QSlider(Qt.Horizontal, self.topLeftGroupBox)
         self.grayscale_threshold.valueChanged.connect(self._change_grayscale_threshold)
@@ -152,12 +157,11 @@ class Window(QDialog):
         self.train_data_size.setValue(50)
         self.train_data_size_label.setText(str(self.train_data_size.value()))
         
+        self.start_button = QPushButton("Start")
+        self.start_button.clicked.connect(self._handle_start_button_click)
+        self.start_button.setDefault(True)
 
-
-        # checkBox = QCheckBox("Tri-state check box")
-        # checkBox.setTristate(True)
-        # checkBox.setCheckState(Qt.PartiallyChecked)
-
+        # add widgets to layout
         layout = QVBoxLayout()
         layout.addWidget(self.classifiers)
 
@@ -175,12 +179,9 @@ class Window(QDialog):
         layout.addWidget(self.train_data_size)
         layout.addWidget(self.train_data_size_label)
 
+        layout.addWidget(self.start_button)
         
-        # layout.addWidget(radioButton1)
-        # layout.addWidget(radioButton2)
-        # layout.addWidget(radioButton3)
-        #layout.addWidget(checkBox)
-        layout.addStretch(1)
+        #layout.addStretch(1)
         self.topLeftGroupBox.setLayout(layout)
 
     def createTopRightGroupBox(self):
