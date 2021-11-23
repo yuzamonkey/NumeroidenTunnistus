@@ -78,7 +78,12 @@ class Window(QDialog):
     def _change_classifier(self):
         print("FOOBAAR DUUBIDUU", self.classifiers.currentText())
 
+    def _change_k_value(self):
+        print("K VALUE BUUBADUU", self.k_value.value())
+        self.k_value_label.setText(str(self.k_value.value()))
+
     def createTopLeftGroupBox(self):
+        self.k_value_label= QLabel("")
         self.topLeftGroupBox = QGroupBox()
 
         # radioButton1 = QRadioButton("Radio button 1")
@@ -87,6 +92,7 @@ class Window(QDialog):
         # radioButton1.setChecked(True)
 
         # select classifier
+        
         self.classifiers = QComboBox()
         self.classifiers.addItems(["KNN", "Neural network", "Some other example"])
         self.classifiers.activated[str].connect(self._change_classifier)
@@ -95,10 +101,12 @@ class Window(QDialog):
 
         # k
         self.k_value = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.k_value.valueChanged.connect(self._change_k_value)
         self.k_value.setMinimum(1)
         self.k_value.setMaximum(10)
         self.k_value.setSingleStep(1)
         self.k_value.setValue(4)
+        self.k_value_label.setText(str(self.k_value.value()))
         # distance measure (d22, d23)
         self.distance_measures = QComboBox()
         self.distance_measures.addItems(["D22", "D23"])
@@ -114,8 +122,13 @@ class Window(QDialog):
 
         layout = QVBoxLayout()
         layout.addWidget(self.classifiers)
+        
         layout.addWidget(self.k_value)
+        layout.addWidget(self.k_value_label)
+
         layout.addWidget(self.distance_measures)
+
+        
         # layout.addWidget(radioButton1)
         # layout.addWidget(radioButton2)
         # layout.addWidget(radioButton3)
