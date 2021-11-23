@@ -1,9 +1,11 @@
+import random
 from PyQt5.QtCore import QDateTime, Qt, QTimer
 from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
                              QDial, QDialog, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLineEdit,
                              QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
                              QSlider, QSpinBox, QStyleFactory, QTableWidget, QGroupBox, QTextEdit,
                              QVBoxLayout, QWidget)
+from services.classification_service import classification_service as cs
 
 
 class Window(QDialog):
@@ -11,6 +13,8 @@ class Window(QDialog):
         super(Window, self).__init__(parent)
 
         self.originalPalette = QApplication.palette()
+        self.example_img_label = QLabel("")
+        self.rand_int = random.randint(0, 1000)
 
         #styleComboBox = QComboBox()
         # styleComboBox.addItems(QStyleFactory.keys())
@@ -87,6 +91,8 @@ class Window(QDialog):
         print("GRAYSCALE ", self.grayscale_threshold.value())
         self.grayscale_threshold_label.setText(
             str(self.grayscale_threshold.value()))
+        self.example_img = cs.get_example_number(self.rand_int, self.grayscale_threshold.value())
+        self.example_img_label.setText(self.example_img)
 
     def _change_test_data_size(self):
         print("TEST DATA SIZE ", self.test_data_size.value())
@@ -106,13 +112,8 @@ class Window(QDialog):
         self.grayscale_threshold_label = QLabel("")
         self.test_data_size_label = QLabel("")
         self.train_data_size_label = QLabel("")
-        # radioButton1 = QRadioButton("Radio button 1")
-        # radioButton2 = QRadioButton("Radio button 2")
-        # radioButton3 = QRadioButton("Radio button 3")
-        # radioButton1.setChecked(True)
-
+        
         # select classifier
-
         self.classifiers = QComboBox()
         self.classifiers.addItems(
             ["KNN", "Neural network", "Some other example"])
@@ -185,17 +186,21 @@ class Window(QDialog):
 
     def createBottomLeftGroupBox(self):
         self.bottomLeftGroupBox = QGroupBox()
-        
+
+        # image of example number
+        self.example_img = cs.get_example_number(self.rand_int, self.grayscale_threshold.value())
+        self.example_img_label.setText(self.example_img)
+
         # start button
         self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self._handle_start_button_click)
 
         # add widgets to layout
         layout = QVBoxLayout()
-
+        layout.addWidget(self.example_img_label)
         layout.addWidget(self.start_button)
 
-        # layout.addStretch(1)
+        layout.addStretch(1)
         self.bottomLeftGroupBox.setLayout(layout)
 
     def createTopRightGroupBox(self):
