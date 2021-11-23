@@ -86,9 +86,20 @@ class Window(QDialog):
         # radioButton3 = QRadioButton("Radio button 3")
         # radioButton1.setChecked(True)
 
+        # select classifier
         self.classifiers = QComboBox()
         self.classifiers.addItems(["KNN", "Neural network", "Some other example"])
         self.classifiers.activated[str].connect(self._change_classifier)
+
+        #for now, KNN options
+
+        # k
+        # distance measure (d22, d23)
+        self.distance_measures = QComboBox()
+        self.distance_measures.addItems(["D22", "D23"])
+        # grayscale threshold (1-255)
+        # test data size (1-10_000)
+        # train data size (1-60_000)
         
 
 
@@ -98,6 +109,7 @@ class Window(QDialog):
 
         layout = QVBoxLayout()
         layout.addWidget(self.classifiers)
+        layout.addWidget(self.distance_measures)
         # layout.addWidget(radioButton1)
         # layout.addWidget(radioButton2)
         # layout.addWidget(radioButton3)
