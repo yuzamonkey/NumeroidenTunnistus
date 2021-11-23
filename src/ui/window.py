@@ -2,8 +2,9 @@ from PyQt5.QtCore import QDateTime, Qt, QTimer
 from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
                              QDial, QDialog, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLineEdit,
                              QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
-                             QSlider, QSpinBox, QStyleFactory, QTableWidget, QTabWidget, QTextEdit,
+                             QSlider, QSpinBox, QStyleFactory, QTableWidget, QGroupBox, QTextEdit,
                              QVBoxLayout, QWidget)
+
 
 class Window(QDialog):
     def __init__(self, parent=None):
@@ -12,47 +13,47 @@ class Window(QDialog):
         self.originalPalette = QApplication.palette()
 
         #styleComboBox = QComboBox()
-        #styleComboBox.addItems(QStyleFactory.keys())
+        # styleComboBox.addItems(QStyleFactory.keys())
 
         #styleLabel = QLabel("&Style:")
-        #styleLabel.setBuddy(styleComboBox)
+        # styleLabel.setBuddy(styleComboBox)
 
         # self.useStylePaletteCheckBox = QCheckBox(
         #     "&Use style's standard palette")
-        #self.useStylePaletteCheckBox.setChecked(False)
+        # self.useStylePaletteCheckBox.setChecked(False)
 
         #disableWidgetsCheckBox = QCheckBox("&Disable widgets")
 
         self.createTopLeftGroupBox()
         self.createTopRightGroupBox()
-        self.createBottomLeftTabWidget()
+        self.createBottomLeftGroupBox()
         self.createBottomRightGroupBox()
         # self.createProgressBar()
 
-        #styleComboBox.activated[str].connect(self.changeStyle)
-        #self.useStylePaletteCheckBox.toggled.connect(self.changePalette)
+        # styleComboBox.activated[str].connect(self.changeStyle)
+        # self.useStylePaletteCheckBox.toggled.connect(self.changePalette)
 
         # disableWidgetsCheckBox.toggled.connect(
         #     self.topLeftGroupBox.setDisabled)
         # disableWidgetsCheckBox.toggled.connect(
         #     self.topRightGroupBox.setDisabled)
         # disableWidgetsCheckBox.toggled.connect(
-        #     self.bottomLeftTabWidget.setDisabled)
+        #     self.bottomLeftGroupBox.setDisabled)
         # disableWidgetsCheckBox.toggled.connect(
         #     self.bottomRightGroupBox.setDisabled)
 
         topLayout = QHBoxLayout()
-        #topLayout.addWidget(styleLabel)
-        #topLayout.addWidget(styleComboBox)
+        # topLayout.addWidget(styleLabel)
+        # topLayout.addWidget(styleComboBox)
         topLayout.addStretch(1)
-        #topLayout.addWidget(self.useStylePaletteCheckBox)
-        #topLayout.addWidget(disableWidgetsCheckBox)
+        # topLayout.addWidget(self.useStylePaletteCheckBox)
+        # topLayout.addWidget(disableWidgetsCheckBox)
 
         mainLayout = QGridLayout()
         mainLayout.addLayout(topLayout, 0, 0, 1, 2)
         mainLayout.addWidget(self.topLeftGroupBox, 1, 0)
-        mainLayout.addWidget(self.topRightGroupBox, 1, 1)
-        mainLayout.addWidget(self.bottomLeftTabWidget, 2, 0)
+        mainLayout.addWidget(self.bottomLeftGroupBox, 1, 1)
+        mainLayout.addWidget(self.topRightGroupBox, 2, 0)
         mainLayout.addWidget(self.bottomRightGroupBox, 2, 1)
         #mainLayout.addWidget(self.progressBar, 3, 0, 1, 2)
         mainLayout.setRowStretch(1, 1)
@@ -62,7 +63,7 @@ class Window(QDialog):
         self.setLayout(mainLayout)
 
         QApplication.setStyle(QStyleFactory.create('Fusion'))
-        #self.changeStyle('Fusion')
+        # self.changeStyle('Fusion')
 
     # def changePalette(self):
     #     if (self.useStylePaletteCheckBox.isChecked()):
@@ -84,7 +85,8 @@ class Window(QDialog):
 
     def _change_grayscale_threshold(self):
         print("GRAYSCALE ", self.grayscale_threshold.value())
-        self.grayscale_threshold_label.setText(str(self.grayscale_threshold.value()))
+        self.grayscale_threshold_label.setText(
+            str(self.grayscale_threshold.value()))
 
     def _change_test_data_size(self):
         print("TEST DATA SIZE ", self.test_data_size.value())
@@ -100,7 +102,7 @@ class Window(QDialog):
     def createTopLeftGroupBox(self):
         self.topLeftGroupBox = QGroupBox()
 
-        self.k_value_label= QLabel("")
+        self.k_value_label = QLabel("")
         self.grayscale_threshold_label = QLabel("")
         self.test_data_size_label = QLabel("")
         self.train_data_size_label = QLabel("")
@@ -110,12 +112,13 @@ class Window(QDialog):
         # radioButton1.setChecked(True)
 
         # select classifier
-        
+
         self.classifiers = QComboBox()
-        self.classifiers.addItems(["KNN", "Neural network", "Some other example"])
+        self.classifiers.addItems(
+            ["KNN", "Neural network", "Some other example"])
         self.classifiers.activated[str].connect(self._change_classifier)
 
-        #for now, KNN options
+        # for now, KNN options
 
         # k
         self.k_value = QSlider(Qt.Horizontal, self.topLeftGroupBox)
@@ -132,13 +135,15 @@ class Window(QDialog):
 
         # grayscale threshold (1-255)
         self.grayscale_threshold = QSlider(Qt.Horizontal, self.topLeftGroupBox)
-        self.grayscale_threshold.valueChanged.connect(self._change_grayscale_threshold)
+        self.grayscale_threshold.valueChanged.connect(
+            self._change_grayscale_threshold)
         self.grayscale_threshold.setMinimum(1)
         self.grayscale_threshold.setMaximum(255)
         self.grayscale_threshold.setSingleStep(1)
         self.grayscale_threshold.setValue(140)
-        self.grayscale_threshold_label.setText(str(self.grayscale_threshold.value()))
-        
+        self.grayscale_threshold_label.setText(
+            str(self.grayscale_threshold.value()))
+
         # test data size (1-10_000)
         self.test_data_size = QSlider(Qt.Horizontal, self.topLeftGroupBox)
         self.test_data_size.valueChanged.connect(self._change_test_data_size)
@@ -147,7 +152,7 @@ class Window(QDialog):
         self.test_data_size.setSingleStep(1)
         self.test_data_size.setValue(10)
         self.test_data_size_label.setText(str(self.test_data_size.value()))
-        
+
         # train data size (1-60_000)
         self.train_data_size = QSlider(Qt.Horizontal, self.topLeftGroupBox)
         self.train_data_size.valueChanged.connect(self._change_train_data_size)
@@ -156,10 +161,6 @@ class Window(QDialog):
         self.train_data_size.setSingleStep(1)
         self.train_data_size.setValue(50)
         self.train_data_size_label.setText(str(self.train_data_size.value()))
-        
-        self.start_button = QPushButton("Start")
-        self.start_button.clicked.connect(self._handle_start_button_click)
-        self.start_button.setDefault(True)
 
         # add widgets to layout
         layout = QVBoxLayout()
@@ -179,10 +180,23 @@ class Window(QDialog):
         layout.addWidget(self.train_data_size)
         layout.addWidget(self.train_data_size_label)
 
-        layout.addWidget(self.start_button)
-        
-        #layout.addStretch(1)
+        # layout.addStretch(1)
         self.topLeftGroupBox.setLayout(layout)
+
+    def createBottomLeftGroupBox(self):
+        self.bottomLeftGroupBox = QGroupBox()
+        
+        # start button
+        self.start_button = QPushButton("Start")
+        self.start_button.clicked.connect(self._handle_start_button_click)
+
+        # add widgets to layout
+        layout = QVBoxLayout()
+
+        layout.addWidget(self.start_button)
+
+        # layout.addStretch(1)
+        self.bottomLeftGroupBox.setLayout(layout)
 
     def createTopRightGroupBox(self):
         self.topRightGroupBox = QGroupBox("Group 2")
@@ -203,37 +217,6 @@ class Window(QDialog):
         layout.addWidget(flatPushButton)
         layout.addStretch(1)
         self.topRightGroupBox.setLayout(layout)
-
-    def createBottomLeftTabWidget(self):
-        self.bottomLeftTabWidget = QTabWidget()
-        self.bottomLeftTabWidget.setSizePolicy(QSizePolicy.Preferred,
-                                               QSizePolicy.Ignored)
-
-        tab1 = QWidget()
-        tableWidget = QTableWidget(10, 10)
-
-        tab1hbox = QHBoxLayout()
-        tab1hbox.setContentsMargins(5, 5, 5, 5)
-        tab1hbox.addWidget(tableWidget)
-        tab1.setLayout(tab1hbox)
-
-        tab2 = QWidget()
-        textEdit = QTextEdit()
-
-        textEdit.setPlainText("Twinkle, twinkle, little star,\n"
-                              "How I wonder what you are.\n"
-                              "Up above the world so high,\n"
-                              "Like a diamond in the sky.\n"
-                              "Twinkle, twinkle, little star,\n"
-                              "How I wonder what you are!\n")
-
-        tab2hbox = QHBoxLayout()
-        tab2hbox.setContentsMargins(5, 5, 5, 5)
-        tab2hbox.addWidget(textEdit)
-        tab2.setLayout(tab2hbox)
-
-        self.bottomLeftTabWidget.addTab(tab1, "&Table")
-        self.bottomLeftTabWidget.addTab(tab2, "Text &Edit")
 
     def createBottomRightGroupBox(self):
         self.bottomRightGroupBox = QGroupBox("Group 3")
@@ -277,4 +260,3 @@ class Window(QDialog):
     #     timer = QTimer(self)
     #     timer.timeout.connect(self.advanceProgressBar)
     #     timer.start(1000)
-
