@@ -76,14 +76,19 @@ class Window(QDialog):
     #     self.progressBar.setValue(curVal + (maxVal - curVal) / 100)
 
     def _change_classifier(self):
-        print("FOOBAAR DUUBIDUU", self.classifiers.currentText())
+        print("CLASSIFIER ", self.classifiers.currentText())
 
     def _change_k_value(self):
-        print("K VALUE BUUBADUU", self.k_value.value())
+        print("K ", self.k_value.value())
         self.k_value_label.setText(str(self.k_value.value()))
+
+    def _change_grayscale_threshold(self):
+        print("GRAYSCALE ", self.grayscale_threshold.value())
+        self.grayscale_threshold_label.setText(str(self.grayscale_threshold.value()))
 
     def createTopLeftGroupBox(self):
         self.k_value_label= QLabel("")
+        self.grayscale_threshold_label = QLabel("")
         self.topLeftGroupBox = QGroupBox()
 
         # radioButton1 = QRadioButton("Radio button 1")
@@ -111,6 +116,14 @@ class Window(QDialog):
         self.distance_measures = QComboBox()
         self.distance_measures.addItems(["D22", "D23"])
         # grayscale threshold (1-255)
+        self.grayscale_threshold = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.grayscale_threshold.valueChanged.connect(self._change_grayscale_threshold)
+        self.grayscale_threshold.setMinimum(1)
+        self.grayscale_threshold.setMaximum(255)
+        self.grayscale_threshold.setSingleStep(1)
+        self.grayscale_threshold.setValue(140)
+        self.grayscale_threshold_label.setText(str(self.grayscale_threshold.value()))
+        
         # test data size (1-10_000)
         # train data size (1-60_000)
         
@@ -122,11 +135,14 @@ class Window(QDialog):
 
         layout = QVBoxLayout()
         layout.addWidget(self.classifiers)
-        
+
         layout.addWidget(self.k_value)
         layout.addWidget(self.k_value_label)
 
         layout.addWidget(self.distance_measures)
+
+        layout.addWidget(self.grayscale_threshold)
+        layout.addWidget(self.grayscale_threshold_label)
 
         
         # layout.addWidget(radioButton1)
