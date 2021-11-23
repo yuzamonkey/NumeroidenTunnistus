@@ -28,9 +28,9 @@ class Window(QDialog):
 
         #disableWidgetsCheckBox = QCheckBox("&Disable widgets")
 
-        self.createTopLeftGroupBox()
+        self.createParametersGroupBox()
         self.createTopRightGroupBox()
-        self.createBottomLeftGroupBox()
+        self.createResultsGroupBox()
         self.createBottomRightGroupBox()
         # self.createProgressBar()
 
@@ -38,11 +38,11 @@ class Window(QDialog):
         # self.useStylePaletteCheckBox.toggled.connect(self.changePalette)
 
         # disableWidgetsCheckBox.toggled.connect(
-        #     self.topLeftGroupBox.setDisabled)
+        #     self.parametersGroupBox.setDisabled)
         # disableWidgetsCheckBox.toggled.connect(
         #     self.topRightGroupBox.setDisabled)
         # disableWidgetsCheckBox.toggled.connect(
-        #     self.bottomLeftGroupBox.setDisabled)
+        #     self.resultsGroupBox.setDisabled)
         # disableWidgetsCheckBox.toggled.connect(
         #     self.bottomRightGroupBox.setDisabled)
 
@@ -55,8 +55,8 @@ class Window(QDialog):
 
         mainLayout = QGridLayout()
         mainLayout.addLayout(topLayout, 0, 0, 1, 2)
-        mainLayout.addWidget(self.topLeftGroupBox, 1, 0)
-        mainLayout.addWidget(self.bottomLeftGroupBox, 1, 1)
+        mainLayout.addWidget(self.parametersGroupBox, 1, 0)
+        mainLayout.addWidget(self.resultsGroupBox, 1, 1)
         mainLayout.addWidget(self.topRightGroupBox, 2, 0)
         mainLayout.addWidget(self.bottomRightGroupBox, 2, 1)
         #mainLayout.addWidget(self.progressBar, 3, 0, 1, 2)
@@ -117,8 +117,8 @@ class Window(QDialog):
             self.train_data_size.value()
         )
 
-    def createTopLeftGroupBox(self):
-        self.topLeftGroupBox = QGroupBox()
+    def createParametersGroupBox(self):
+        self.parametersGroupBox = QGroupBox()
 
         self.k_value_label = QLabel("")
         self.grayscale_threshold_label = QLabel("")
@@ -134,7 +134,7 @@ class Window(QDialog):
         # for now, KNN options
 
         # k
-        self.k_value = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.k_value = QSlider(Qt.Horizontal, self.parametersGroupBox)
         self.k_value.valueChanged.connect(self._change_k_value)
         self.k_value.setMinimum(1)
         self.k_value.setMaximum(10)
@@ -149,7 +149,7 @@ class Window(QDialog):
         self.distance_measures.activated[str].connect(self._change_dist_measure)
 
         # grayscale threshold (1-255)
-        self.grayscale_threshold = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.grayscale_threshold = QSlider(Qt.Horizontal, self.parametersGroupBox)
         self.grayscale_threshold.valueChanged.connect(
             self._change_grayscale_threshold)
         self.grayscale_threshold.setMinimum(1)
@@ -160,7 +160,7 @@ class Window(QDialog):
             str(self.grayscale_threshold.value()))
 
         # test data size (1-10_000)
-        self.test_data_size = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.test_data_size = QSlider(Qt.Horizontal, self.parametersGroupBox)
         self.test_data_size.valueChanged.connect(self._change_test_data_size)
         self.test_data_size.setMinimum(1)
         self.test_data_size.setMaximum(10_000)
@@ -169,7 +169,7 @@ class Window(QDialog):
         self.test_data_size_label.setText(str(self.test_data_size.value()))
 
         # train data size (1-60_000)
-        self.train_data_size = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.train_data_size = QSlider(Qt.Horizontal, self.parametersGroupBox)
         self.train_data_size.valueChanged.connect(self._change_train_data_size)
         self.train_data_size.setMinimum(1)
         self.train_data_size.setMaximum(60_000)
@@ -196,10 +196,10 @@ class Window(QDialog):
         layout.addWidget(self.train_data_size_label)
 
         # layout.addStretch(1)
-        self.topLeftGroupBox.setLayout(layout)
+        self.parametersGroupBox.setLayout(layout)
 
-    def createBottomLeftGroupBox(self):
-        self.bottomLeftGroupBox = QGroupBox()
+    def createResultsGroupBox(self):
+        self.resultsGroupBox = QGroupBox()
 
         # image of example number
         self.example_img = cs.get_example_number(
@@ -216,7 +216,7 @@ class Window(QDialog):
         layout.addWidget(self.start_button)
 
         layout.addStretch(1)
-        self.bottomLeftGroupBox.setLayout(layout)
+        self.resultsGroupBox.setLayout(layout)
 
     def createTopRightGroupBox(self):
         self.topRightGroupBox = QGroupBox("Group 2")
