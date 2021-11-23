@@ -86,11 +86,21 @@ class Window(QDialog):
         print("GRAYSCALE ", self.grayscale_threshold.value())
         self.grayscale_threshold_label.setText(str(self.grayscale_threshold.value()))
 
+    def _change_test_data_size(self):
+        print("TEST DATA SIZE ", self.test_data_size.value())
+        self.test_data_size_label.setText(str(self.test_data_size.value()))
+
+    def _change_train_data_size(self):
+        print("train DATA SIZE ", self.train_data_size.value())
+        self.train_data_size_label.setText(str(self.train_data_size.value()))
+
     def createTopLeftGroupBox(self):
-        self.k_value_label= QLabel("")
-        self.grayscale_threshold_label = QLabel("")
         self.topLeftGroupBox = QGroupBox()
 
+        self.k_value_label= QLabel("")
+        self.grayscale_threshold_label = QLabel("")
+        self.test_data_size_label = QLabel("")
+        self.train_data_size_label = QLabel("")
         # radioButton1 = QRadioButton("Radio button 1")
         # radioButton2 = QRadioButton("Radio button 2")
         # radioButton3 = QRadioButton("Radio button 3")
@@ -125,7 +135,22 @@ class Window(QDialog):
         self.grayscale_threshold_label.setText(str(self.grayscale_threshold.value()))
         
         # test data size (1-10_000)
+        self.test_data_size = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.test_data_size.valueChanged.connect(self._change_test_data_size)
+        self.test_data_size.setMinimum(1)
+        self.test_data_size.setMaximum(10_000)
+        self.test_data_size.setSingleStep(1)
+        self.test_data_size.setValue(10)
+        self.test_data_size_label.setText(str(self.test_data_size.value()))
+        
         # train data size (1-60_000)
+        self.train_data_size = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.train_data_size.valueChanged.connect(self._change_train_data_size)
+        self.train_data_size.setMinimum(1)
+        self.train_data_size.setMaximum(60_000)
+        self.train_data_size.setSingleStep(1)
+        self.train_data_size.setValue(50)
+        self.train_data_size_label.setText(str(self.train_data_size.value()))
         
 
 
@@ -136,13 +161,19 @@ class Window(QDialog):
         layout = QVBoxLayout()
         layout.addWidget(self.classifiers)
 
+        layout.addWidget(self.distance_measures)
+
         layout.addWidget(self.k_value)
         layout.addWidget(self.k_value_label)
 
-        layout.addWidget(self.distance_measures)
-
         layout.addWidget(self.grayscale_threshold)
         layout.addWidget(self.grayscale_threshold_label)
+
+        layout.addWidget(self.test_data_size)
+        layout.addWidget(self.test_data_size_label)
+
+        layout.addWidget(self.train_data_size)
+        layout.addWidget(self.train_data_size_label)
 
         
         # layout.addWidget(radioButton1)
