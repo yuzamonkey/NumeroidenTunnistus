@@ -94,6 +94,11 @@ class Window(QDialog):
         #for now, KNN options
 
         # k
+        self.k_value = QSlider(Qt.Horizontal, self.topLeftGroupBox)
+        self.k_value.setMinimum(1)
+        self.k_value.setMaximum(10)
+        self.k_value.setSingleStep(1)
+        self.k_value.setValue(4)
         # distance measure (d22, d23)
         self.distance_measures = QComboBox()
         self.distance_measures.addItems(["D22", "D23"])
@@ -109,6 +114,7 @@ class Window(QDialog):
 
         layout = QVBoxLayout()
         layout.addWidget(self.classifiers)
+        layout.addWidget(self.k_value)
         layout.addWidget(self.distance_measures)
         # layout.addWidget(radioButton1)
         # layout.addWidget(radioButton2)
