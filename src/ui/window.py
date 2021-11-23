@@ -67,6 +67,7 @@ class Window(QDialog):
         self.setLayout(mainLayout)
 
         QApplication.setStyle(QStyleFactory.create('Fusion'))
+        # QApplication.setStyle(QStyleFactory.create('macos'))
         # self.changeStyle('Fusion')
 
     # def changePalette(self):
@@ -87,11 +88,15 @@ class Window(QDialog):
         print("K ", self.k_value.value())
         self.k_value_label.setText(str(self.k_value.value()))
 
+    def _change_dist_measure(self):
+        print("DIST MEASURE ", self.distance_measures.currentText())
+
     def _change_grayscale_threshold(self):
         print("GRAYSCALE ", self.grayscale_threshold.value())
         self.grayscale_threshold_label.setText(
             str(self.grayscale_threshold.value()))
-        self.example_img = cs.get_example_number(self.rand_int, self.grayscale_threshold.value())
+        self.example_img = cs.get_example_number(
+            self.rand_int, self.grayscale_threshold.value())
         self.example_img_label.setText(self.example_img)
 
     def _change_test_data_size(self):
@@ -104,6 +109,13 @@ class Window(QDialog):
 
     def _handle_start_button_click(self):
         print("START BUTTON CLICKED")
+        cs.start_knn_classification(
+            self.k_value.value(),
+            self.grayscale_threshold.value(),
+            self.distance_measures.currentText(),
+            self.test_data_size.value(),
+            self.train_data_size.value()
+        )
 
     def createTopLeftGroupBox(self):
         self.topLeftGroupBox = QGroupBox()
@@ -112,7 +124,7 @@ class Window(QDialog):
         self.grayscale_threshold_label = QLabel("")
         self.test_data_size_label = QLabel("")
         self.train_data_size_label = QLabel("")
-        
+
         # select classifier
         self.classifiers = QComboBox()
         self.classifiers.addItems(
@@ -133,6 +145,8 @@ class Window(QDialog):
         # distance measure (d22, d23)
         self.distance_measures = QComboBox()
         self.distance_measures.addItems(["D22", "D23"])
+        #self.distance_measures.valueChanged.connect(self._change_dist_measure)
+        self.distance_measures.activated[str].connect(self._change_dist_measure)
 
         # grayscale threshold (1-255)
         self.grayscale_threshold = QSlider(Qt.Horizontal, self.topLeftGroupBox)
@@ -188,7 +202,8 @@ class Window(QDialog):
         self.bottomLeftGroupBox = QGroupBox()
 
         # image of example number
-        self.example_img = cs.get_example_number(self.rand_int, self.grayscale_threshold.value())
+        self.example_img = cs.get_example_number(
+            self.rand_int, self.grayscale_threshold.value())
         self.example_img_label.setText(self.example_img)
 
         # start button

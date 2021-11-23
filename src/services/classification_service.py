@@ -18,4 +18,13 @@ class ClassificationService:
 
         return retval
 
+    def start_knn_classification(self, k, threshold, distance_measure, test_size, train_size):
+        print("\nSTART KNN WITH PARAMS")
+        print("K ", k)
+        print("THRESHOLD ", threshold)
+        print("DIST ", distance_measure)
+        print("TEST_SIZE ", test_size)
+        print("TRAIN_SIZE ", train_size)
+        print("")
+
 classification_service = ClassificationService()
