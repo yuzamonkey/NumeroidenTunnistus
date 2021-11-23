@@ -11,17 +11,17 @@ class Window(QDialog):
 
         self.originalPalette = QApplication.palette()
 
-        styleComboBox = QComboBox()
-        styleComboBox.addItems(QStyleFactory.keys())
+        #styleComboBox = QComboBox()
+        #styleComboBox.addItems(QStyleFactory.keys())
 
-        styleLabel = QLabel("&Style:")
-        styleLabel.setBuddy(styleComboBox)
+        #styleLabel = QLabel("&Style:")
+        #styleLabel.setBuddy(styleComboBox)
 
-        self.useStylePaletteCheckBox = QCheckBox(
-            "&Use style's standard palette")
-        self.useStylePaletteCheckBox.setChecked(True)
+        # self.useStylePaletteCheckBox = QCheckBox(
+        #     "&Use style's standard palette")
+        #self.useStylePaletteCheckBox.setChecked(False)
 
-        disableWidgetsCheckBox = QCheckBox("&Disable widgets")
+        #disableWidgetsCheckBox = QCheckBox("&Disable widgets")
 
         self.createTopLeftGroupBox()
         self.createTopRightGroupBox()
@@ -29,23 +29,24 @@ class Window(QDialog):
         self.createBottomRightGroupBox()
         # self.createProgressBar()
 
-        styleComboBox.activated[str].connect(self.changeStyle)
-        self.useStylePaletteCheckBox.toggled.connect(self.changePalette)
-        disableWidgetsCheckBox.toggled.connect(
-            self.topLeftGroupBox.setDisabled)
-        disableWidgetsCheckBox.toggled.connect(
-            self.topRightGroupBox.setDisabled)
-        disableWidgetsCheckBox.toggled.connect(
-            self.bottomLeftTabWidget.setDisabled)
-        disableWidgetsCheckBox.toggled.connect(
-            self.bottomRightGroupBox.setDisabled)
+        #styleComboBox.activated[str].connect(self.changeStyle)
+        #self.useStylePaletteCheckBox.toggled.connect(self.changePalette)
+
+        # disableWidgetsCheckBox.toggled.connect(
+        #     self.topLeftGroupBox.setDisabled)
+        # disableWidgetsCheckBox.toggled.connect(
+        #     self.topRightGroupBox.setDisabled)
+        # disableWidgetsCheckBox.toggled.connect(
+        #     self.bottomLeftTabWidget.setDisabled)
+        # disableWidgetsCheckBox.toggled.connect(
+        #     self.bottomRightGroupBox.setDisabled)
 
         topLayout = QHBoxLayout()
-        topLayout.addWidget(styleLabel)
-        topLayout.addWidget(styleComboBox)
+        #topLayout.addWidget(styleLabel)
+        #topLayout.addWidget(styleComboBox)
         topLayout.addStretch(1)
-        topLayout.addWidget(self.useStylePaletteCheckBox)
-        topLayout.addWidget(disableWidgetsCheckBox)
+        #topLayout.addWidget(self.useStylePaletteCheckBox)
+        #topLayout.addWidget(disableWidgetsCheckBox)
 
         mainLayout = QGridLayout()
         mainLayout.addLayout(topLayout, 0, 0, 1, 2)
@@ -60,41 +61,47 @@ class Window(QDialog):
         mainLayout.setColumnStretch(1, 1)
         self.setLayout(mainLayout)
 
-        self.setWindowTitle("Styles")
-        self.changeStyle('Fusion')
+        QApplication.setStyle(QStyleFactory.create('Fusion'))
+        #self.changeStyle('Fusion')
 
-    def changeStyle(self, styleName):
-        QApplication.setStyle(QStyleFactory.create(styleName))
-        self.changePalette()
+    # def changePalette(self):
+    #     if (self.useStylePaletteCheckBox.isChecked()):
+    #         QApplication.setPalette(QApplication.style().standardPalette())
+    #     else:
+    #         QApplication.setPalette(self.originalPalette)
 
-    def changePalette(self):
-        if (self.useStylePaletteCheckBox.isChecked()):
-            QApplication.setPalette(QApplication.style().standardPalette())
-        else:
-            QApplication.setPalette(self.originalPalette)
+    # def advanceProgressBar(self):
+    #     curVal = self.progressBar.value()
+    #     maxVal = self.progressBar.maximum()
+    #     self.progressBar.setValue(curVal + (maxVal - curVal) / 100)
 
-    def advanceProgressBar(self):
-        curVal = self.progressBar.value()
-        maxVal = self.progressBar.maximum()
-        self.progressBar.setValue(curVal + (maxVal - curVal) / 100)
+    def _change_classifier(self):
+        print("FOOBAAR DUUBIDUU", self.classifiers.currentText())
 
     def createTopLeftGroupBox(self):
-        self.topLeftGroupBox = QGroupBox("Group 1")
+        self.topLeftGroupBox = QGroupBox()
 
-        radioButton1 = QRadioButton("Radio button 1")
-        radioButton2 = QRadioButton("Radio button 2")
-        radioButton3 = QRadioButton("Radio button 3")
-        radioButton1.setChecked(True)
+        # radioButton1 = QRadioButton("Radio button 1")
+        # radioButton2 = QRadioButton("Radio button 2")
+        # radioButton3 = QRadioButton("Radio button 3")
+        # radioButton1.setChecked(True)
 
-        checkBox = QCheckBox("Tri-state check box")
-        checkBox.setTristate(True)
-        checkBox.setCheckState(Qt.PartiallyChecked)
+        self.classifiers = QComboBox()
+        self.classifiers.addItems(["KNN", "Neural network", "Some other example"])
+        self.classifiers.activated[str].connect(self._change_classifier)
+        
+
+
+        # checkBox = QCheckBox("Tri-state check box")
+        # checkBox.setTristate(True)
+        # checkBox.setCheckState(Qt.PartiallyChecked)
 
         layout = QVBoxLayout()
-        layout.addWidget(radioButton1)
-        layout.addWidget(radioButton2)
-        layout.addWidget(radioButton3)
-        layout.addWidget(checkBox)
+        layout.addWidget(self.classifiers)
+        # layout.addWidget(radioButton1)
+        # layout.addWidget(radioButton2)
+        # layout.addWidget(radioButton3)
+        #layout.addWidget(checkBox)
         layout.addStretch(1)
         self.topLeftGroupBox.setLayout(layout)
 
@@ -183,12 +190,12 @@ class Window(QDialog):
         layout.setRowStretch(5, 1)
         self.bottomRightGroupBox.setLayout(layout)
 
-    def createProgressBar(self):
-        self.progressBar = QProgressBar()
-        self.progressBar.setRange(0, 10000)
-        self.progressBar.setValue(0)
+    # def createProgressBar(self):
+    #     self.progressBar = QProgressBar()
+    #     self.progressBar.setRange(0, 10000)
+    #     self.progressBar.setValue(0)
 
-        timer = QTimer(self)
-        timer.timeout.connect(self.advanceProgressBar)
-        timer.start(1000)
+    #     timer = QTimer(self)
+    #     timer.timeout.connect(self.advanceProgressBar)
+    #     timer.start(1000)
 
