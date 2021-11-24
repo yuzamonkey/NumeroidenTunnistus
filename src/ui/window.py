@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
                              QSlider, QSpinBox, QStyleFactory, QTableWidget, QGroupBox, QTextEdit,
                              QVBoxLayout, QWidget)
 from services.classification_service import classification_service as cs
-
+from ui.param_selection.results_widget import ResultsWidget
 
 class Window(QDialog):
     def __init__(self, parent=None):
@@ -14,6 +14,8 @@ class Window(QDialog):
 
         self.example_img_label = QLabel("")
         self.rand_int = random.randint(0, 1000)
+
+        self.results_widget = ResultsWidget()
 
         self.createParametersGroupBox()
         self.createResultsGroupBox()
@@ -149,19 +151,20 @@ class Window(QDialog):
     def createResultsGroupBox(self):
         self.resultsGroupBox = QGroupBox()
 
-        # image of example number
-        self.example_img = cs.get_example_number(
-            self.rand_int, self.grayscale_threshold.value())
-        self.example_img_label.setText(self.example_img)
+        # # image of example number
+        # self.example_img = cs.get_example_number(
+        #     self.rand_int, self.grayscale_threshold.value())
+        # self.example_img_label.setText(self.example_img)
 
-        # start button
-        self.start_button = QPushButton("Start")
-        self.start_button.clicked.connect(self._handle_start_button_click)
+        # # start button
+        # self.start_button = QPushButton("Start")
+        # self.start_button.clicked.connect(self._handle_start_button_click)
 
-        # add widgets to layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.example_img_label)
-        layout.addWidget(self.start_button)
+        # # add widgets to layout
+        # layout = QVBoxLayout()
+        # layout.addWidget(self.example_img_label)
+        # layout.addWidget(self.start_button)
 
-        layout.addStretch(1)
-        self.resultsGroupBox.setLayout(layout)
+        # layout.addStretch(1)
+        # self.resultsGroupBox.setLayout(layout)
+        self.resultsGroupBox.setLayout(self.results_widget.get_layout())
