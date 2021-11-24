@@ -13,7 +13,7 @@ class Window(QDialog):
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
 
-        self.example_img_label = QLabel("")
+        #self.example_img_label = QLabel("")
 
         self.results_widget = ResultsWidget()
 
@@ -44,11 +44,8 @@ class Window(QDialog):
     def _change_grayscale_threshold(self):
         print("GRAYSCALE ", self.grayscale_threshold.value())
         params.set_grayscale_threshold(self.grayscale_threshold.value())
-        self.grayscale_threshold_label.setText(
-            str(params.get_grayscale_threshold()))
-        self.example_img = cs.get_example_number(
-            params.get_random_integer(), params.get_grayscale_threshold())
-        self.example_img_label.setText(self.example_img)
+        self.grayscale_threshold_label.setText(str(params.get_grayscale_threshold()))
+        self.results_widget.update_image()
 
     def _change_test_data_size(self):
         print("TEST DATA SIZE ", self.test_data_size.value())
@@ -59,16 +56,6 @@ class Window(QDialog):
         print("TRAIN DATA SIZE ", self.train_data_size.value())
         params.set_train_data_size(self.train_data_size.value())
         self.train_data_size_label.setText(str(params.get_train_data_size()))
-
-    def _handle_start_button_click(self):
-        print("START BUTTON CLICKED")
-        cs.start_knn_classification(
-            params.get_k(),
-            params.get_grayscale_threshold(),
-            params.get_distance_measure(),
-            params.get_test_data_size(),
-            params.get_train_data_size()
-        )
 
     def createParametersGroupBox(self):
         self.parametersGroupBox = QGroupBox()
@@ -155,21 +142,4 @@ class Window(QDialog):
 
     def createResultsGroupBox(self):
         self.resultsGroupBox = QGroupBox()
-
-        # image of example number
-        self.example_img = cs.get_example_number(
-            params.get_random_integer(), params.get_grayscale_threshold())
-        self.example_img_label.setText(self.example_img)
-
-        # start button
-        self.start_button = QPushButton("Start")
-        self.start_button.clicked.connect(self._handle_start_button_click)
-
-        # add widgets to layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.example_img_label)
-        layout.addWidget(self.start_button)
-
-        layout.addStretch(1)
-        self.resultsGroupBox.setLayout(layout)
-        self.resultsGroupBox.setLayout(layout)
+        self.resultsGroupBox.setLayout(self.results_widget.get_layout())
