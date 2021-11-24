@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
                              QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
                              QSlider, QSpinBox, QStyleFactory, QTableWidget, QGroupBox, QTextEdit,
                              QVBoxLayout, QWidget)
-from ui.param_selection.results_widget import ResultsWidget
+from ui.result_widgets.results_widget import ResultsWidget
 from ui.param_selection.params_widget import ParamsWidget
 
 
