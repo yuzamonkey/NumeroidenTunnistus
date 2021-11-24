@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
 from services.classification_service import classification_service as cs
 from ui.param_selection.results_widget import ResultsWidget
 
+from ui.params import params
+
 class Window(QDialog):
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
@@ -34,7 +36,8 @@ class Window(QDialog):
 
     def _change_k_value(self):
         print("K ", self.k_value.value())
-        self.k_value_label.setText(str(self.k_value.value()))
+        params.set_k(self.k_value.value())
+        self.k_value_label.setText(str(params.get_k()))
 
     def _change_dist_measure(self):
         print("DIST MEASURE ", self.distance_measures.currentText())
@@ -58,7 +61,7 @@ class Window(QDialog):
     def _handle_start_button_click(self):
         print("START BUTTON CLICKED")
         cs.start_knn_classification(
-            self.k_value.value(),
+            params.get_k(),
             self.grayscale_threshold.value(),
             self.distance_measures.currentText(),
             self.test_data_size.value(),
@@ -89,7 +92,8 @@ class Window(QDialog):
             self.k_value.setMinimum(1)
             self.k_value.setMaximum(10)
             self.k_value.setSingleStep(1)
-            self.k_value.setValue(4)
+            self.k_value.setValue(params.get_k())
+            print("•••", params.get_k())
             self.k_value_label.setText(str(self.k_value.value()))
 
             # distance measure (d22, d23)
@@ -151,20 +155,20 @@ class Window(QDialog):
     def createResultsGroupBox(self):
         self.resultsGroupBox = QGroupBox()
 
-        # # image of example number
-        # self.example_img = cs.get_example_number(
-        #     self.rand_int, self.grayscale_threshold.value())
-        # self.example_img_label.setText(self.example_img)
+        # image of example number
+        self.example_img = cs.get_example_number(
+            self.rand_int, self.grayscale_threshold.value())
+        self.example_img_label.setText(self.example_img)
 
-        # # start button
-        # self.start_button = QPushButton("Start")
-        # self.start_button.clicked.connect(self._handle_start_button_click)
+        # start button
+        self.start_button = QPushButton("Start")
+        self.start_button.clicked.connect(self._handle_start_button_click)
 
-        # # add widgets to layout
-        # layout = QVBoxLayout()
-        # layout.addWidget(self.example_img_label)
-        # layout.addWidget(self.start_button)
+        # add widgets to layout
+        layout = QVBoxLayout()
+        layout.addWidget(self.example_img_label)
+        layout.addWidget(self.start_button)
 
-        # layout.addStretch(1)
-        # self.resultsGroupBox.setLayout(layout)
-        self.resultsGroupBox.setLayout(self.results_widget.get_layout())
+        layout.addStretch(1)
+        self.resultsGroupBox.setLayout(layout)
+        self.resultsGroupBox.setLayout(layout)
