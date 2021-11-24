@@ -4,21 +4,23 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
                              QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
                              QSlider, QSpinBox, QStyleFactory, QTableWidget, QGroupBox, QTextEdit,
                              QVBoxLayout, QWidget)
-from ui.result_widgets.results_widget import ResultsWidget
+
+from ui.result_widgets.starting_widget import StartingWidget
 from ui.param_selection.params_widget import ParamsWidget
-from ui.result_widgets.foobaar import Foobaar
+from ui.result_widgets.classification_widget import ClassificationWidget
+
 
 class Window(QDialog):
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
 
-        self.foobar_widget = Foobaar()
-        self.results_widget = ResultsWidget(self.updateResultsGroupBox)
-        self.params_widget = ParamsWidget(self.results_widget.update_image)
-
+        self.classification_widget = ClassificationWidget()
+        self.starting_widget = StartingWidget(self.updateResultsGroupBox)
+        self.params_widget = ParamsWidget(self.starting_widget.update_image)
         self.createParametersGroupBox()
         self.createResultsGroupBox()
-        self.createFoobaarGroupBox()
+        self.createClassificationGroupBox()
+
         self.mainLayout = QGridLayout()
         self.mainLayout.addWidget(self.parametersGroupBox, 0, 0)
         self.mainLayout.addWidget(self.resultsGroupBox, 0, 1)
@@ -34,14 +36,15 @@ class Window(QDialog):
 
     def createResultsGroupBox(self):
         self.resultsGroupBox = QGroupBox()
-        self.resultsGroupBox.setLayout(self.results_widget.get_layout())
+        self.resultsGroupBox.setLayout(self.starting_widget.get_layout())
 
-    def createFoobaarGroupBox(self):
-        self.foobarGroupBox = QGroupBox()
-        self.foobarGroupBox.setLayout(self.foobar_widget.get_layout())
+    def createClassificationGroupBox(self):
+        self.classificationGroupBox = QGroupBox()
+        self.classificationGroupBox.setLayout(
+            self.classification_widget.get_layout())
 
     def updateResultsGroupBox(self):
         print("UPDATE CALLED")
-        #self.mainLayout.removeWidget(self.resultsGroupBox)
+        # self.mainLayout.removeWidget(self.resultsGroupBox)
         self.resultsGroupBox.setParent(None)
-        self.mainLayout.addWidget(self.foobarGroupBox, 0, 1)
+        self.mainLayout.addWidget(self.classificationGroupBox, 0, 1)
