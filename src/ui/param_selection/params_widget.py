@@ -1,23 +1,19 @@
-from PyQt5.QtCore import QDateTime, Qt, QTimer
-from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
-                             QDial, QDialog, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-                             QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
-                             QSlider, QSpinBox, QStyleFactory, QTableWidget, QGroupBox, QTextEdit,
-                             QVBoxLayout, QWidget)
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (QComboBox, QLabel, QSlider, QVBoxLayout)
 from services.classification_service import classification_service as cs
 from ui.params import params
+
 
 class ParamsWidget:
     def __init__(self, update_img):
         # update image function, used on threshold change
         self.update_img = update_img
-        
+
         # select classifier
         self.classifiers = QComboBox()
         self.classifiers.addItems(
             ["KNN", "Neural network", "Some other example"])
         self.classifiers.activated[str].connect(self._change_classifier)
-
 
         self.k_value_label = QLabel("")
         self.grayscale_threshold_label = QLabel("")
@@ -39,8 +35,9 @@ class ParamsWidget:
         # distance measure (d22, d23)
         self.distance_measures = QComboBox()
         self.distance_measures.addItems(["D22", "D23"])
-        #self.distance_measures.valueChanged.connect(self._change_dist_measure)
-        self.distance_measures.activated[str].connect(self._change_dist_measure)
+        # self.distance_measures.valueChanged.connect(self._change_dist_measure)
+        self.distance_measures.activated[str].connect(
+            self._change_dist_measure)
 
         # grayscale threshold (1-255)
         self.grayscale_threshold = QSlider(Qt.Horizontal)
@@ -89,7 +86,6 @@ class ParamsWidget:
         self.layout.addWidget(self.train_data_size)
         self.layout.addWidget(self.train_data_size_label)
 
-    
     def get_layout(self):
         return self.layout
 
@@ -108,7 +104,8 @@ class ParamsWidget:
     def _change_grayscale_threshold(self):
         print("GRAYSCALE ", self.grayscale_threshold.value())
         params.set_grayscale_threshold(self.grayscale_threshold.value())
-        self.grayscale_threshold_label.setText(str(params.get_grayscale_threshold()))
+        self.grayscale_threshold_label.setText(
+            str(params.get_grayscale_threshold()))
         self.update_img()
 
     def _change_test_data_size(self):

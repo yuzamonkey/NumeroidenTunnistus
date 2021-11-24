@@ -3,28 +3,24 @@ from ui.params import params
 from PyQt5.QtWidgets import QPushButton, QVBoxLayout, QLabel
 
 
-class ResultsWidget:
-    def __init__(self, update):
-        self.update = update
-
+class StartingWidget:
+    def __init__(self):
+        # StartingWidget, ResultsWidget
         self.example_img_label = QLabel("")
         self.update_image()
         # start button
         self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self._handle_start_button_click)
         # add widgets to layout
-        self.layout1 = QVBoxLayout()
-        self.layout1.addWidget(self.example_img_label)
-        self.layout1.addWidget(self.start_button)
-        self.layout1.addStretch(1)
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.example_img_label)
+        self.layout.addWidget(self.start_button)
 
-        self.layout2 = QVBoxLayout()
-        self.layout2.addWidget(QLabel("Started"))
-
-        self.layout = self.layout1
+        self.layout.addStretch(1)
 
     def get_layout(self):
         return self.layout
+
 
     def _handle_start_button_click(self):
         print("START BUTTON CLICKED")
@@ -35,8 +31,7 @@ class ResultsWidget:
             params.get_test_data_size(),
             params.get_train_data_size()
         )
-        self.layout = self.layout2
-        self.update()
+        self.change_layout()
 
     def update_image(self):
         self.example_img = cs.get_example_number(

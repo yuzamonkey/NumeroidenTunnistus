@@ -10,7 +10,7 @@ class ClassificationService:
         for i in range(len(img)):
             for j in range(len(img[0])):
                 if img[i][j] == 1:
-                    retval += "⚫ "
+                    retval += "⚫"
                     #retval += "▪ "
                 else:
                     retval += "  "
