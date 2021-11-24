@@ -29,9 +29,9 @@ class Window(QDialog):
         #disableWidgetsCheckBox = QCheckBox("&Disable widgets")
 
         self.createParametersGroupBox()
-        self.createTopRightGroupBox()
         self.createResultsGroupBox()
-        self.createBottomRightGroupBox()
+        #self.createTopRightGroupBox()
+        #self.createBottomRightGroupBox()
         # self.createProgressBar()
 
         # styleComboBox.activated[str].connect(self.changeStyle)
@@ -54,14 +54,14 @@ class Window(QDialog):
         # topLayout.addWidget(disableWidgetsCheckBox)
 
         mainLayout = QGridLayout()
-        mainLayout.addLayout(topLayout, 0, 0, 1, 2)
-        mainLayout.addWidget(self.parametersGroupBox, 1, 0)
-        mainLayout.addWidget(self.resultsGroupBox, 1, 1)
-        mainLayout.addWidget(self.topRightGroupBox, 2, 0)
-        mainLayout.addWidget(self.bottomRightGroupBox, 2, 1)
+        mainLayout.addLayout(topLayout, 0, 0, 0, 0)
+        mainLayout.addWidget(self.parametersGroupBox, 0, 0)
+        mainLayout.addWidget(self.resultsGroupBox, 0, 1)
+        #mainLayout.addWidget(self.topRightGroupBox, 2, 0)
+        #mainLayout.addWidget(self.bottomRightGroupBox, 2, 1)
         #mainLayout.addWidget(self.progressBar, 3, 0, 1, 2)
-        mainLayout.setRowStretch(1, 1)
-        mainLayout.setRowStretch(2, 1)
+        #mainLayout.setRowStretch(1, 1)
+        #mainLayout.setRowStretch(2, 1)
         mainLayout.setColumnStretch(0, 1)
         mainLayout.setColumnStretch(1, 1)
         self.setLayout(mainLayout)
@@ -120,82 +120,84 @@ class Window(QDialog):
     def createParametersGroupBox(self):
         self.parametersGroupBox = QGroupBox()
 
-        self.k_value_label = QLabel("")
-        self.grayscale_threshold_label = QLabel("")
-        self.test_data_size_label = QLabel("")
-        self.train_data_size_label = QLabel("")
-
         # select classifier
         self.classifiers = QComboBox()
         self.classifiers.addItems(
             ["KNN", "Neural network", "Some other example"])
         self.classifiers.activated[str].connect(self._change_classifier)
 
-        # for now, KNN options
-
-        # k
-        self.k_value = QSlider(Qt.Horizontal, self.parametersGroupBox)
-        self.k_value.valueChanged.connect(self._change_k_value)
-        self.k_value.setMinimum(1)
-        self.k_value.setMaximum(10)
-        self.k_value.setSingleStep(1)
-        self.k_value.setValue(4)
-        self.k_value_label.setText(str(self.k_value.value()))
-
-        # distance measure (d22, d23)
-        self.distance_measures = QComboBox()
-        self.distance_measures.addItems(["D22", "D23"])
-        #self.distance_measures.valueChanged.connect(self._change_dist_measure)
-        self.distance_measures.activated[str].connect(self._change_dist_measure)
-
-        # grayscale threshold (1-255)
-        self.grayscale_threshold = QSlider(Qt.Horizontal, self.parametersGroupBox)
-        self.grayscale_threshold.valueChanged.connect(
-            self._change_grayscale_threshold)
-        self.grayscale_threshold.setMinimum(1)
-        self.grayscale_threshold.setMaximum(255)
-        self.grayscale_threshold.setSingleStep(1)
-        self.grayscale_threshold.setValue(140)
-        self.grayscale_threshold_label.setText(
-            str(self.grayscale_threshold.value()))
-
-        # test data size (1-10_000)
-        self.test_data_size = QSlider(Qt.Horizontal, self.parametersGroupBox)
-        self.test_data_size.valueChanged.connect(self._change_test_data_size)
-        self.test_data_size.setMinimum(1)
-        self.test_data_size.setMaximum(10_000)
-        self.test_data_size.setSingleStep(1)
-        self.test_data_size.setValue(10)
-        self.test_data_size_label.setText(str(self.test_data_size.value()))
-
-        # train data size (1-60_000)
-        self.train_data_size = QSlider(Qt.Horizontal, self.parametersGroupBox)
-        self.train_data_size.valueChanged.connect(self._change_train_data_size)
-        self.train_data_size.setMinimum(1)
-        self.train_data_size.setMaximum(60_000)
-        self.train_data_size.setSingleStep(1)
-        self.train_data_size.setValue(50)
-        self.train_data_size_label.setText(str(self.train_data_size.value()))
-
-        # add widgets to layout
+        self.k_value_label = QLabel("")
+        self.grayscale_threshold_label = QLabel("")
+        self.test_data_size_label = QLabel("")
+        self.train_data_size_label = QLabel("")
         layout = QVBoxLayout()
-        layout.addWidget(self.classifiers)
+        if self.classifiers.currentText() == "KNN":
+                
+            # for now, KNN options
 
-        layout.addWidget(self.distance_measures)
+            # k
+            self.k_value = QSlider(Qt.Horizontal, self.parametersGroupBox)
+            self.k_value.valueChanged.connect(self._change_k_value)
+            self.k_value.setMinimum(1)
+            self.k_value.setMaximum(10)
+            self.k_value.setSingleStep(1)
+            self.k_value.setValue(4)
+            self.k_value_label.setText(str(self.k_value.value()))
 
-        layout.addWidget(self.k_value)
-        layout.addWidget(self.k_value_label)
+            # distance measure (d22, d23)
+            self.distance_measures = QComboBox()
+            self.distance_measures.addItems(["D22", "D23"])
+            #self.distance_measures.valueChanged.connect(self._change_dist_measure)
+            self.distance_measures.activated[str].connect(self._change_dist_measure)
 
-        layout.addWidget(self.grayscale_threshold)
-        layout.addWidget(self.grayscale_threshold_label)
+            # grayscale threshold (1-255)
+            self.grayscale_threshold = QSlider(Qt.Horizontal, self.parametersGroupBox)
+            self.grayscale_threshold.valueChanged.connect(
+                self._change_grayscale_threshold)
+            self.grayscale_threshold.setMinimum(1)
+            self.grayscale_threshold.setMaximum(255)
+            self.grayscale_threshold.setSingleStep(1)
+            self.grayscale_threshold.setValue(140)
+            self.grayscale_threshold_label.setText(
+                str(self.grayscale_threshold.value()))
 
-        layout.addWidget(self.test_data_size)
-        layout.addWidget(self.test_data_size_label)
+            # test data size (1-10_000)
+            self.test_data_size = QSlider(Qt.Horizontal, self.parametersGroupBox)
+            self.test_data_size.valueChanged.connect(self._change_test_data_size)
+            self.test_data_size.setMinimum(1)
+            self.test_data_size.setMaximum(10_000)
+            self.test_data_size.setSingleStep(1)
+            self.test_data_size.setValue(10)
+            self.test_data_size_label.setText(str(self.test_data_size.value()))
 
-        layout.addWidget(self.train_data_size)
-        layout.addWidget(self.train_data_size_label)
+            # train data size (1-60_000)
+            self.train_data_size = QSlider(Qt.Horizontal, self.parametersGroupBox)
+            self.train_data_size.valueChanged.connect(self._change_train_data_size)
+            self.train_data_size.setMinimum(1)
+            self.train_data_size.setMaximum(60_000)
+            self.train_data_size.setSingleStep(1)
+            self.train_data_size.setValue(50)
+            self.train_data_size_label.setText(str(self.train_data_size.value()))
 
-        # layout.addStretch(1)
+            # add widgets to layout
+            # layout = QVBoxLayout()
+            layout.addWidget(self.classifiers)
+
+            layout.addWidget(self.distance_measures)
+
+            layout.addWidget(self.k_value)
+            layout.addWidget(self.k_value_label)
+
+            layout.addWidget(self.grayscale_threshold)
+            layout.addWidget(self.grayscale_threshold_label)
+
+            layout.addWidget(self.test_data_size)
+            layout.addWidget(self.test_data_size_label)
+
+            layout.addWidget(self.train_data_size)
+            layout.addWidget(self.train_data_size_label)
+
+            # layout.addStretch(1)
         self.parametersGroupBox.setLayout(layout)
 
     def createResultsGroupBox(self):
