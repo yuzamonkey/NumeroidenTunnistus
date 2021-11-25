@@ -7,7 +7,11 @@ class ResultsWidget:
     def __init__(self):
 
         self.layout = QVBoxLayout()
-        self.layout.addWidget(QLabel(f"Done. Correct {results.get_correct_count()}, errors {results.get_errors_count()}"))
+        self.label = QLabel(f"Done. Correct {results.get_correct_count()}, errors {results.get_errors_count()}")
+        self.layout.addWidget(self.label)
+
+    def update(self):
+        self.label.setText(f"Done. Correct {results.get_correct_count()}, errors {results.get_errors_count()}")
 
     def get_layout(self):
         return self.layout

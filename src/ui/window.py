@@ -16,10 +16,10 @@ class Window(QDialog):
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
 
-        self.classification_widget = ClassificationWidget(self.showResultsWidget)
+        self.results_widget = ResultsWidget()
+        self.classification_widget = ClassificationWidget(self.showResultsWidget, self.results_widget.update)
         self.starting_widget = StartingWidget(self.showClassificationWidget)
         self.params_widget = ParamsWidget(self.starting_widget.update_image)
-        self.results_widget = ResultsWidget()
         self.createParametersGroupBox()
         self.createResultsGroupBox()
         self.createClassificationGroupBox()
