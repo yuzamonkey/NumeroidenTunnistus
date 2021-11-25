@@ -7,9 +7,9 @@ class TestNumberClassifier(unittest.TestCase):
     def setUp(self):
         self._knn = knn
 
-    def test_classify_set_returns_float(self):
-        percentage = self._knn.classify_set_of_numbers(3, 144, 3, 10)
-        self.assertEqual(type(percentage), float)
+    def test_classify_set_returns_tuple(self):
+        result = self._knn.classify_set_of_numbers(3, 144, 3, 10)
+        self.assertEqual(type(result), tuple)
 
     def test_classify_number_returns_int(self):
         result = self._knn.classify_number(3, 0, 10)
