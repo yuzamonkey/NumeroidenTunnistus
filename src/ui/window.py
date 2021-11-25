@@ -15,7 +15,7 @@ class Window(QDialog):
         super(Window, self).__init__(parent)
 
         self.classification_widget = ClassificationWidget()
-        self.starting_widget = StartingWidget(self.updateResultsGroupBox)
+        self.starting_widget = StartingWidget(self.showClassificationWidget)
         self.params_widget = ParamsWidget(self.starting_widget.update_image)
         self.createParametersGroupBox()
         self.createResultsGroupBox()
@@ -43,7 +43,7 @@ class Window(QDialog):
         self.classificationGroupBox.setLayout(
             self.classification_widget.get_layout())
 
-    def updateResultsGroupBox(self):
+    def showClassificationWidget(self):
         print("UPDATE CALLED")
         # self.mainLayout.removeWidget(self.resultsGroupBox)
         self.resultsGroupBox.setParent(None)

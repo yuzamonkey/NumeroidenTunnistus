@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import QPushButton, QVBoxLayout, QLabel
 
 
 class StartingWidget:
-    def __init__(self, update):
-        self.update = update
+    def __init__(self, show_classification_widget):
+        self.show_classification_widget = show_classification_widget
 
         self.example_img_label = QLabel("")
         self.update_image()
@@ -13,15 +13,10 @@ class StartingWidget:
         self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self._handle_start_button_click)
         # add widgets to layout
-        self.layout1 = QVBoxLayout()
-        self.layout1.addWidget(self.example_img_label)
-        self.layout1.addWidget(self.start_button)
-        self.layout1.addStretch(1)
-
-        self.layout2 = QVBoxLayout()
-        self.layout2.addWidget(QLabel("Started"))
-
-        self.layout = self.layout1
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.example_img_label)
+        self.layout.addWidget(self.start_button)
+        self.layout.addStretch(1)
 
     def get_layout(self):
         return self.layout
@@ -35,8 +30,7 @@ class StartingWidget:
             params.get_test_data_size(),
             params.get_train_data_size()
         )
-        self.layout = self.layout2
-        self.update()
+        self.show_classification_widget()
 
     def update_image(self):
         self.example_img = cs.get_example_number(
