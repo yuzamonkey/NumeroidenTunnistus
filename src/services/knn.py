@@ -36,7 +36,8 @@ class KNN:
         Returns:
             float: Success percentage
         """
-        self._train_imgs = images_with_threshold(self.train_imgs_data, threshold)
+        self._train_imgs = images_with_threshold(
+            self.train_imgs_data, threshold)
         self._test_imgs = images_with_threshold(self.test_imgs_data, threshold)
 
         errors = []
@@ -52,13 +53,13 @@ class KNN:
         print(
             f"""PERCENTAGE: {percentage}%
             ({number_of_test_images - len(errors)} / {number_of_test_images})""")
-        #return percentage
+        # return percentage
         errors_count = len(errors)
         correct_count = number_of_test_images - errors_count
         return correct_count, errors_count
 
     def classify_number(self, k, test_set_index, number_of_training_imgs, dist_measure="D22"):
-        #add threshold here
+        # add threshold here
         """Classifies a number with given parameters with k-nearest neighbor method
 
         Args:

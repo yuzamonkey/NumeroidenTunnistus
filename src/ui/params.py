@@ -1,5 +1,6 @@
 import random
 
+
 class Params:
     def __init__(self):
         self.k = 4
@@ -41,9 +42,6 @@ class Params:
 
     def get_random_integer(self):
         return self.rand_int
-
-    
-
 
 
 params = Params()

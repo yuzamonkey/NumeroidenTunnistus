@@ -1,9 +1,5 @@
-from PyQt5.QtCore import QDateTime, Qt, QTimer
-from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
-                             QDial, QDialog, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-                             QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
-                             QSlider, QSpinBox, QStyleFactory, QTableWidget, QGroupBox, QTextEdit,
-                             QVBoxLayout, QWidget)
+from PyQt5.QtWidgets import (
+    QApplication, QDialog, QGridLayout, QGroupBox, QStyleFactory, QGroupBox)
 from ui.result_widgets.results_widget import ResultsWidget
 
 from ui.result_widgets.starting_widget import StartingWidget
@@ -17,7 +13,8 @@ class Window(QDialog):
         super(Window, self).__init__(parent)
 
         self.results_widget = ResultsWidget()
-        self.classification_widget = ClassificationWidget(self.showResultsWidget, self.results_widget.update)
+        self.classification_widget = ClassificationWidget(
+            self.showResultsWidget, self.results_widget.update)
         self.starting_widget = StartingWidget(self.showClassificationWidget)
 
         self.params_widget = ParamsWidget(self.starting_widget.update_image)
