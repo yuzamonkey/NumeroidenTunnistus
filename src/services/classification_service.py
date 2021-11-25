@@ -12,10 +12,10 @@ class ClassificationService:
         for i in range(len(img)): # pylint: disable=consider-using-enumerate
             for j in range(len(img[0])):
                 if img[i][j] == 1:
-                    retval += "⚫"
+                    retval += "⚫ "
                     #retval += "▪ "
                 else:
-                    retval += "  "
+                    retval += "   "
             retval += "\n"
 
         return retval

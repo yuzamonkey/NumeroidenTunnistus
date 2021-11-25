@@ -12,7 +12,7 @@ class Window(QDialog):
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
 
-        self.results_widget = ResultsWidget()
+        self.results_widget = ResultsWidget(self.showStartingWidget)
         self.classification_widget = ClassificationWidget(
             self.showResultsWidget, self.results_widget.update)
         self.starting_widget = StartingWidget(self.showClassificationWidget)
@@ -49,6 +49,10 @@ class Window(QDialog):
         self.classificationGroupBox = QGroupBox()
         self.classificationGroupBox.setLayout(
             self.classification_widget.get_layout())
+
+    def showStartingWidget(self):
+        self.clearRightGroupBox()
+        self.mainLayout.addWidget(self.startingGroupBox, 0, 1)
 
     def showClassificationWidget(self):
         self.clearRightGroupBox()
