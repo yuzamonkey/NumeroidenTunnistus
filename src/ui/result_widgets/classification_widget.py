@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QVBoxLayout, QPushButton
-from ui.results import results
 
 
 class ClassificationWidget:
@@ -9,6 +8,7 @@ class ClassificationWidget:
 
         self.layout = QVBoxLayout()
         self.show_results_button = QPushButton("Show results")
+        self.show_results_button.setDefault(True)
         self.show_results_button.clicked.connect(
             self.handle_show_results_button_press)
 

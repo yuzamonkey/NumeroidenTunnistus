@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import (
     QApplication, QDialog, QGridLayout, QGroupBox, QStyleFactory, QGroupBox)
 from ui.result_widgets.results_widget import ResultsWidget
-
 from ui.result_widgets.starting_widget import StartingWidget
 from ui.result_widgets.results_widget import ResultsWidget
 from ui.param_selection.params_widget import ParamsWidget
