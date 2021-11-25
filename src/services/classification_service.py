@@ -2,6 +2,7 @@ import random
 from repositories.data_repository import data_repository
 from utils.utils import as_2d_arrays, image_with_threshold
 from services.knn import knn
+from ui.results import results
 
 class ClassificationService:
     def get_example_number(self, idx, threshold=1):
@@ -28,7 +29,10 @@ class ClassificationService:
         print("TRAIN_SIZE ", train_size)
         print("")
 
-        knn.classify_set_of_numbers(k, threshold, test_size, train_size, distance_measure)
+        correct_count, errors_count = knn.classify_set_of_numbers(k, threshold, test_size, train_size, distance_measure)
+        results.set_correct_count(correct_count)
+        results.set_errors_count(errors_count)
+        
 
 
 

@@ -4,8 +4,10 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
                              QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
                              QSlider, QSpinBox, QStyleFactory, QTableWidget, QGroupBox, QTextEdit,
                              QVBoxLayout, QWidget)
+from ui.result_widgets.results_widget import ResultsWidget
 
 from ui.result_widgets.starting_widget import StartingWidget
+from ui.result_widgets.results_widget import ResultsWidget
 from ui.param_selection.params_widget import ParamsWidget
 from ui.result_widgets.classification_widget import ClassificationWidget
 
@@ -14,16 +16,18 @@ class Window(QDialog):
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
 
-        self.classification_widget = ClassificationWidget()
+        self.classification_widget = ClassificationWidget(self.showResultsWidget)
         self.starting_widget = StartingWidget(self.showClassificationWidget)
         self.params_widget = ParamsWidget(self.starting_widget.update_image)
+        self.results_widget = ResultsWidget()
         self.createParametersGroupBox()
         self.createResultsGroupBox()
         self.createClassificationGroupBox()
+        self.createStartingGroupBox()
 
         self.mainLayout = QGridLayout()
         self.mainLayout.addWidget(self.parametersGroupBox, 0, 0)
-        self.mainLayout.addWidget(self.resultsGroupBox, 0, 1)
+        self.mainLayout.addWidget(self.startingGroupBox, 0, 1)
         self.mainLayout.setColumnStretch(0, 1)
         self.mainLayout.setColumnStretch(1, 1)
         self.setLayout(self.mainLayout)
@@ -36,7 +40,11 @@ class Window(QDialog):
 
     def createResultsGroupBox(self):
         self.resultsGroupBox = QGroupBox()
-        self.resultsGroupBox.setLayout(self.starting_widget.get_layout())
+        self.resultsGroupBox.setLayout(self.results_widget.get_layout())
+
+    def createStartingGroupBox(self):
+        self.startingGroupBox = QGroupBox()
+        self.startingGroupBox.setLayout(self.starting_widget.get_layout())
 
     def createClassificationGroupBox(self):
         self.classificationGroupBox = QGroupBox()
@@ -44,7 +52,9 @@ class Window(QDialog):
             self.classification_widget.get_layout())
 
     def showClassificationWidget(self):
-        print("UPDATE CALLED")
-        # self.mainLayout.removeWidget(self.resultsGroupBox)
-        self.resultsGroupBox.setParent(None)
+        self.startingGroupBox.setParent(None)
         self.mainLayout.addWidget(self.classificationGroupBox, 0, 1)
+
+    def showResultsWidget(self):
+        self.classificationGroupBox.setParent(None)
+        self.mainLayout.addWidget(self.resultsGroupBox, 0, 1)
