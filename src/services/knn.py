@@ -17,15 +17,16 @@ class KNN:
         """KNN constructor. Gets data from DataRepository class
         """
         self._dr = dr
-        train_imgs, self._train_labels, test_imgs, self._test_labels = self._dr.get_all_data()
-        self._train_imgs = images_with_threshold(train_imgs, 140)
-        self._test_imgs = images_with_threshold(test_imgs, 140)
+        self.train_imgs_data, self._train_labels, self.test_imgs_data, self._test_labels = self._dr.get_all_data()
+        self._train_imgs = images_with_threshold(self.train_imgs_data, 140)
+        self._test_imgs = images_with_threshold(self.test_imgs_data, 140)
 
-    def classify_set_of_numbers(self, k, number_of_test_images, number_of_training_imgs, dist_measure="D22"):
+    def classify_set_of_numbers(self, k, threshold, number_of_test_images, number_of_training_imgs, dist_measure="D22"):
         """Classifies a set of data with given parameters with k-nearest neighbor method
 
         Args:
             k (int): value of k
+            threshold (int): grayscale threshold. Value between 1-255
             number_of_test_images (int): number of how many test images are wanted to be tested.
             Range between 1-10_000
             number_of_training_imgs (int): number of how many training images are used.
@@ -35,6 +36,9 @@ class KNN:
         Returns:
             float: Success percentage
         """
+        self._train_imgs = images_with_threshold(self.train_imgs_data, threshold)
+        self._test_imgs = images_with_threshold(self.test_imgs_data, threshold)
+
         errors = []
         for i in range(number_of_test_images):
             label = self._test_labels[i]
