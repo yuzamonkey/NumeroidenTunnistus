@@ -19,7 +19,9 @@ class Window(QDialog):
         self.results_widget = ResultsWidget()
         self.classification_widget = ClassificationWidget(self.showResultsWidget, self.results_widget.update)
         self.starting_widget = StartingWidget(self.showClassificationWidget)
+
         self.params_widget = ParamsWidget(self.starting_widget.update_image)
+
         self.createParametersGroupBox()
         self.createResultsGroupBox()
         self.createClassificationGroupBox()
@@ -52,9 +54,14 @@ class Window(QDialog):
             self.classification_widget.get_layout())
 
     def showClassificationWidget(self):
-        self.startingGroupBox.setParent(None)
+        self.clearRightGroupBox()
         self.mainLayout.addWidget(self.classificationGroupBox, 0, 1)
 
     def showResultsWidget(self):
-        self.classificationGroupBox.setParent(None)
+        self.clearRightGroupBox()
         self.mainLayout.addWidget(self.resultsGroupBox, 0, 1)
+
+    def clearRightGroupBox(self):
+        self.startingGroupBox.setParent(None)
+        self.classificationGroupBox.setParent(None)
+        self.resultsGroupBox.setParent(None)
