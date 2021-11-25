@@ -21,7 +21,7 @@ class KNN:
         self._train_imgs = images_with_threshold(train_imgs, 140)
         self._test_imgs = images_with_threshold(test_imgs, 140)
 
-    def classify_set_of_numbers(self, k, number_of_test_images, number_of_training_imgs):
+    def classify_set_of_numbers(self, k, number_of_test_images, number_of_training_imgs, dist_measure="D22"):
         """Classifies a set of data with given parameters with k-nearest neighbor method
 
         Args:
@@ -30,6 +30,7 @@ class KNN:
             Range between 1-10_000
             number_of_training_imgs (int): number of how many training images are used.
             Range between 1-60_000
+            dist_measure (string): Distance between 2 images, D22 or D23
 
         Returns:
             float: Success percentage
@@ -37,7 +38,8 @@ class KNN:
         errors = []
         for i in range(number_of_test_images):
             label = self._test_labels[i]
-            result = self.classify_number(k, i, number_of_training_imgs)
+            result = self.classify_number(
+                k, i, number_of_training_imgs, dist_measure)
             if result != label:
                 errors.append((i, result))
             print(f"{i+1}/{number_of_test_images}")
@@ -48,7 +50,7 @@ class KNN:
             ({number_of_test_images - len(errors)} / {number_of_test_images})""")
         return percentage
 
-    def classify_number(self, k, test_set_index, number_of_training_imgs):
+    def classify_number(self, k, test_set_index, number_of_training_imgs, dist_measure="D22"):
         """Classifies a number with given parameters with k-nearest neighbor method
 
         Args:
@@ -56,6 +58,7 @@ class KNN:
             test_set_index (int): index of number to be classified from test set
             number_of_training_imgs (int): number of how many training images are used.
             Range between 1-60_000
+            dist_measure (string): Distance between 2 images, D22 or D23
 
         Returns:
             int: classification value
@@ -63,8 +66,18 @@ class KNN:
         test_img = as_2d_arrays(self._test_imgs[test_set_index])
         k_nearest = []  # tuples: (value, index)
         for i in range(number_of_training_imgs):
-            dist = self._compare_d22(
-                test_img, as_2d_arrays(self._train_imgs[i]))
+            if dist_measure == "D22":
+                dist = self._compare_d22(
+                    test_img,
+                    as_2d_arrays(self._train_imgs[i])
+                )
+            elif dist_measure == "D23":
+                dist = self._compare_d23(
+                    test_img,
+                    as_2d_arrays(self._train_imgs[i])
+                )
+            else:
+                raise Exception("Not a valid distance measure")
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
         result = self._result_from_k_nearest(k_nearest)

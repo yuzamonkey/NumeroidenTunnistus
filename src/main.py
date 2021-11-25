@@ -1,13 +1,13 @@
 import time
-#from services.knn import knn
+from services.knn import knn
 from ui.ui import UI
 
 
 def main():
     start_time = time.time()
-    #knn.classify_set_of_numbers(5, 50, 500)
-    ui = UI()
-    ui.start()
+    knn.classify_set_of_numbers(3, 10, 10, "D22")
+    #ui = UI()
+    #ui.start()
 
     print(f"--- {(time.time() - start_time)} seconds ---")
 
