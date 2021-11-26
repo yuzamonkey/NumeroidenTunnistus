@@ -9,12 +9,19 @@ class StartingWidget:
 
         self.example_img_label = QLabel("")
         self.update_image()
-        # start button
         self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self._handle_start_button_click)
-        # add widgets to layout
+
+        note_label = QLabel("""
+            Note! 
+            Pick small values for test and train data sizes. 
+            During calculation there's no threading (yet), 
+            so the program will freeze for a while.
+        """)
+
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.example_img_label)
+        self.layout.addWidget(note_label)
         self.layout.addWidget(self.start_button)
         self.layout.addStretch(1)
 
