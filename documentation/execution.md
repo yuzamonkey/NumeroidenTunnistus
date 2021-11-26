@@ -8,7 +8,7 @@ Sovellus noudattaa kolmikerrosarkkitehtuuria:
 * Sovelluslogiikka ([Services](https://github.com/yuzamonkey/NumeroidenTunnistus/tree/main/src/services))
 * Tiedon talletus ([Repositories](https://github.com/yuzamonkey/NumeroidenTunnistus/tree/main/src/repositories))
 
-![pakkauskaavio](https://github.com/yuzamonkey/NumeroidenTunnistus/tree/main/documentation/images/packagediagram.png)
+![pakkauskaavio](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/documentation/images/packagediagram.png)
 
 Lisäksi sovelluksella on pakkaus [Utils](https://github.com/yuzamonkey/NumeroidenTunnistus/tree/main/src/utils), joka sisältää yleishyödyllisiä funktioita. UI-pakkaus sisältää myös luokat [Params](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/ui/params.py) ja [Results](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/ui/results.py), jotka tallettavat syötteenä annetut parametrit ja tulokset laskennan jälkeen. Nämä luokat ovat sitä varten, ettei UI-luokkien välillä tarvitse antaa suuria määriä parametreja.
 
@@ -44,4 +44,5 @@ Funktio [_point_to_set_dist](https://github.com/yuzamonkey/NumeroidenTunnistus/b
 
 ## Lähteet
 [A Modifed Hausdorf Distance for Object Matching](https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf)
+
 [The MNIST Database](http://yann.lecun.com/exdb/mnist/)
