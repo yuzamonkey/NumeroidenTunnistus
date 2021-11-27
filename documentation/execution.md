@@ -20,6 +20,7 @@ function classify_number:
     for i to train_data_size:
         distance = compare(selected_image, train_data[i])
         update_k_nearest(distance)
+    return result_from_k_nearest(k_nearest)
 
 function compare(img1, img2):
     for each pixel in img1:
