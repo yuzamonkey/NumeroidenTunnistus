@@ -26,7 +26,7 @@ Pystyn tarvittaessa vertaisarvioimaan myös Javalla, JavaScriptillä tai TypeScr
 Käsin kirjoitettujen numeroiden tunnistusohjelma tunnistaa numerot 0-9.
 
 ## Algoritmit ja tietorakenteet
-* Tekoäly koulutetaan käyttämällä MNIST-tietokantaa, ja (ainakin ensin) k:n lähimmän naapurin menetelmällä.
+* K:n lähimmän naapurin menetelmä.
 
 ## Aikavaativuus ja tilavaativuus
 
