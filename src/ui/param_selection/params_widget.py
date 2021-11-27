@@ -1,6 +1,6 @@
+import webbrowser
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (QComboBox, QLabel, QSlider, QVBoxLayout)
-from services.classification_service import classification_service as cs
+from PyQt5.QtWidgets import (QComboBox, QLabel, QSlider, QVBoxLayout, QPushButton)
 from ui.params import params
 
 
@@ -15,14 +15,6 @@ class ParamsWidget:
         self.classifiers.addItems(["KNN"])
         self.classifiers.activated[str].connect(self._change_classifier)
 
-        self.k_value_label = QLabel("K: ")
-        self.grayscale_threshold_label = QLabel("")
-        self.test_data_size_label = QLabel("")
-        self.train_data_size_label = QLabel("")
-        self.layout = QVBoxLayout()
-        # if self.classifiers.currentText() == "KNN":
-        # for now, KNN options
-
         # distance measure (d22, d23)
         self.distance_measure_label = QLabel("Select distance measure:")
         self.distance_measures = QComboBox()
@@ -32,6 +24,12 @@ class ParamsWidget:
             self._change_dist_measure)
 
         # k
+        self.k_value_label = QLabel("K: ")
+        self.grayscale_threshold_label = QLabel("")
+        self.test_data_size_label = QLabel("")
+        self.train_data_size_label = QLabel("")
+        self.layout = QVBoxLayout()
+        
         self.k_value = QSlider(Qt.Horizontal)
         self.k_value.valueChanged.connect(self._change_k_value)
         self.k_value.setMinimum(1)
@@ -68,6 +66,9 @@ class ParamsWidget:
         self.train_data_size.setValue(50)
         self.train_data_size_label.setText(f"Train dataset size: {params.get_train_data_size()}")
 
+        self.distance_measures_link = QPushButton("Distance measures (opens in browser)")
+        self.distance_measures_link.clicked.connect(self._handle_browser_link_press)
+
         # add widgets to layout
         # layout = QVBoxLayout()
         self.layout.addWidget(self.classifier_label)
@@ -88,8 +89,13 @@ class ParamsWidget:
         self.layout.addWidget(self.train_data_size)
         self.layout.addWidget(self.train_data_size_label)
 
+        self.layout.addWidget(self.distance_measures_link)
+
     def get_layout(self):
         return self.layout
+
+    def _handle_browser_link_press(self):
+        webbrowser.open("https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf")
 
     def _change_classifier(self):
         print("CLASSIFIER ", self.classifiers.currentText())
