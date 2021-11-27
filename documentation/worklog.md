@@ -35,3 +35,4 @@ Pvm       | h |  |
 24.11.2021 | 2.5 | UI |
 25.11.2021 | 1.5 | UI |
 26.11.2021 | 1.5 | UI, dokumentaatio |
+27.11.2021 | 0.5 | Testausdokumentaatio |

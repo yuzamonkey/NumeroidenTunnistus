@@ -1,15 +1,22 @@
-import time
+#import time
 #from services.knn import knn
 from ui.ui import UI
 
 
 def main():
-    start_time = time.time()
-    #knn.classify_set_of_numbers(3, 1, 10, 10, "D22")
+    # start_time = time.time()
+    # knn.classify_number(3, 1, 60_000, "D22")
+    # end_1 = time.time()
+    # print(f"--- {(end_1 - start_time)} seconds ---")
+    # knn.classify_number(3, 1, 1000, "D22")
+    # end_2 = time.time()
+    # print(f"--- {(end_2 - end_1)} seconds ---")
+    # knn.classify_number(3, 1, 10_000, "D22")
+    # end_3 = time.time()
+    # print(f"--- {(end_3 - end_2)} seconds ---")
+
     ui = UI()
     ui.start()
-
-    print(f"--- {(time.time() - start_time)} seconds ---")
 
 
 if __name__ == "__main__":
