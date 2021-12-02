@@ -36,3 +36,20 @@ Pvm       | h |  |
 25.11.2021 | 1.5 | UI |
 26.11.2021 | 1.5 | UI, dokumentaatio |
 27.11.2021 | 1 | Testausdokumentaatio, viikkoraportti |
+
+## Viikko 5
+
+Pvm       | h |  |
+-----------|------|--------|
+2.12.2021 |  |  |
+
+
+## Yhteensä
+
+Viikko       | h | 
+-----------|------|
+1| 4 |
+2| 11 |
+3| 10 |
+4| 10.5 |
+=| 35.5 |
