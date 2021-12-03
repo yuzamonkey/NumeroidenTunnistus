@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import (
-    QApplication, QDialog, QGridLayout, QGroupBox, QStyleFactory, QGroupBox)
+    QApplication, QDialog, QGridLayout, QGroupBox, QStyleFactory)
 from ui.result_widgets.results_widget import ResultsWidget
 from ui.result_widgets.starting_widget import StartingWidget
 from ui.result_widgets.results_widget import ResultsWidget
