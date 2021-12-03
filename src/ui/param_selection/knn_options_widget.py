@@ -1,8 +1,32 @@
 import webbrowser
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QComboBox, QLabel, QSlider, QVBoxLayout, QPushButton, QWidget, QGroupBox)
+    QComboBox, QLabel, QSlider, QVBoxLayout, QHBoxLayout, QPushButton, QWidget, QGroupBox)
 from ui.params import params
+
+DISTANCE_MEASURES = ["D22", "D23"]
+
+class DistanceMeasureSelection:
+    def __init__(self):
+        self.widget = QWidget()
+        self.layout = QHBoxLayout(self.widget)
+        
+        self.label = QLabel("Distance measure:")
+        self.selector = QComboBox()
+        self.selector.addItems(DISTANCE_MEASURES)
+        self.selector.activated[str].connect(
+            self._change_dist_measure)
+        
+        self.layout.addWidget(self.label)
+        self.layout.addWidget(self.selector)
+
+    def get_widget(self):
+        return self.widget
+
+    def _change_dist_measure(self):
+        print("DIST MEASURE ", self.selector.currentText())
+        params.set_distance_measure(self.selector.currentText())
+
 
 
 class KNNOptionsWidget:
@@ -11,13 +35,14 @@ class KNNOptionsWidget:
         self.update_img = update_img
         self.widget = QGroupBox()
         #self.layout.addWidget(QLabel("KNN OPTIONS WIDGET"))
-
+        
+        self.distance_measure_selection = DistanceMeasureSelection()
         # distance measure (d22, d23)
-        self.distance_measure_label = QLabel("Select distance measure:")
-        self.distance_measures = QComboBox()
-        self.distance_measures.addItems(["D22", "D23"])
-        self.distance_measures.activated[str].connect(
-            self._change_dist_measure)
+        # self.distance_measure_label = QLabel("Distance measure:")
+        # self.distance_measures = QComboBox()
+        # self.distance_measures.addItems(["D22", "D23"])
+        # self.distance_measures.activated[str].connect(
+        #     self._change_dist_measure)
 
         # k
         self.k_value_label = QLabel("K: ")
@@ -73,8 +98,7 @@ class KNNOptionsWidget:
         # add widgets to layout
         self.layout = QVBoxLayout(self.widget)
 
-        self.layout.addWidget(self.distance_measure_label)
-        self.layout.addWidget(self.distance_measures)
+        self.layout.addWidget(self.distance_measure_selection.get_widget())
 
         self.layout.addWidget(self.k_value)
         self.layout.addWidget(self.k_value_label)
@@ -93,9 +117,6 @@ class KNNOptionsWidget:
     def get_widget(self):
         return self.widget
 
-    def _change_dist_measure(self):
-        print("DIST MEASURE ", self.distance_measures.currentText())
-        params.set_distance_measure(self.distance_measures.currentText())
 
     def _change_k_value(self):
         print("K ", self.k_value.value())
