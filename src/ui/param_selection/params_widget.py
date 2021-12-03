@@ -3,27 +3,11 @@ from PyQt5.QtWidgets import (
 from ui.param_selection.knn_options_widget import KNNOptionsWidget
 from utils.constants import CLASSIFIERS
 
-class ClassifierOptionsWidget:
-    def __init__(self, update_classifier):
-        self.widget = QWidget()
-        self.classifier_label = QLabel("Select classifier")
-        self.classifiers = QComboBox()
-        self.classifiers.addItems(CLASSIFIERS)
-        self.classifiers.activated[str].connect(update_classifier)
-
-        self.layout = QHBoxLayout(self.widget)
-        self.layout.addWidget(self.classifier_label)
-        self.layout.addWidget(self.classifiers)
-
-    def get_widget(self):
-        return self.widget
-
-    def get_current_text(self):
-        return self.classifiers.currentText()
 
 class ParamsWidget:
     def __init__(self, update_img):
-        self.classifier_options = ClassifierOptionsWidget(self._update_classifier)
+        self.classifier_options = ClassifierOptionsWidget(
+            self._update_classifier)
 
         self.knn_options = KNNOptionsWidget(update_img)
 
@@ -47,3 +31,22 @@ class ParamsWidget:
     def _remove_current_classifier_options(self):
         if self.layout.itemAt(2) is not None:
             self.layout.itemAt(2).widget().setParent(None)
+
+
+class ClassifierOptionsWidget:
+    def __init__(self, update_classifier):
+        self.widget = QWidget()
+        self.classifier_label = QLabel("Select classifier")
+        self.classifiers = QComboBox()
+        self.classifiers.addItems(CLASSIFIERS)
+        self.classifiers.activated[str].connect(update_classifier)
+
+        self.layout = QHBoxLayout(self.widget)
+        self.layout.addWidget(self.classifier_label)
+        self.layout.addWidget(self.classifiers)
+
+    def get_widget(self):
+        return self.widget
+
+    def get_current_text(self):
+        return self.classifiers.currentText()

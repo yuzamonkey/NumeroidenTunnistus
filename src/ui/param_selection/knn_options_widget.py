@@ -1,22 +1,77 @@
 import webbrowser
+from PyQt5.QtGui import QCursor
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QComboBox, QLabel, QSlider, QVBoxLayout, QHBoxLayout, QPushButton, QWidget, QGroupBox)
 from ui.params import params
-from utils.constants import DISTANCE_MEASURES
+from utils.constants import DISTANCE_MEASURES, DISTANCE_MEASURES_ADDRESS
+
+
+class KNNOptionsWidget:
+    def __init__(self, update_img):
+        # update image function, used on threshold change
+        update_img
+        self.widget = QGroupBox()
+        #self.layout.addWidget(QLabel("KNN OPTIONS WIDGET"))
+
+        self.distance_measure_selector = DistanceMeasureSelector()
+        self.k_value_selector = KValueSelector()
+        self.grayscale_threshold_selector = ThresholdSelector(update_img)
+        self.test_data_size_selector = TestDataSizeSelector()
+        self.train_data_size_selector = TrainDataSizeSelector()
+
+        # self.distance_measures_link = QPushButton(
+        #     "Distance measures (opens in browser)")
+        # self.distance_measures_link.clicked.connect(
+        #     self._handle_browser_link_press)
+
+        # add widgets to layout
+        self.layout = QVBoxLayout(self.widget)
+
+        self.layout.addWidget(self.distance_measure_selector.get_widget())
+        self.layout.addWidget(self.k_value_selector.get_widget())
+        self.layout.addWidget(self.grayscale_threshold_selector.get_widget())
+        self.layout.addWidget(self.test_data_size_selector.get_widget())
+        self.layout.addWidget(self.train_data_size_selector.get_widget())
+
+        # self.layout.addWidget(self.distance_measures_link)
+
+    def get_widget(self):
+        return self.widget
+
+
+class HyperlinkLabel:
+    def __init__(self, text, address):
+        self.address = address
+
+        self.label = QLabel(text)
+        self.label.setStyleSheet(
+            "QLabel { color : #0033aa; text-decoration : underline;}")
+        self.label.setMouseTracking(True)
+        self.label.mousePressEvent = self._handle_browser_link_press
+        self.label.setCursor(QCursor(Qt.PointingHandCursor))
+
+    def _handle_browser_link_press(self, widget):
+        webbrowser.open(self.address)
+
+    def get_label(self):
+        return self.label
+
 
 class DistanceMeasureSelector:
     def __init__(self):
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
 
-        self.label = QLabel("Distance measure:")
         self.selector = QComboBox()
         self.selector.addItems(DISTANCE_MEASURES)
         self.selector.activated[str].connect(
             self._update_distance_measure)
 
-        self.layout.addWidget(self.label)
+        self.link_label = HyperlinkLabel(
+            "Distance measure: ", DISTANCE_MEASURES_ADDRESS)
+
+        self.layout.addWidget(self.link_label.get_label())
         self.layout.addWidget(self.selector)
 
     def get_widget(self):
@@ -139,40 +194,3 @@ class TrainDataSizeSelector:
         params.set_train_data_size(self.slider.value())
         self.label.setText(
             f"Train dataset size: {params.get_train_data_size()}")
-
-
-class KNNOptionsWidget:
-    def __init__(self, update_img):
-        # update image function, used on threshold change
-        update_img
-        self.widget = QGroupBox()
-        #self.layout.addWidget(QLabel("KNN OPTIONS WIDGET"))
-
-        self.distance_measure_selector = DistanceMeasureSelector()
-        self.k_value_selector = KValueSelector()
-        self.grayscale_threshold_selector = ThresholdSelector(update_img)
-        self.test_data_size_selector = TestDataSizeSelector()
-        self.train_data_size_selector = TrainDataSizeSelector()
-
-        self.distance_measures_link = QPushButton(
-            "Distance measures (opens in browser)")
-        self.distance_measures_link.clicked.connect(
-            self._handle_browser_link_press)
-
-        # add widgets to layout
-        self.layout = QVBoxLayout(self.widget)
-
-        self.layout.addWidget(self.distance_measure_selector.get_widget())
-        self.layout.addWidget(self.k_value_selector.get_widget())
-        self.layout.addWidget(self.grayscale_threshold_selector.get_widget())
-        self.layout.addWidget(self.test_data_size_selector.get_widget())
-        self.layout.addWidget(self.train_data_size_selector.get_widget())
-
-        self.layout.addWidget(self.distance_measures_link)
-
-    def get_widget(self):
-        return self.widget
-
-    def _handle_browser_link_press(self):
-        webbrowser.open(
-            "https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=6F7642FDC63869C9A005AB4B14ED484E?doi=10.1.1.1.8155&rep=rep1&type=pdf")
