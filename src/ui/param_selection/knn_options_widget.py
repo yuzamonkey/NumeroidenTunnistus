@@ -6,27 +6,54 @@ from ui.params import params
 
 DISTANCE_MEASURES = ["D22", "D23"]
 
-class DistanceMeasureSelection:
+
+class DistanceMeasureSelector:
     def __init__(self):
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
-        
+
         self.label = QLabel("Distance measure:")
         self.selector = QComboBox()
         self.selector.addItems(DISTANCE_MEASURES)
         self.selector.activated[str].connect(
-            self._change_dist_measure)
-        
+            self._update_distance_measure)
+
         self.layout.addWidget(self.label)
         self.layout.addWidget(self.selector)
 
     def get_widget(self):
         return self.widget
 
-    def _change_dist_measure(self):
+    def _update_distance_measure(self):
         print("DIST MEASURE ", self.selector.currentText())
         params.set_distance_measure(self.selector.currentText())
 
+
+class KValueSelector:
+    def __init__(self):
+        self.widget = QWidget()
+        self.layout = QHBoxLayout(self.widget)
+                
+        self.label = QLabel("K: ")
+        
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.valueChanged.connect(self._update_k)
+        self.slider.setMinimum(1)
+        self.slider.setMaximum(10)
+        self.slider.setSingleStep(1)
+        params.set_k(4)
+        self.slider.setValue(params.get_k())
+
+        self.layout.addWidget(self.label)
+        self.layout.addWidget(self.slider)
+
+    def get_widget(self):
+        return self.widget
+
+    def _update_k(self):
+        print("K ", self.slider.value())
+        params.set_k(self.slider.value())
+        self.label.setText(f"K: {params.get_k()}")
 
 
 class KNNOptionsWidget:
@@ -35,29 +62,21 @@ class KNNOptionsWidget:
         self.update_img = update_img
         self.widget = QGroupBox()
         #self.layout.addWidget(QLabel("KNN OPTIONS WIDGET"))
-        
-        self.distance_measure_selection = DistanceMeasureSelection()
+
+        self.distance_measure_selector = DistanceMeasureSelector()
+        self.k_value_selector = KValueSelector()
         # distance measure (d22, d23)
         # self.distance_measure_label = QLabel("Distance measure:")
         # self.distance_measures = QComboBox()
         # self.distance_measures.addItems(["D22", "D23"])
         # self.distance_measures.activated[str].connect(
-        #     self._change_dist_measure)
+        #     self._update_distance_measure)
 
         # k
-        self.k_value_label = QLabel("K: ")
         self.grayscale_threshold_label = QLabel("")
         self.test_data_size_label = QLabel("")
         self.train_data_size_label = QLabel("")
-        self.layout = QVBoxLayout()
-
-        self.k_value = QSlider(Qt.Horizontal)
-        self.k_value.valueChanged.connect(self._change_k_value)
-        self.k_value.setMinimum(1)
-        self.k_value.setMaximum(10)
-        self.k_value.setSingleStep(1)
-        self.k_value.setValue(params.get_k())
-        self.k_value_label.setText(f"K: {self.k_value.value()}")
+        #self.layout = QVBoxLayout()
 
         # grayscale threshold (1-255)
         self.grayscale_threshold = QSlider(Qt.Horizontal)
@@ -98,10 +117,8 @@ class KNNOptionsWidget:
         # add widgets to layout
         self.layout = QVBoxLayout(self.widget)
 
-        self.layout.addWidget(self.distance_measure_selection.get_widget())
-
-        self.layout.addWidget(self.k_value)
-        self.layout.addWidget(self.k_value_label)
+        self.layout.addWidget(self.distance_measure_selector.get_widget())
+        self.layout.addWidget(self.k_value_selector.get_widget())
 
         self.layout.addWidget(self.grayscale_threshold)
         self.layout.addWidget(self.grayscale_threshold_label)
@@ -116,12 +133,6 @@ class KNNOptionsWidget:
 
     def get_widget(self):
         return self.widget
-
-
-    def _change_k_value(self):
-        print("K ", self.k_value.value())
-        params.set_k(self.k_value.value())
-        self.k_value_label.setText(f"K: {params.get_k()}")
 
     def _change_grayscale_threshold(self):
         print("GRAYSCALE ", self.grayscale_threshold.value())
