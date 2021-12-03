@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import (
-    QComboBox, QLabel, QVBoxLayout, QHBoxLayout, QWidget)
+    QComboBox, QLabel, QGridLayout, QHBoxLayout, QWidget)
 from ui.param_selection.knn_options_widget import KNNOptionsWidget
 from utils.constants import CLASSIFIERS
 
@@ -11,11 +11,11 @@ class ParamsWidget:
 
         self.knn_options = KNNOptionsWidget(update_img)
 
-        self.layout = QVBoxLayout()
-        self.layout.addWidget(self.classifier_options.get_widget())
-
         self.current_classifier_options = self.knn_options.get_widget()
-        self.layout.addWidget(self.current_classifier_options)
+
+        self.layout = QGridLayout()
+        self.layout.addWidget(self.classifier_options.get_widget(), 0, 0, 1, 0)
+        self.layout.addWidget(self.current_classifier_options, 1, 0, 9, 0)
 
     def get_layout(self):
         return self.layout
