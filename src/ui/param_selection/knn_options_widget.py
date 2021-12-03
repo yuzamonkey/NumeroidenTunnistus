@@ -33,9 +33,9 @@ class KValueSelector:
     def __init__(self):
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
-                
+
         self.label = QLabel("K: ")
-        
+
         self.slider = QSlider(Qt.Horizontal)
         self.slider.valueChanged.connect(self._update_k)
         self.slider.setMinimum(1)
@@ -56,58 +56,105 @@ class KValueSelector:
         self.label.setText(f"K: {params.get_k()}")
 
 
+class ThresholdSelector:
+    def __init__(self, update_img):
+        self.update_img = update_img
+        self.widget = QWidget()
+        self.layout = QHBoxLayout(self.widget)
+
+        self.label = QLabel("")
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.valueChanged.connect(
+            self._update_grayscale_threshold)
+        self.slider.setMinimum(1)
+        self.slider.setMaximum(255)
+        self.slider.setSingleStep(1)
+        self.slider.setValue(140)
+        self.label.setText(
+            f"Grayscale threshold: {self.slider.value()}")
+
+        self.layout.addWidget(self.label)
+        self.layout.addWidget(self.slider)
+
+    def get_widget(self):
+        return self.widget
+
+    def _update_grayscale_threshold(self):
+        print("GRAYSCALE ", self.slider.value())
+        params.set_grayscale_threshold(self.slider.value())
+        self.label.setText(
+            f"Grayscale threshold: {self.slider.value()}")
+        self.update_img()
+
+
+class TestDataSizeSelector:
+    def __init__(self):
+        self.widget = QWidget()
+        self.layout = QHBoxLayout(self.widget)
+
+        self.label = QLabel("")
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.valueChanged.connect(self._update_test_data_size)
+        self.slider.setMinimum(1)
+        self.slider.setMaximum(10_000)
+        self.slider.setSingleStep(1)
+        self.slider.setValue(10)
+        self.label.setText(
+            f"Test dataset size: {params.get_test_data_size()}")
+
+        self.layout.addWidget(self.label)
+        self.layout.addWidget(self.slider)
+
+    def get_widget(self):
+        return self.widget
+
+    def _update_test_data_size(self):
+        print("TEST DATA SIZE ", self.slider.value())
+        params.set_test_data_size(self.slider.value())
+        self.label.setText(
+            f"Test dataset size: {params.get_test_data_size()}")
+
+
+class TestDataSizeSelector:
+    def __init__(self):
+        self.widget = QWidget()
+        self.layout = QHBoxLayout(self.widget)
+
+        self.label = QLabel("")
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.valueChanged.connect(self._update_train_data_size)
+        self.slider.setMinimum(1)
+        self.slider.setMaximum(60_000)
+        self.slider.setSingleStep(1)
+        self.slider.setValue(50)
+        self.label.setText(
+            f"Train dataset size: {params.get_train_data_size()}")
+
+        self.layout.addWidget(self.label)
+        self.layout.addWidget(self.slider)
+
+    def get_widget(self):
+        return self.widget
+
+    def _update_train_data_size(self):
+        print("TRAIN DATA SIZE ", self.slider.value())
+        params.set_train_data_size(self.slider.value())
+        self.label.setText(
+            f"Train dataset size: {params.get_train_data_size()}")
+
+
 class KNNOptionsWidget:
     def __init__(self, update_img):
         # update image function, used on threshold change
-        self.update_img = update_img
+        update_img
         self.widget = QGroupBox()
         #self.layout.addWidget(QLabel("KNN OPTIONS WIDGET"))
 
         self.distance_measure_selector = DistanceMeasureSelector()
         self.k_value_selector = KValueSelector()
-        # distance measure (d22, d23)
-        # self.distance_measure_label = QLabel("Distance measure:")
-        # self.distance_measures = QComboBox()
-        # self.distance_measures.addItems(["D22", "D23"])
-        # self.distance_measures.activated[str].connect(
-        #     self._update_distance_measure)
-
-        # k
-        self.grayscale_threshold_label = QLabel("")
-        self.test_data_size_label = QLabel("")
-        self.train_data_size_label = QLabel("")
-        #self.layout = QVBoxLayout()
-
-        # grayscale threshold (1-255)
-        self.grayscale_threshold = QSlider(Qt.Horizontal)
-        self.grayscale_threshold.valueChanged.connect(
-            self._change_grayscale_threshold)
-        self.grayscale_threshold.setMinimum(1)
-        self.grayscale_threshold.setMaximum(255)
-        self.grayscale_threshold.setSingleStep(1)
-        self.grayscale_threshold.setValue(140)
-        self.grayscale_threshold_label.setText(
-            f"Grayscale threshold: {self.grayscale_threshold.value()}")
-
-        # test data size (1-10_000)
-        self.test_data_size = QSlider(Qt.Horizontal)
-        self.test_data_size.valueChanged.connect(self._change_test_data_size)
-        self.test_data_size.setMinimum(1)
-        self.test_data_size.setMaximum(10_000)
-        self.test_data_size.setSingleStep(1)
-        self.test_data_size.setValue(10)
-        self.test_data_size_label.setText(
-            f"Test dataset size: {params.get_test_data_size()}")
-
-        # train data size (1-60_000)
-        self.train_data_size = QSlider(Qt.Horizontal)
-        self.train_data_size.valueChanged.connect(self._change_train_data_size)
-        self.train_data_size.setMinimum(1)
-        self.train_data_size.setMaximum(60_000)
-        self.train_data_size.setSingleStep(1)
-        self.train_data_size.setValue(50)
-        self.train_data_size_label.setText(
-            f"Train dataset size: {params.get_train_data_size()}")
+        self.grayscale_threshold_selector = ThresholdSelector(update_img)
+        self.test_data_size_selector = TestDataSizeSelector()
+        self.train_data_size_selector = TestDataSizeSelector()
 
         self.distance_measures_link = QPushButton(
             "Distance measures (opens in browser)")
@@ -119,39 +166,14 @@ class KNNOptionsWidget:
 
         self.layout.addWidget(self.distance_measure_selector.get_widget())
         self.layout.addWidget(self.k_value_selector.get_widget())
-
-        self.layout.addWidget(self.grayscale_threshold)
-        self.layout.addWidget(self.grayscale_threshold_label)
-
-        self.layout.addWidget(self.test_data_size)
-        self.layout.addWidget(self.test_data_size_label)
-
-        self.layout.addWidget(self.train_data_size)
-        self.layout.addWidget(self.train_data_size_label)
+        self.layout.addWidget(self.grayscale_threshold_selector.get_widget())
+        self.layout.addWidget(self.test_data_size_selector.get_widget())
+        self.layout.addWidget(self.train_data_size_selector.get_widget())
 
         self.layout.addWidget(self.distance_measures_link)
 
     def get_widget(self):
         return self.widget
-
-    def _change_grayscale_threshold(self):
-        print("GRAYSCALE ", self.grayscale_threshold.value())
-        params.set_grayscale_threshold(self.grayscale_threshold.value())
-        self.grayscale_threshold_label.setText(
-            f"Grayscale threshold: {self.grayscale_threshold.value()}")
-        self.update_img()
-
-    def _change_test_data_size(self):
-        print("TEST DATA SIZE ", self.test_data_size.value())
-        params.set_test_data_size(self.test_data_size.value())
-        self.test_data_size_label.setText(
-            f"Test dataset size: {params.get_test_data_size()}")
-
-    def _change_train_data_size(self):
-        print("TRAIN DATA SIZE ", self.train_data_size.value())
-        params.set_train_data_size(self.train_data_size.value())
-        self.train_data_size_label.setText(
-            f"Train dataset size: {params.get_train_data_size()}")
 
     def _handle_browser_link_press(self):
         webbrowser.open(
