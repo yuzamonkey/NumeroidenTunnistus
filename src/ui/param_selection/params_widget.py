@@ -1,6 +1,6 @@
 import webbrowser
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (QComboBox, QLabel, QSlider, QVBoxLayout, QPushButton)
+from PyQt5.QtWidgets import (QComboBox, QLabel, QSlider, QVBoxLayout, QHBoxLayout, QPushButton, QWidget)
 from ui.params import params
 
 
@@ -29,7 +29,14 @@ class ParamsWidget:
         self.test_data_size_label = QLabel("")
         self.train_data_size_label = QLabel("")
         self.layout = QVBoxLayout()
-        
+
+        #### OTA TÄSTÄ MALLIA REFAKTOROINTIA VARTEN
+        some_widget = QWidget()
+        some_other_lo = QHBoxLayout(some_widget)
+        some_other_lo.addWidget(QLabel("Something else"))
+        self.layout.addWidget(some_widget)
+        ####
+
         self.k_value = QSlider(Qt.Horizontal)
         self.k_value.valueChanged.connect(self._change_k_value)
         self.k_value.setMinimum(1)
