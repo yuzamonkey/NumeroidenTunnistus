@@ -26,7 +26,7 @@ class ParamsWidget:
         selection = self.classifier_options.get_current_text()
         if selection == CLASSIFIERS[0]:
             self.current_classifier_options = self.knn_options.get_widget()
-        self.layout.addWidget(self.current_classifier_options)
+        self.layout.addWidget(self.current_classifier_options, 1, 0, 9, 0)
 
     def _remove_current_classifier_options(self):
         if self.layout.itemAt(2) is not None:
