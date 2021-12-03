@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import (
     QComboBox, QLabel, QVBoxLayout, QHBoxLayout, QWidget)
 from ui.param_selection.knn_options_widget import KNNOptionsWidget
-
-CLASSIFIERS = ["KNN"]
+from utils.constants import CLASSIFIERS
 
 class ClassifierOptionsWidget:
     def __init__(self, update_classifier):

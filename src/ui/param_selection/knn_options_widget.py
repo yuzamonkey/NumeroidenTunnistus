@@ -3,9 +3,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QComboBox, QLabel, QSlider, QVBoxLayout, QHBoxLayout, QPushButton, QWidget, QGroupBox)
 from ui.params import params
-
-DISTANCE_MEASURES = ["D22", "D23"]
-
+from utils.constants import DISTANCE_MEASURES
 
 class DistanceMeasureSelector:
     def __init__(self):
@@ -115,7 +113,7 @@ class TestDataSizeSelector:
             f"Test dataset size: {params.get_test_data_size()}")
 
 
-class TestDataSizeSelector:
+class TrainDataSizeSelector:
     def __init__(self):
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
@@ -154,7 +152,7 @@ class KNNOptionsWidget:
         self.k_value_selector = KValueSelector()
         self.grayscale_threshold_selector = ThresholdSelector(update_img)
         self.test_data_size_selector = TestDataSizeSelector()
-        self.train_data_size_selector = TestDataSizeSelector()
+        self.train_data_size_selector = TrainDataSizeSelector()
 
         self.distance_measures_link = QPushButton(
             "Distance measures (opens in browser)")
