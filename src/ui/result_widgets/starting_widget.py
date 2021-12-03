@@ -1,5 +1,6 @@
 from services.classification_service import classification_service as cs
 from ui.params import params
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QPushButton, QGridLayout, QLabel, QWidget
 
 
@@ -14,6 +15,7 @@ class ExampleNumberImage:
             params.get_grayscale_threshold()
         )
         self.label.setText(self.img)
+        self.label.setAlignment(Qt.AlignCenter)
 
         self.layout.addWidget(self.label)
 
@@ -45,9 +47,9 @@ class StartingWidget:
         """)
 
         self.layout = QGridLayout()
-        self.layout.addWidget(self.example_number_image.get_widget())
-        self.layout.addWidget(note_label)
-        self.layout.addWidget(self.start_button)
+        self.layout.addWidget(self.example_number_image.get_widget(), 0, 0)
+        self.layout.addWidget(note_label, 1, 0)
+        self.layout.addWidget(self.start_button, 2, 0)
 
     def get_layout(self):
         return self.layout
