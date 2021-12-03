@@ -1,7 +1,7 @@
 import webbrowser
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QComboBox, QLabel, QSlider, QVBoxLayout, QPushButton, QWidget)
+    QComboBox, QLabel, QSlider, QVBoxLayout, QPushButton, QWidget, QGroupBox)
 from ui.params import params
 
 
@@ -9,7 +9,7 @@ class KNNOptionsWidget:
     def __init__(self, update_img):
         # update image function, used on threshold change
         self.update_img = update_img
-        self.widget = QWidget()
+        self.widget = QGroupBox()
         #self.layout.addWidget(QLabel("KNN OPTIONS WIDGET"))
 
         # distance measure (d22, d23)
