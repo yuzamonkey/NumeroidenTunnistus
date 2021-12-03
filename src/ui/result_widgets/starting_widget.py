@@ -7,7 +7,7 @@ class ExampleNumberImage:
     def __init__(self):
         self.widget = QWidget()
         self.layout = QGridLayout(self.widget)
-        
+
         self.label = QLabel("")
         self.img = cs.get_example_number(
             params.get_random_integer(),
@@ -19,13 +19,14 @@ class ExampleNumberImage:
 
     def get_widget(self):
         return self.widget
-        
+
     def update(self):
         self.img = cs.get_example_number(
             params.get_random_integer(),
             params.get_grayscale_threshold()
         )
         self.label.setText(self.img)
+
 
 class StartingWidget:
     def __init__(self, show_classification_widget):
