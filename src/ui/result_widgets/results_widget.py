@@ -4,7 +4,7 @@ from ui.results import results
 from ui.params import params
 from services.classification_service import classification_service as cs
 
-class ErrorsWidget:
+class StatsWidget:
     def __init__(self):
         self.widget = QWidget()
         self.layout = QGridLayout(self.widget)
@@ -65,17 +65,17 @@ class ResultsWidget:
     def __init__(self, show_starting_widget):
         self.layout = QGridLayout()
 
-        self.errors_widget = ErrorsWidget()
+        self.stats_widget = StatsWidget()
 
         self.end_button = QPushButton("End")
         self.end_button.clicked.connect(show_starting_widget)
         self.end_button.setDefault(True)
 
-        self.layout.addWidget(self.errors_widget.get_widget(), 0, 0)
+        self.layout.addWidget(self.stats_widget.get_widget(), 0, 0)
         self.layout.addWidget(self.end_button, 1, 0)
 
     def update(self):
-        self.errors_widget.update()
+        self.stats_widget.update()
 
     def get_layout(self):
         return self.layout
