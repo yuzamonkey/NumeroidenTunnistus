@@ -1,6 +1,8 @@
+
+import time
 from services.classification_service import classification_service as cs
 from ui.params import params
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QCoreApplication, QObject, QRunnable, QThread, QThreadPool, pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QPushButton, QGridLayout, QLabel, QWidget
 
 
@@ -32,6 +34,8 @@ class ExampleNumberImage:
 
 class StartingWidget:
     def __init__(self, show_classification_widget):
+        self.threadpool = QThreadPool()
+
         self.show_classification_widget = show_classification_widget
 
         self.example_number_image = ExampleNumberImage()
@@ -40,9 +44,9 @@ class StartingWidget:
         self.start_button.clicked.connect(self._handle_start_button_click)
 
         note_label = QLabel("""
-            Note! 
-            Pick small values for test and train data sizes. 
-            During calculation there's no threading (yet), 
+            Note!
+            Pick small values for test and train data sizes.
+            During calculation there's no threading (yet),
             so the program will freeze for a while.
         """)
 
@@ -56,6 +60,30 @@ class StartingWidget:
 
     def _handle_start_button_click(self):
         print("START BUTTON CLICKED")
+        # cs.start_knn_classification(
+        #     params.get_k(),
+        #     params.get_grayscale_threshold(),
+        #     params.get_distance_measure(),
+        #     params.get_test_data_size(),
+        #     params.get_train_data_size()
+        # )
+        # self.show_classification_widget()
+        # self.threadpool = QThreadPool()
+
+        #print("Multithreading with maximum %d threads" %self.threadpool.maxThreadCount())
+        
+        worker = ClassificationThread()
+        self.threadpool.start(worker)
+
+
+    def update_image(self):
+        self.example_number_image.update()
+
+
+class ClassificationThread(QRunnable):
+
+    @pyqtSlot()
+    def run(self):
         cs.start_knn_classification(
             params.get_k(),
             params.get_grayscale_threshold(),
@@ -63,7 +91,3 @@ class StartingWidget:
             params.get_test_data_size(),
             params.get_train_data_size()
         )
-        self.show_classification_widget()
-
-    def update_image(self):
-        self.example_number_image.update()
