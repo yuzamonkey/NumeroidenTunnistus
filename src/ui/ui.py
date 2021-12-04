@@ -7,7 +7,7 @@ class UI:
     def start(self):
         app = QApplication(sys.argv)
         win = Window()
-        win.setGeometry(300, 100, 1200, 900)
+        win.setGeometry(100, 100, 1200, 900)
         win.setWindowTitle("Number classifier")
         win.show()
         app.exec()

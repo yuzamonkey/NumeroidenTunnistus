@@ -1,3 +1,4 @@
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QVBoxLayout, QGridLayout, QLabel, QPushButton, QWidget
 from ui.results import results
 from ui.params import params
@@ -9,10 +10,14 @@ class ErrorsWidget:
         self.layout = QGridLayout(self.widget)
 
         self.previous_button = QPushButton("<")
+        self.previous_button.clicked.connect(self._handle_previous_click)
         self.next_button = QPushButton(">")
-        self.index_of_error_label = QLabel(f"Error 0/{results.get_errors_count()}")
+        self.next_button.clicked.connect(self._handle_next_click)
+        self.current_error_index = 0
+        self.index_of_error_label = QLabel(f"Error {self.current_error_index + 1}/{results.get_errors_count()}")
         
         self.image_label = QLabel("")
+        self.image_label.setAlignment(Qt.AlignCenter)
 
         self.layout.addWidget(self.previous_button, 0, 0)
         self.layout.addWidget(self.index_of_error_label, 0, 1)
@@ -20,22 +25,37 @@ class ErrorsWidget:
 
 
         self.layout.addWidget(self.image_label)
+
+    def update(self):
+        self.current_error_index = 0
+        self.index_of_error_label.setText(f"Error {self.current_error_index + 1}/{results.get_errors_count()}")
+        self._update_img_label()
         
     def get_widget(self):
         return self.widget
     
-    def update(self):
-        text = "•••"
-        errors = results.get_errors()
-        # for e in errors:
-        #     img_text = cs.get_example_number(e[1], params.get_grayscale_threshold())
-        #     text += img_text
-        self.image_label.setText(text)
+    def _handle_previous_click(self):
+        if self.current_error_index > 0:
+            self.current_error_index -= 1
+            self.index_of_error_label.setText(f"Error {self.current_error_index + 1}/{results.get_errors_count()}")
+            self._update_img_label()
+
+    def _handle_next_click(self):
+        if self.current_error_index < results.get_errors_count() - 1:
+            self.current_error_index += 1
+            self.index_of_error_label.setText(f"Error {self.current_error_index + 1}/{results.get_errors_count()}")
+            self._update_img_label()
+
+    def _update_img_label(self):
+        if results.get_errors_count() > 0:
+            e = results.get_errors()[self.current_error_index]
+            img_text = cs.get_example_number(e[1], params.get_grayscale_threshold())
+            self.image_label.setText(img_text)
 
 
 class ResultsWidget:
     def __init__(self, show_starting_widget):
-        self.layout = QVBoxLayout()
+        self.layout = QGridLayout()
         self.label = QLabel("")
 
         self.errors_widget = ErrorsWidget()
