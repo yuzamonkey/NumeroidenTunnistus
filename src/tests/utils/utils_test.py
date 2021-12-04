@@ -1,5 +1,5 @@
 import unittest
-from utils.utils import as_2d_arrays, images_with_threshold, image_with_threshold
+from utils.utils import as_2d_arrays, image_as_2d_string, images_with_threshold, image_with_threshold
 
 
 class TestUtils(unittest.TestCase):
@@ -32,3 +32,8 @@ class TestUtils(unittest.TestCase):
         new_arr = image_with_threshold(self._arr, 10)
         expected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.assertEqual(new_arr, expected)
+
+    def test_image_as_2d_string_returns_expected_output(self):
+        img = [[0, 0, 1, 1, 1], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1]]
+        expected = " ○ ○ ● ● ●\n ○ ○ ○ ○ ○\n ● ● ● ● ●\n"
+        self.assertEqual(image_as_2d_string(img), expected)
