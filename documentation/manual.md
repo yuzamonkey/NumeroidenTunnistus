@@ -15,10 +15,10 @@ poetry install
 
 Ohjelma käynnistyy komennolla:
 ```
-python3 src/main.py
+python3 src/index.py
 ```
 tai
 ```
 poetry run invoke start
 ```
-Komento `python3 src/main.py` on suositeltava tässä vaiheessa projektia, jotta jotkin tulostukset näkyvät reaaliaikaisesti konsolissa.
+Komento `python3 src/index.py` on suositeltava tässä vaiheessa projektia, jotta jotkin tulostukset näkyvät reaaliaikaisesti konsolissa.
