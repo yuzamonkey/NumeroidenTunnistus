@@ -9,7 +9,12 @@ class ClassificationService:
         imgs = data_repository.get_testing_imgs()
         img = as_2d_arrays(image_with_threshold(imgs[idx], threshold))
         return image_as_2d_string(img)
-        
+    
+    def get_image_from_test_data(self, idx, threshold=1):
+        imgs = data_repository.get_testing_imgs()
+        img = as_2d_arrays(image_with_threshold(imgs[idx], threshold))
+        return image_as_2d_string(img)
+
     def start_knn_classification(self, k, threshold, distance_measure, test_size, train_size):
         print("\nSTART KNN WITH PARAMS")
         print("K ", k)
