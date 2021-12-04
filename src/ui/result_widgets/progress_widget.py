@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QVBoxLayout, QPushButton, QLabel
+from PyQt5.QtWidgets import QVBoxLayout, QLabel
 
 
 class ProgressWidget:

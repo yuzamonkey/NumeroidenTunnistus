@@ -12,7 +12,7 @@ class ExampleNumberImage:
         self.layout = QGridLayout(self.widget)
 
         self.label = QLabel("")
-        self.img = cs.get_example_number(
+        self.img = cs.get_image_from_test_data(
             params.get_random_integer(),
             params.get_grayscale_threshold()
         )
@@ -25,7 +25,7 @@ class ExampleNumberImage:
         return self.widget
 
     def update(self):
-        self.img = cs.get_example_number(
+        self.img = cs.get_image_from_test_data(
             params.get_random_integer(),
             params.get_grayscale_threshold()
         )
