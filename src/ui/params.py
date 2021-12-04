@@ -13,6 +13,8 @@ class Params:
         self.train_data_size = 50
         self.rand_int = random.randint(0, 1000)
 
+        self.time_estimate = 0
+
     def get_classifier(self):
         return self.classifier
 
@@ -48,6 +50,10 @@ class Params:
 
     def get_random_integer(self):
         return self.rand_int
+
+    def get_time_estimate(self):
+        self.time_estimate = random.randint(0, 1000)
+        return self.time_estimate
 
 
 params = Params()

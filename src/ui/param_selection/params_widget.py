@@ -5,11 +5,11 @@ from utils.constants import CLASSIFIERS
 
 
 class ParamsWidget:
-    def __init__(self, update_img):
+    def __init__(self, update_img, update_time_estimate):
         self.classifier_options = ClassifierOptionsWidget(
             self._update_classifier)
 
-        self.knn_options = KNNOptionsWidget(update_img)
+        self.knn_options = KNNOptionsWidget(update_img, update_time_estimate)
 
         self.current_classifier_options = self.knn_options.get_widget()
 

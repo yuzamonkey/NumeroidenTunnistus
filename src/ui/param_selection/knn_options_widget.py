@@ -8,14 +8,14 @@ from utils.constants import DISTANCE_MEASURES, DISTANCE_MEASURES_ADDRESS
 
 
 class KNNOptionsWidget:
-    def __init__(self, update_img):
+    def __init__(self, update_img, update_time_estimate):
         self.widget = QGroupBox()
 
         self.distance_measure_selector = DistanceMeasureSelector()
         self.k_value_selector = KValueSelector()
         self.grayscale_threshold_selector = ThresholdSelector(update_img)
-        self.test_data_size_selector = TestDataSizeSelector()
-        self.train_data_size_selector = TrainDataSizeSelector()
+        self.test_data_size_selector = TestDataSizeSelector(update_time_estimate)
+        self.train_data_size_selector = TrainDataSizeSelector(update_time_estimate)
 
         self.layout = QVBoxLayout(self.widget)
 
@@ -130,7 +130,9 @@ class ThresholdSelector:
 
 
 class TestDataSizeSelector:
-    def __init__(self):
+    def __init__(self, update_time_estimate):
+        self.update_time_estimate = update_time_estimate
+        
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
 
@@ -155,10 +157,13 @@ class TestDataSizeSelector:
         params.set_test_data_size(self.slider.value())
         self.label.setText(
             f"Test dataset size: {params.get_test_data_size()}")
+        self.update_time_estimate()
 
 
 class TrainDataSizeSelector:
-    def __init__(self):
+    def __init__(self, update_time_estimate):
+        self.update_time_estimate = update_time_estimate
+        
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
 
@@ -183,3 +188,4 @@ class TrainDataSizeSelector:
         params.set_train_data_size(self.slider.value())
         self.label.setText(
             f"Train dataset size: {params.get_train_data_size()}")
+        self.update_time_estimate()

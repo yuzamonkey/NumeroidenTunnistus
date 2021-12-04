@@ -14,7 +14,7 @@ class Window(QDialog):
         self.progress_widget = ProgressWidget()
         self.starting_widget = StartingWidget(self.showProgressWidget, self.showResultsWidget)
 
-        self.params_widget = ParamsWidget(self.starting_widget.update_image)
+        self.params_widget = ParamsWidget(self.starting_widget.update_image, self.starting_widget.update_time_estimate)
 
         self.createParametersGroupBox()
         self.createResultsGroupBox()
