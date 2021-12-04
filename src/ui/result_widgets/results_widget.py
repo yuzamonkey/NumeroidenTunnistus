@@ -7,22 +7,30 @@ class ErrorsWidget:
     def __init__(self):
         self.widget = QWidget()
         self.layout = QGridLayout(self.widget)
-        
-        self.label = QLabel("")
 
-        self.layout.addWidget(self.label)
+        self.previous_button = QPushButton("<")
+        self.next_button = QPushButton(">")
+        self.index_of_error_label = QLabel(f"Error 0/{results.get_errors_count()}")
+        
+        self.image_label = QLabel("")
+
+        self.layout.addWidget(self.previous_button, 0, 0)
+        self.layout.addWidget(self.index_of_error_label, 0, 1)
+        self.layout.addWidget(self.next_button, 0, 2)
+
+
+        self.layout.addWidget(self.image_label)
         
     def get_widget(self):
         return self.widget
     
     def update(self):
-        text = ""
+        text = "•••"
         errors = results.get_errors()
-        for e in errors:
-            img_text = cs.get_example_number(e[1], params.get_grayscale_threshold())
-            text += img_text
-
-        self.label.setText(text)
+        # for e in errors:
+        #     img_text = cs.get_example_number(e[1], params.get_grayscale_threshold())
+        #     text += img_text
+        self.image_label.setText(text)
 
 
 class ResultsWidget:

@@ -6,7 +6,7 @@ from ui.results import results
 
 class ClassificationService:
     def get_example_number(self, idx, threshold=1):
-        imgs = data_repository.get_training_imgs()
+        imgs = data_repository.get_testing_imgs()
         img = as_2d_arrays(image_with_threshold(imgs[idx], threshold))
         return image_as_2d_string(img)
         
