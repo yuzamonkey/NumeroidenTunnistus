@@ -34,10 +34,11 @@ class ExampleNumberImage:
 
 
 class StartingWidget:
-    def __init__(self, show_progress_widget):
+    def __init__(self, show_progress_widget, show_results_widget):
         self.threadpool = QThreadPool()
 
         self.show_progress_widget = show_progress_widget
+        self.show_results_widget = show_results_widget
 
         self.example_number_image = ExampleNumberImage()
 
@@ -63,7 +64,7 @@ class StartingWidget:
         print("START BUTTON CLICKED")
         self.show_progress_widget()
         if params.get_classifier() == CLASSIFIERS[0]:
-            worker = KNNClassificationThread()
+            worker = KNNClassificationThread(self.show_results_widget)
             self.threadpool.start(worker)
 
     def update_image(self):
@@ -71,6 +72,10 @@ class StartingWidget:
 
 
 class KNNClassificationThread(QRunnable):
+    def __init__(self, show_results_widget):
+        super().__init__()
+        self.show_results_widget = show_results_widget
+
     @pyqtSlot()
     def run(self):
         cs.start_knn_classification(
@@ -80,3 +85,4 @@ class KNNClassificationThread(QRunnable):
             params.get_test_data_size(),
             params.get_train_data_size()
         )
+        self.show_results_widget()

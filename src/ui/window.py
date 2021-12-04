@@ -11,9 +11,8 @@ class Window(QDialog):
         super(Window, self).__init__(parent)
 
         self.results_widget = ResultsWidget(self.showStartingWidget)
-        self.progress_widget = ProgressWidget(
-            self.showResultsWidget, self.results_widget.update)
-        self.starting_widget = StartingWidget(self.showProgressWidget)
+        self.progress_widget = ProgressWidget()
+        self.starting_widget = StartingWidget(self.showProgressWidget, self.showResultsWidget)
 
         self.params_widget = ParamsWidget(self.starting_widget.update_image)
 
@@ -58,6 +57,7 @@ class Window(QDialog):
 
     def showResultsWidget(self):
         self.clearRightGroupBox()
+        self.results_widget.update()
         self.mainLayout.addWidget(self.resultsGroupBox, 0, 1)
 
     def clearRightGroupBox(self):
