@@ -43,6 +43,7 @@ Pvm       | h |  |
 -----------|------|--------|
 2.12.2021 | 0.5 | Dokumentaatio, PyQt5 widget sandbox |
 3.12.2021 | 3.5 | UI refaktorointia |
+3.12.2021 | 915- |  |
 
 
 ## Yhteensä
