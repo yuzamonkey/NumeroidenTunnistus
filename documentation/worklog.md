@@ -43,7 +43,7 @@ Pvm       | h |  |
 -----------|------|--------|
 2.12.2021 | 0.5 | Dokumentaatio, PyQt5 widget sandbox |
 3.12.2021 | 3.5 | UI refaktorointia |
-3.12.2021 | 3, 1330- | UI, Threading |
+3.12.2021 | 6 | UI, Threading, stats |
 
 
 ## Yhteensä
@@ -54,5 +54,5 @@ Viikko       | h |
 2| 11 |
 3| 10 |
 4| 10.5 |
-5|  |
-=| 35.5 |
+5| 10 |
+=| 45.5 |
