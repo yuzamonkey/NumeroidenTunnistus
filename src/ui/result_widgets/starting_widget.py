@@ -1,4 +1,3 @@
-
 import time
 from services.classification_service import classification_service as cs
 from ui.params import params
@@ -76,6 +75,7 @@ class KNNClassificationThread(QRunnable):
 
     @pyqtSlot()
     def run(self):
+        #start_time = time.time()
         cs.start_knn_classification(
             params.get_k(),
             params.get_grayscale_threshold(),
@@ -83,4 +83,5 @@ class KNNClassificationThread(QRunnable):
             params.get_test_data_size(),
             params.get_train_data_size()
         )
+        #print(f"--- classification took {(time.time() - start_time)} seconds ---")
         self.show_results_widget()
