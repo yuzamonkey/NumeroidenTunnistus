@@ -60,6 +60,9 @@ class StatsWidget:
             img_text = cs.get_image_from_test_data(e[1], params.get_grayscale_threshold())
             result_text = f"This image of {cs.get_label_from_test_data(e[1])} was classified as {e[0]}."
             self.image_label.setText(f"{img_text}\n{result_text}")
+        else:
+            self.index_of_error_label.setText(f"Error {self.current_error_index}/{results.get_errors_count()}")
+            self.image_label.setText("No errors, darn good classification 💪")
 
 
 class ResultsWidget:
