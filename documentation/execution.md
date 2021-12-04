@@ -39,6 +39,9 @@ Funktio [_point_to_set_dist](https://github.com/yuzamonkey/NumeroidenTunnistus/b
 
 ## Puutteita
 
+* [KNN-luokan](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py) käyttö ei ole UI:n kannalta paras mahdollinen. Esimerkiksi luokittelun reealiaikainen seuranta ei oikein ole mahdollista, ja yksittäisen numeron tunnistamista varten olisi hyvä pystyä antamaan tietty datajoukko. 
+* [ProgressWidget](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/ui/result_widgets/progress_widget.py) pyörittää kelloa koko ohjelman ajon ajan, sillä sen pysäyttäminen toisesta luokasta tulostaa konsoliin varoituksen.
+
 ## Parannusehdotuksia
 
 * Ohjelma on pyritty rakentamaan niin, että uuden luokittelualgoritmin lisääminen olisi sujuvaa. Tällöin voisi lisätä esimerkiksi neuroverkon ohjelman koodiin, joka tunnistaa numeroita testidatasta. 
