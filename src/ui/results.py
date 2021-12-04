@@ -2,7 +2,7 @@ class Results:
     def __init__(self):
         self.correct_count = 0
         self.errors_count = 0
-        self.errors = []
+        self.errors = [] # (result, index)
 
     def get_correct_count(self):
         return self.correct_count

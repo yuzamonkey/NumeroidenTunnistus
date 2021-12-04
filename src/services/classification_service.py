@@ -1,24 +1,15 @@
 from repositories.data_repository import data_repository
-from utils.utils import as_2d_arrays, image_with_threshold
+from utils.utils import as_2d_arrays, image_with_threshold, image_as_2d_string
 from services.knn import knn
 from ui.results import results
 
 
 class ClassificationService:
     def get_example_number(self, idx, threshold=1):
-        imgs = data_repository.get_testing_imgs()
+        imgs = data_repository.get_training_imgs()
         img = as_2d_arrays(image_with_threshold(imgs[idx], threshold))
-        retval = ""
-        for i in range(len(img)): # pylint: disable=consider-using-enumerate
-            for j in range(len(img[0])):
-                char = "○"
-                if img[i][j] == 1:
-                    char = "●"
-                retval += "{0:>2}".format(char)
-            retval += "\n"
-
-        return retval
-
+        return image_as_2d_string(img)
+        
     def start_knn_classification(self, k, threshold, distance_measure, test_size, train_size):
         print("\nSTART KNN WITH PARAMS")
         print("K ", k)
