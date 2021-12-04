@@ -1,5 +1,6 @@
 import random
 import math
+import datetime
 from utils.constants import CLASSIFIERS
 
 
@@ -12,8 +13,6 @@ class Params:
         self.test_data_size = 20
         self.train_data_size = 50
         self.rand_int = random.randint(0, 1000)
-
-        self.time_estimate = 0
 
     def get_classifier(self):
         return self.classifier
@@ -52,8 +51,9 @@ class Params:
         return self.rand_int
 
     def get_time_estimate(self):
-        self.time_estimate = math.ceil(self.test_data_size * (0.007 * self.train_data_size) + 5)
-        return f"{self.time_estimate} seconds"
+        time_estimate = math.ceil(
+            self.test_data_size * (0.007 * self.train_data_size) + 5)
+        return str(datetime.timedelta(seconds=time_estimate))
 
 
 params = Params()
