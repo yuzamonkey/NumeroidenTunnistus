@@ -1,14 +1,29 @@
 from PyQt5.QtWidgets import QVBoxLayout, QGridLayout, QLabel, QPushButton, QWidget
 from ui.results import results
+from ui.params import params
+from services.classification_service import classification_service as cs
 
 class ErrorsWidget:
     def __init__(self):
         self.widget = QWidget()
         self.layout = QGridLayout(self.widget)
-        self.layout.addWidget(QLabel(f"ERRORS WIDGET, {str(results.get_errors())}"))
+        
+        self.label = QLabel("")
 
+        self.layout.addWidget(self.label)
+        
     def get_widget(self):
         return self.widget
+    
+    def update(self):
+        text = ""
+        errors = results.get_errors()
+        for e in errors:
+            img_text = cs.get_example_number(e[1], params.get_grayscale_threshold())
+            text += img_text
+
+        self.label.setText(text)
+
 
 class ResultsWidget:
     def __init__(self, show_starting_widget):
@@ -32,6 +47,7 @@ class ResultsWidget:
             Errors: {results.get_errors_count()} / {results.get_total_count()} ({results.get_error_percentage()}%)
             """
         )
+        self.errors_widget.update()
 
     def get_layout(self):
         return self.layout
