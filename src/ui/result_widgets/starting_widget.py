@@ -45,17 +45,9 @@ class StartingWidget:
         self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self._handle_start_button_click)
 
-        note_label = QLabel("""
-            Note!
-            Pick small values for test and train data sizes.
-            During calculation there's no threading (yet),
-            so the program will freeze for a while.
-        """)
-
         self.layout = QGridLayout()
         self.layout.addWidget(self.example_number_image.get_widget(), 0, 0)
-        self.layout.addWidget(note_label, 1, 0)
-        self.layout.addWidget(self.start_button, 2, 0)
+        self.layout.addWidget(self.start_button, 1, 0)
 
     def get_layout(self):
         return self.layout
