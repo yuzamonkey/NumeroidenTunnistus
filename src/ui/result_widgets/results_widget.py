@@ -9,24 +9,32 @@ class ErrorsWidget:
         self.widget = QWidget()
         self.layout = QGridLayout(self.widget)
 
+        self.results_label = QLabel("")
+
         self.previous_button = QPushButton("<")
         self.previous_button.clicked.connect(self._handle_previous_click)
         self.next_button = QPushButton(">")
         self.next_button.clicked.connect(self._handle_next_click)
         self.current_error_index = 0
         self.index_of_error_label = QLabel(f"Error {self.current_error_index + 1}/{results.get_errors_count()}")
+        self.index_of_error_label.setAlignment(Qt.AlignCenter)
         
         self.image_label = QLabel("")
         self.image_label.setAlignment(Qt.AlignCenter)
 
-        self.layout.addWidget(self.previous_button, 0, 0)
-        self.layout.addWidget(self.index_of_error_label, 0, 1)
-        self.layout.addWidget(self.next_button, 0, 2)
-
-
-        self.layout.addWidget(self.image_label)
+        self.layout.addWidget(self.results_label, 0, 0)
+        self.layout.addWidget(self.previous_button, 1, 0)
+        self.layout.addWidget(self.index_of_error_label, 1, 1)
+        self.layout.addWidget(self.next_button, 1, 2)
+        self.layout.addWidget(self.image_label, 2, 1)
 
     def update(self):
+        self.results_label.setText(
+            f"""
+            Correct: {results.get_correct_count()} / {results.get_total_count()} ({results.get_correct_percentage()}%) 
+            Errors: {results.get_errors_count()} / {results.get_total_count()} ({results.get_error_percentage()}%)
+            """
+        )
         self.current_error_index = 0
         self.index_of_error_label.setText(f"Error {self.current_error_index + 1}/{results.get_errors_count()}")
         self._update_img_label()
@@ -56,7 +64,6 @@ class ErrorsWidget:
 class ResultsWidget:
     def __init__(self, show_starting_widget):
         self.layout = QGridLayout()
-        self.label = QLabel("")
 
         self.errors_widget = ErrorsWidget()
 
@@ -64,17 +71,10 @@ class ResultsWidget:
         self.end_button.clicked.connect(show_starting_widget)
         self.end_button.setDefault(True)
 
-        self.layout.addWidget(self.label)
-        self.layout.addWidget(self.errors_widget.get_widget())
-        self.layout.addWidget(self.end_button)
+        self.layout.addWidget(self.errors_widget.get_widget(), 0, 0)
+        self.layout.addWidget(self.end_button, 1, 0)
 
     def update(self):
-        self.label.setText(
-            f"""
-            Correct: {results.get_correct_count()} / {results.get_total_count()} ({results.get_correct_percentage()}%) 
-            Errors: {results.get_errors_count()} / {results.get_total_count()} ({results.get_error_percentage()}%)
-            """
-        )
         self.errors_widget.update()
 
     def get_layout(self):

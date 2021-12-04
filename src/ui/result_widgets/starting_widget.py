@@ -45,6 +45,7 @@ class StartingWidget:
         self.start_button.clicked.connect(self._handle_start_button_click)
 
         self.time_estimate_label = QLabel(f"Time estimate: {params.get_time_estimate()}")
+        self.time_estimate_label.setAlignment(Qt.AlignCenter)
 
         self.layout = QGridLayout()
         self.layout.addWidget(self.example_number_image.get_widget(), 0, 0)
