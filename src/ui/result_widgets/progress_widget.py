@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QVBoxLayout, QPushButton
 
 
-class ClassificationWidget:
+class ProgressWidget:
     def __init__(self, show_results_group_box, update_results_widget):
         self.update_results_widget = update_results_widget
         self.show_results_group_box = show_results_group_box

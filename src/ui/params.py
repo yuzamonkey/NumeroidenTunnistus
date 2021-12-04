@@ -1,14 +1,20 @@
 import random
 
+from utils.constants import CLASSIFIERS
+
 
 class Params:
     def __init__(self):
+        self.classifier = CLASSIFIERS[0]
         self.k = 4
         self.distance_measure = "D22"
         self.grayscale_threshold = 150
         self.test_data_size = 20
         self.train_data_size = 50
         self.rand_int = random.randint(0, 1000)
+
+    def get_classifier(self):
+        return self.classifier
 
     def get_k(self):
         return self.k

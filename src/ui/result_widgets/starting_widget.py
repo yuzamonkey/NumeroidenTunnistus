@@ -4,6 +4,7 @@ from services.classification_service import classification_service as cs
 from ui.params import params
 from PyQt5.QtCore import Qt, QCoreApplication, QObject, QRunnable, QThread, QThreadPool, pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QPushButton, QGridLayout, QLabel, QWidget
+from utils.constants import CLASSIFIERS
 
 
 class ExampleNumberImage:
@@ -33,10 +34,10 @@ class ExampleNumberImage:
 
 
 class StartingWidget:
-    def __init__(self, show_classification_widget):
+    def __init__(self, show_progress_widget):
         self.threadpool = QThreadPool()
 
-        self.show_classification_widget = show_classification_widget
+        self.show_progress_widget = show_progress_widget
 
         self.example_number_image = ExampleNumberImage()
 
@@ -60,28 +61,16 @@ class StartingWidget:
 
     def _handle_start_button_click(self):
         print("START BUTTON CLICKED")
-        # cs.start_knn_classification(
-        #     params.get_k(),
-        #     params.get_grayscale_threshold(),
-        #     params.get_distance_measure(),
-        #     params.get_test_data_size(),
-        #     params.get_train_data_size()
-        # )
-        # self.show_classification_widget()
-        # self.threadpool = QThreadPool()
-
-        #print("Multithreading with maximum %d threads" %self.threadpool.maxThreadCount())
-        
-        worker = ClassificationThread()
-        self.threadpool.start(worker)
-
+        self.show_progress_widget()
+        if params.get_classifier() == CLASSIFIERS[0]:
+            worker = KNNClassificationThread()
+            self.threadpool.start(worker)
 
     def update_image(self):
         self.example_number_image.update()
 
 
-class ClassificationThread(QRunnable):
-
+class KNNClassificationThread(QRunnable):
     @pyqtSlot()
     def run(self):
         cs.start_knn_classification(
