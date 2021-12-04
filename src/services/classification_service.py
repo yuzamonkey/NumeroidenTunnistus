@@ -24,9 +24,10 @@ class ClassificationService:
         results.set_correct_count(correct_count)
         results.set_errors_count(errors_count)
         results.set_errors(errors)
-    
+
     def get_label_from_test_data(self, idx):
         labels = data_repository.get_testing_labels()
         return labels[idx]
+
 
 classification_service = ClassificationService()

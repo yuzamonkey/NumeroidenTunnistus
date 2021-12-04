@@ -64,6 +64,7 @@ def image_with_threshold(image, threshold=1):
         new_image.append(value)
     return new_image
 
+
 def image_as_2d_string(image):
     """Takes two-dimensional image and returns it as 28*28 string
 
@@ -74,12 +75,12 @@ def image_as_2d_string(image):
         string: image as 28*28 string
     """
     retval = ""
-    for i in range(len(image)): # pylint: disable=consider-using-enumerate
+    for i in range(len(image)):  # pylint: disable=consider-using-enumerate
         for j in range(len(image[0])):
             char = "○"
             if image[i][j] == 1:
                 char = "●"
-            retval += "{0:>2}".format(char)
+            retval += "{0:>2}".format(char) # pylint: disable=consider-using-f-string
         retval += "\n"
     return retval
 

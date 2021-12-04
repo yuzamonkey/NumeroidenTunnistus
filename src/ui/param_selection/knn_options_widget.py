@@ -14,8 +14,10 @@ class KNNOptionsWidget:
         self.distance_measure_selector = DistanceMeasureSelector()
         self.k_value_selector = KValueSelector()
         self.grayscale_threshold_selector = ThresholdSelector(update_img)
-        self.test_data_size_selector = TestDataSizeSelector(update_time_estimate)
-        self.train_data_size_selector = TrainDataSizeSelector(update_time_estimate)
+        self.test_data_size_selector = TestDataSizeSelector(
+            update_time_estimate)
+        self.train_data_size_selector = TrainDataSizeSelector(
+            update_time_estimate)
 
         self.layout = QVBoxLayout(self.widget)
 
@@ -132,7 +134,7 @@ class ThresholdSelector:
 class TestDataSizeSelector:
     def __init__(self, update_time_estimate):
         self.update_time_estimate = update_time_estimate
-        
+
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
 
@@ -163,7 +165,7 @@ class TestDataSizeSelector:
 class TrainDataSizeSelector:
     def __init__(self, update_time_estimate):
         self.update_time_estimate = update_time_estimate
-        
+
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
 

@@ -14,13 +14,14 @@ class TestNumberClassifier(unittest.TestCase):
     def test_classify_number_returns_int_with_d22(self):
         result = self._knn.classify_number(3, 0, 10, "D22")
         self.assertEqual(type(result), int)
-    
+
     def test_classify_number_returns_int_with_d23(self):
         result = self._knn.classify_number(3, 0, 10, "D23")
         self.assertEqual(type(result), int)
 
     def test_classify_number_raises_exception_with_invalid_dist_measure(self):
-        self.assertRaises(Exception, self._knn.classify_number, 3, 0, 10, "F00")
+        self.assertRaises(
+            Exception, self._knn.classify_number, 3, 0, 10, "F00")
 
     def test_d22_returns_maximum_of_set_distances(self):
         set1 = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]

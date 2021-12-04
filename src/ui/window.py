@@ -12,9 +12,11 @@ class Window(QDialog):
 
         self.results_widget = ResultsWidget(self.showStartingWidget)
         self.progress_widget = ProgressWidget()
-        self.starting_widget = StartingWidget(self.showProgressWidget, self.showResultsWidget)
+        self.starting_widget = StartingWidget(
+            self.showProgressWidget, self.showResultsWidget)
 
-        self.params_widget = ParamsWidget(self.starting_widget.update_image, self.starting_widget.update_time_estimate)
+        self.params_widget = ParamsWidget(
+            self.starting_widget.update_image, self.starting_widget.update_time_estimate)
 
         self.createParametersGroupBox()
         self.createResultsGroupBox()
@@ -59,8 +61,8 @@ class Window(QDialog):
         self.progress_widget.start_timer()
 
     def showResultsWidget(self):
-        self.progress_widget.stop_timer()
-        
+        # self.progress_widget.stop_timer()
+
         self.clearRightGroupBox()
         self.results_widget.update()
         self.mainLayout.addWidget(self.resultsGroupBox, 0, 1)

@@ -40,13 +40,13 @@ class KNN:
             self.train_imgs_data, threshold)
         self._test_imgs = images_with_threshold(self.test_imgs_data, threshold)
 
-        errors = [] # (result, index)
+        errors = []  # (result, index)
         for i in range(number_of_test_images):
             label = self._test_labels[i]
             result = self.classify_number(
                 k, i, number_of_training_imgs, dist_measure)
             if result != label:
-                errors.append((result, i)) 
+                errors.append((result, i))
             print(f"{i+1}/{number_of_test_images}")
 
         percentage = (1 - (len(errors) / number_of_test_images)) * 100

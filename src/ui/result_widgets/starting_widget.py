@@ -44,7 +44,8 @@ class StartingWidget:
         self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self._handle_start_button_click)
 
-        self.time_estimate_label = QLabel(f"Time estimate: {params.get_time_estimate()}")
+        self.time_estimate_label = QLabel(
+            f"Time estimate: {params.get_time_estimate()}")
         self.time_estimate_label.setAlignment(Qt.AlignCenter)
 
         self.layout = QGridLayout()
@@ -66,7 +67,8 @@ class StartingWidget:
         self.example_number_image.update()
 
     def update_time_estimate(self):
-        self.time_estimate_label.setText(f"Time estimate: {params.get_time_estimate()}")
+        self.time_estimate_label.setText(
+            f"Time estimate: {params.get_time_estimate()}")
 
 
 class KNNClassificationThread(QRunnable):
