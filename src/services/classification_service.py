@@ -28,10 +28,11 @@ class ClassificationService:
         print("TRAIN_SIZE ", train_size)
         print("")
 
-        correct_count, errors_count = knn.classify_set_of_numbers(
+        correct_count, errors_count, errors = knn.classify_set_of_numbers(
             k, threshold, test_size, train_size, distance_measure)
         results.set_correct_count(correct_count)
         results.set_errors_count(errors_count)
+        results.set_errors(errors)
 
 
 classification_service = ClassificationService()

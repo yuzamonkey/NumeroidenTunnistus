@@ -1,7 +1,7 @@
 import time
 from services.classification_service import classification_service as cs
 from ui.params import params
-from PyQt5.QtCore import Qt, QCoreApplication, QObject, QRunnable, QThread, QThreadPool, pyqtSignal, pyqtSlot
+from PyQt5.QtCore import Qt, QRunnable, QThreadPool, pyqtSlot
 from PyQt5.QtWidgets import QPushButton, QGridLayout, QLabel, QWidget
 from utils.constants import CLASSIFIERS
 

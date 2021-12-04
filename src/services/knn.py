@@ -56,7 +56,7 @@ class KNN:
         # return percentage
         errors_count = len(errors)
         correct_count = number_of_test_images - errors_count
-        return correct_count, errors_count
+        return correct_count, errors_count, errors
 
     def classify_number(self, k, test_set_index, number_of_training_imgs, dist_measure="D22"):
         # add threshold here

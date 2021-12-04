@@ -7,8 +7,8 @@ from ui.result_widgets.progress_widget import ProgressWidget
 
 
 class Window(QDialog):
-    def __init__(self, parent=None):
-        super(Window, self).__init__(parent)
+    def __init__(self):
+        super().__init__()
 
         self.results_widget = ResultsWidget(self.showStartingWidget)
         self.progress_widget = ProgressWidget()
