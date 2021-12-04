@@ -56,8 +56,11 @@ class Window(QDialog):
         self.clearRightGroupBox()
         self.mainLayout.addWidget(self.classificationGroupBox, 0, 1)
         self.parametersGroupBox.setDisabled(True)
+        self.progress_widget.start_timer()
 
     def showResultsWidget(self):
+        self.progress_widget.stop_timer()
+        
         self.clearRightGroupBox()
         self.results_widget.update()
         self.mainLayout.addWidget(self.resultsGroupBox, 0, 1)
