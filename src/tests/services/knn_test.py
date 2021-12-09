@@ -31,8 +31,10 @@ class TestNumberClassifier(unittest.TestCase):
         self.assertEqual(type(result), int)
 
     def test_classify_number_raises_exception_with_invalid_dist_measure(self):
+        k = 3
+        test_image = as_2d_arrays(self.test_set_imgs[0])
         self.assertRaises(
-            Exception, self._knn.classify_number, 3, 0, 10, "F00")
+            Exception, self._knn.classify_number, k, test_image, self.train_set_labels, "F00")
 
     def test_d22_returns_maximum_of_set_distances(self):
         set1 = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
@@ -79,7 +81,8 @@ class TestNumberClassifier(unittest.TestCase):
         d2 = (0.8, 2)
         d3 = (0.9, 3)
         k_nearest = [d1, d2, d3]
-        result = self._knn._result_from_k_nearest(k_nearest, self.train_set_labels)
+        result = self._knn._result_from_k_nearest(
+            k_nearest, self.train_set_labels)
         self.assertEqual(type(result), int)
 
     def test_point_to_set_distance_returns_correct_distance(self):

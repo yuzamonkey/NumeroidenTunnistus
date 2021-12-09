@@ -57,7 +57,6 @@ class StartingWidget:
         return self.layout
 
     def _handle_start_button_click(self):
-        print("START BUTTON CLICKED")
         self.show_progress_widget()
         if params.get_classifier() == CLASSIFIERS[0]:
             worker = KNNClassificationThread(self.show_results_widget)

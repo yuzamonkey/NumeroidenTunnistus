@@ -65,6 +65,16 @@ class KNN:
         return correct_count, errors_count, errors
 
     def get_test_set(self, num_of_images, randomized, threshold):
+        """Returns a test set with given parameters
+
+        Args:
+            num_of_images (int): Range between 1-10_000
+            randomized (bool): Whether returned set contains randomized images or not
+            threshold (int): grayscale threshold. Value between 1-255
+
+        Returns:
+            tuple: images and corresponding labels
+        """
         if randomized:
             random_indexes = random.sample(
                 range(len(self._test_imgs_data)), num_of_images)
@@ -77,6 +87,16 @@ class KNN:
         return images_with_threshold(imgs, threshold), labels
 
     def get_train_set(self, num_of_images, randomized, threshold):
+        """Returns a training set with given parameters
+
+        Args:
+            num_of_images (int): Range between 1-60_000
+            randomized (bool): Whether returned set contains randomized images or not
+            threshold (int): grayscale threshold. Value between 1-255
+
+        Returns:
+            tuple: images and corresponding labels
+        """
         if randomized:
             random_indexes = random.sample(
                 range(len(self._train_imgs_data)), num_of_images)
@@ -88,28 +108,30 @@ class KNN:
         labels = self._train_labels[:num_of_images]
         return images_with_threshold(imgs, threshold), labels
 
-    def classify_number(self, k, test_image, train_set_images, train_set_labels, dist_measure="D22"):
+    def classify_number(self, k, test_image, train_set_images, train_set_labels, dist_measure):
         """Classifies a number with given parameters with k-nearest neighbor method
 
         Args:
             k (int): value of k
-            test_image (int): index of number to be classified from test set
-            number_of_training_imgs (int): number of how many training images are used.
-            Range between 1-60_000
+            test_image (int[][]): number to be classified as 2d array
+            train_set_images (list[int]): list training images as 1d arrays
+            train_set_labels (int[]): list of labels in training images
             dist_measure (string): Distance between 2 images, D22 or D23
 
         Returns:
             int: classification value
         """
-        #test_image = as_2d_arrays(test_image)
+
         k_nearest = []  # tuples: (value, index)
         for i in range(len(train_set_images)):  # pylint: disable=consider-using-enumerate
             if dist_measure == "D22":
+                print("CALCULATING D22")
                 dist = self._compare_d22(
                     test_image,
                     as_2d_arrays(train_set_images[i])
                 )
             elif dist_measure == "D23":
+                print("CALCULATING D23")
                 dist = self._compare_d23(
                     test_image,
                     as_2d_arrays(train_set_images[i])
