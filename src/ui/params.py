@@ -66,7 +66,7 @@ class Params:
 
     def get_time_estimate(self):
         time_estimate = math.ceil(
-            self.test_data_size * (0.007 * self.train_data_size) + 5)
+            self.test_data_size * (0.007 * self.train_data_size))
         return str(datetime.timedelta(seconds=time_estimate))
 
 
