@@ -1,7 +1,6 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QVBoxLayout, QGridLayout, QLabel, QPushButton, QWidget
+from PyQt5.QtWidgets import QGridLayout, QLabel, QPushButton, QWidget
 from ui.results import results
-from ui.params import params
 from services.classification_service import classification_service as cs
 
 
@@ -63,9 +62,8 @@ class StatsWidget:
     def _update_img_label(self):
         if results.get_errors_count() > 0:
             e = results.get_errors()[self.current_error_index]
-            img_text = cs.get_image_from_test_data(
-                e[1], params.get_grayscale_threshold())
-            result_text = f"This image of {cs.get_label_from_test_data(e[1])} was classified as {e[0]}."
+            img_text = cs.get_image(e[2])
+            result_text = f"This image of {e[1]} was classified as {e[0]}."
             self.image_label.setText(f"{img_text}\n{result_text}")
         else:
             self.index_of_error_label.setText(

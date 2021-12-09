@@ -40,34 +40,38 @@ class KNN:
         print("••• RANDOM TEST", use_random_test_set)
         print("••• RANDOM TRAIN", use_random_train_set)
 
-        test_set_images, test_set_labels = self._get_test_set(number_of_test_images, use_random_test_set, threshold)
-        train_set_images, train_set_labels = self._get_train_set(number_of_training_imgs, use_random_train_set, threshold)
-
-        for i in range(len(test_set_images)):
-            print_image_and_result(test_set_images[i], test_set_labels[i])
-            print("")
+        test_set_images, test_set_labels = self._get_test_set(
+            number_of_test_images, use_random_test_set, threshold)
+        train_set_images, train_set_labels = self._get_train_set(
+            number_of_training_imgs, use_random_train_set, threshold)
 
         errors = []  # (result, index)
         for i in range(len(test_set_images)):
             label = test_set_labels[i]
+            image = as_2d_arrays(test_set_images[i])
             result = self.classify_number(
-                k, test_set_images[i], train_set_images, train_set_labels, dist_measure)
+                k, image, train_set_images, train_set_labels, dist_measure)
             if result != label:
-                errors.append((result, i))
-            print(f"{i+1}/{number_of_test_images}")
+                print_2d_array(image)
+                result_text = f"This image of {label} was classified as {result}."
+                print(result_text)
+                print("")
+                errors.append((result, label, image)) # result was _, when it should have been _, image
+        #     print(f"{i+1}/{number_of_test_images}")
 
-        percentage = (1 - (len(errors) / number_of_test_images)) * 100
-        print(
-            f"""PERCENTAGE: {percentage}%
-            ({number_of_test_images - len(errors)} / {number_of_test_images})""")
-        # return percentage
+        # percentage = (1 - (len(errors) / number_of_test_images)) * 100
+        # print(
+        #     f"""PERCENTAGE: {percentage}%
+        #     ({number_of_test_images - len(errors)} / {number_of_test_images})""")
+        # # return percentage
         errors_count = len(errors)
         correct_count = number_of_test_images - errors_count
         return correct_count, errors_count, errors
 
     def _get_test_set(self, num_of_images, randomized, threshold):
         if randomized:
-            random_indexes = random.sample(range(len(self._test_imgs_data)), num_of_images)
+            random_indexes = random.sample(
+                range(len(self._test_imgs_data)), num_of_images)
             imgs = [self._test_imgs_data[i] for i in random_indexes]
             labels = [self._test_labels[i] for i in random_indexes]
             return images_with_threshold(imgs, threshold), labels
@@ -75,10 +79,11 @@ class KNN:
             imgs = self._test_imgs_data[:num_of_images]
             labels = self._test_labels[:num_of_images]
             return images_with_threshold(imgs, threshold), labels
-    
+
     def _get_train_set(self, num_of_images, randomized, threshold):
         if randomized:
-            random_indexes = random.sample(range(len(self._train_imgs_data)), num_of_images)
+            random_indexes = random.sample(
+                range(len(self._train_imgs_data)), num_of_images)
             imgs = [self._train_imgs_data[i] for i in random_indexes]
             labels = [self._train_labels[i] for i in random_indexes]
             return images_with_threshold(imgs, threshold), labels
@@ -86,14 +91,13 @@ class KNN:
             imgs = self._train_imgs_data[:num_of_images]
             labels = self._train_labels[:num_of_images]
             return images_with_threshold(imgs, threshold), labels
-    
 
     def classify_number(self, k, test_image, train_set_images, train_set_labels, dist_measure="D22"):
         """Classifies a number with given parameters with k-nearest neighbor method
 
         Args:
             k (int): value of k
-            test_set_index (int): index of number to be classified from test set
+            test_image (int): index of number to be classified from test set
             number_of_training_imgs (int): number of how many training images are used.
             Range between 1-60_000
             dist_measure (string): Distance between 2 images, D22 or D23
@@ -101,7 +105,7 @@ class KNN:
         Returns:
             int: classification value
         """
-        test_image = as_2d_arrays(test_image)
+        #test_image = as_2d_arrays(test_image)
         k_nearest = []  # tuples: (value, index)
         for i in range(len(train_set_images)):
             if dist_measure == "D22":
