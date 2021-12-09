@@ -2,7 +2,7 @@ import webbrowser
 from PyQt5.QtGui import QCursor
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QComboBox, QLabel, QSlider, QVBoxLayout, QHBoxLayout, QWidget, QGroupBox)
+    QComboBox, QLabel, QSlider, QVBoxLayout, QHBoxLayout, QWidget, QGroupBox, QCheckBox)
 from ui.params import params
 from utils.constants import DISTANCE_MEASURES, DISTANCE_MEASURES_ADDRESS
 
@@ -138,18 +138,22 @@ class TestDataSizeSelector:
         self.widget = QWidget()
         self.layout = QHBoxLayout(self.widget)
 
-        self.label = QLabel("")
+        self.size_label = QLabel("")
         self.slider = QSlider(Qt.Horizontal)
         self.slider.valueChanged.connect(self._update_test_data_size)
         self.slider.setMinimum(1)
         self.slider.setMaximum(10_000)
         self.slider.setSingleStep(1)
         self.slider.setValue(10)
-        self.label.setText(
+        self.size_label.setText(
             f"Test dataset size: {params.get_test_data_size()}")
-
-        self.layout.addWidget(self.label)
+        self.random_set_label = QLabel("Randomized")
+        self.checkbox = QCheckBox()
+        
+        self.layout.addWidget(self.size_label)
         self.layout.addWidget(self.slider)
+        self.layout.addWidget(self.random_set_label)
+        self.layout.addWidget(self.checkbox)
 
     def get_widget(self):
         return self.widget
@@ -157,7 +161,7 @@ class TestDataSizeSelector:
     def _update_test_data_size(self):
         print("TEST DATA SIZE ", self.slider.value())
         params.set_test_data_size(self.slider.value())
-        self.label.setText(
+        self.size_label.setText(
             f"Test dataset size: {params.get_test_data_size()}")
         self.update_time_estimate()
 
@@ -178,9 +182,13 @@ class TrainDataSizeSelector:
         self.slider.setValue(50)
         self.label.setText(
             f"Train dataset size: {params.get_train_data_size()}")
+        self.random_set_label = QLabel("Randomized")
+        self.checkbox = QCheckBox()
 
         self.layout.addWidget(self.label)
         self.layout.addWidget(self.slider)
+        self.layout.addWidget(self.random_set_label)
+        self.layout.addWidget(self.checkbox)
 
     def get_widget(self):
         return self.widget
