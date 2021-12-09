@@ -1,6 +1,7 @@
+import random
 from math import sqrt
 from repositories.data_repository import data_repository as dr
-from utils.utils import as_2d_arrays, images_with_threshold
+from utils.utils import as_2d_arrays, images_with_threshold, print_2d_array, print_image_and_result
 
 
 class KNN:
@@ -17,9 +18,7 @@ class KNN:
         """KNN constructor. Gets data from DataRepository class
         """
         self._dr = dr
-        self.train_imgs_data, self._train_labels, self.test_imgs_data, self._test_labels = self._dr.get_all_data()
-        self._train_imgs = images_with_threshold(self.train_imgs_data, 140)
-        self._test_imgs = images_with_threshold(self.test_imgs_data, 140)
+        self._train_imgs_data, self._train_labels, self._test_imgs_data, self._test_labels = self._dr.get_all_data()
 
     def classify_set_of_numbers(self, k, threshold, number_of_test_images, number_of_training_imgs, dist_measure="D22", use_random_test_set=False, use_random_train_set=False):
         """Classifies a set of data with given parameters with k-nearest neighbor method
@@ -36,20 +35,23 @@ class KNN:
             use_random_train_set (bool): Use training set that is randomized
 
         Returns:
-            float: Success percentage
+            int, int, tuple: correct classifications, error classifications, errors as a tuple of result and index
         """
         print("••• RANDOM TEST", use_random_test_set)
         print("••• RANDOM TRAIN", use_random_train_set)
 
-        self._train_imgs = images_with_threshold(
-            self.train_imgs_data, threshold)
-        self._test_imgs = images_with_threshold(self.test_imgs_data, threshold)
+        test_set_images, test_set_labels = self._get_test_set(number_of_test_images, use_random_test_set, threshold)
+        train_set_images, train_set_labels = self._get_train_set(number_of_training_imgs, use_random_train_set, threshold)
+
+        for i in range(len(test_set_images)):
+            print_image_and_result(test_set_images[i], test_set_labels[i])
+            print("")
 
         errors = []  # (result, index)
-        for i in range(number_of_test_images):
-            label = self._test_labels[i]
+        for i in range(len(test_set_images)):
+            label = test_set_labels[i]
             result = self.classify_number(
-                k, i, number_of_training_imgs, dist_measure)
+                k, test_set_images[i], train_set_images, train_set_labels, dist_measure)
             if result != label:
                 errors.append((result, i))
             print(f"{i+1}/{number_of_test_images}")
@@ -63,8 +65,30 @@ class KNN:
         correct_count = number_of_test_images - errors_count
         return correct_count, errors_count, errors
 
-    def classify_number(self, k, test_set_index, number_of_training_imgs, dist_measure="D22"):
-        # add threshold here
+    def _get_test_set(self, num_of_images, randomized, threshold):
+        if randomized:
+            random_indexes = random.sample(range(len(self._test_imgs_data)), num_of_images)
+            imgs = [self._test_imgs_data[i] for i in random_indexes]
+            labels = [self._test_labels[i] for i in random_indexes]
+            return images_with_threshold(imgs, threshold), labels
+        else:
+            imgs = self._test_imgs_data[:num_of_images]
+            labels = self._test_labels[:num_of_images]
+            return images_with_threshold(imgs, threshold), labels
+    
+    def _get_train_set(self, num_of_images, randomized, threshold):
+        if randomized:
+            random_indexes = random.sample(range(len(self._train_imgs_data)), num_of_images)
+            imgs = [self._train_imgs_data[i] for i in random_indexes]
+            labels = [self._train_labels[i] for i in random_indexes]
+            return images_with_threshold(imgs, threshold), labels
+        else:
+            imgs = self._train_imgs_data[:num_of_images]
+            labels = self._train_labels[:num_of_images]
+            return images_with_threshold(imgs, threshold), labels
+    
+
+    def classify_number(self, k, test_image, train_set_images, train_set_labels, dist_measure="D22"):
         """Classifies a number with given parameters with k-nearest neighbor method
 
         Args:
@@ -77,24 +101,24 @@ class KNN:
         Returns:
             int: classification value
         """
-        test_img = as_2d_arrays(self._test_imgs[test_set_index])
+        test_image = as_2d_arrays(test_image)
         k_nearest = []  # tuples: (value, index)
-        for i in range(number_of_training_imgs):
+        for i in range(len(train_set_images)):
             if dist_measure == "D22":
                 dist = self._compare_d22(
-                    test_img,
-                    as_2d_arrays(self._train_imgs[i])
+                    test_image,
+                    as_2d_arrays(train_set_images[i])
                 )
             elif dist_measure == "D23":
                 dist = self._compare_d23(
-                    test_img,
-                    as_2d_arrays(self._train_imgs[i])
+                    test_image,
+                    as_2d_arrays(train_set_images[i])
                 )
             else:
                 raise Exception("Not a valid distance measure")
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
-        result = self._result_from_k_nearest(k_nearest)
+        result = self._result_from_k_nearest(k_nearest, train_set_labels)
         return result
 
     def _update_k_nearest(self, k, k_nearest, dist):
@@ -117,7 +141,7 @@ class KNN:
             return sorted_list
         return k_nearest
 
-    def _result_from_k_nearest(self, k_nearest):
+    def _result_from_k_nearest(self, k_nearest, train_set_labels):
         """Gives the classification result on k-nearest neighbors
 
         Args:
@@ -128,7 +152,7 @@ class KNN:
         """
         results = []
         for item in k_nearest:
-            results.append(self._train_labels[item[1]])
+            results.append(train_set_labels[item[1]])
         return max(set(results), key=results.count)
 
     def _compare_d22(self, img1, img2):

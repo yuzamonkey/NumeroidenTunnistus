@@ -49,7 +49,7 @@ Pvm       | h |  |
 
 Pvm       | h |  |
 -----------|------|--------|
-9.12.2021 | 1730- | random.choice-käyttöä |
+9.12.2021 | 1730-1810, 1830- | random.choice-käyttöä |
 
 ## Yhteensä
 
