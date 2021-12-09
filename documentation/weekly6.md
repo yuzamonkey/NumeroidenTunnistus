@@ -4,7 +4,7 @@
 
 ### Mitä olen tehnyt tällä viikolla?
 
-* Lisäsin toiminnallisuuden, jolla voi valita käyttääkö random treeni- ja testisettiä
+* Lisäsin toiminnallisuuden, jolla voi valita käyttääkö sattumanvaraista treeni- tai testisettiä
 * Päivitin koodia ja testejä
 
 ### Miten ohjelma on edistynyt?

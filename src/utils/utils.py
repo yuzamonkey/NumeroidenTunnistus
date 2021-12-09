@@ -84,24 +84,23 @@ def image_as_2d_string(image):
         retval += "\n"
     return retval
 
-def print_2d_array(array):
-    for row in array:
-        for val in row:
-            if val == 0:
-                print("  ", end="")
-            else:
-                print("@ ", end="")
-        print("")
+# def print_2d_array(array):
+#     for row in array:
+#         for val in row:
+#             if val == 0:
+#                 print("  ", end="")
+#             else:
+#                 print("@ ", end="")
+#         print("")
 
 
-def print_image_and_result(img, result, threshold=1):
-    for i, value in enumerate(img):
-        # to_print = f"{value} "
-        to_print = "  "
-        if value >= threshold:
-            to_print = "@ "
-        if (i+1) % 28 == 0:
-            print(to_print, end="\n")
-        else:
-            print(to_print, end="")
-    print("IS: ", result)
+# def print_image_and_result(img, result, threshold=1):
+#     for i, value in enumerate(img):
+#         to_print = "  "
+#         if value >= threshold:
+#             to_print = "@ "
+#         if (i+1) % 28 == 0:
+#             print(to_print, end="\n")
+#         else:
+#             print(to_print, end="")
+#     print("IS: ", result)
