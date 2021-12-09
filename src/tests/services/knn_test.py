@@ -1,22 +1,33 @@
 import unittest
 from math import sqrt
 from services.knn import knn
+from utils.utils import as_2d_arrays
 
 
 class TestNumberClassifier(unittest.TestCase):
     def setUp(self):
         self._knn = knn
+        self.test_set_imgs, self.test_set_labels = knn.get_test_set(
+            3, True, 140)
+        self.train_set_imgs, self.train_set_labels = knn.get_train_set(
+            10, True, 140)
 
     def test_classify_set_returns_tuple(self):
         result = self._knn.classify_set_of_numbers(3, 144, 3, 10)
         self.assertEqual(type(result), tuple)
 
     def test_classify_number_returns_int_with_d22(self):
-        result = self._knn.classify_number(3, 0, 10, "D22")
+        k = 3
+        test_image = as_2d_arrays(self.test_set_imgs[0])
+        result = self._knn.classify_number(
+            k, test_image, self.train_set_imgs, self.train_set_labels, "D22")
         self.assertEqual(type(result), int)
 
     def test_classify_number_returns_int_with_d23(self):
-        result = self._knn.classify_number(3, 0, 10, "D23")
+        k = 3
+        test_image = as_2d_arrays(self.test_set_imgs[0])
+        result = self._knn.classify_number(
+            k, test_image, self.train_set_imgs, self.train_set_labels, "D23")
         self.assertEqual(type(result), int)
 
     def test_classify_number_raises_exception_with_invalid_dist_measure(self):
@@ -68,7 +79,7 @@ class TestNumberClassifier(unittest.TestCase):
         d2 = (0.8, 2)
         d3 = (0.9, 3)
         k_nearest = [d1, d2, d3]
-        result = self._knn._result_from_k_nearest(k_nearest)
+        result = self._knn._result_from_k_nearest(k_nearest, self.train_set_labels)
         self.assertEqual(type(result), int)
 
     def test_point_to_set_distance_returns_correct_distance(self):

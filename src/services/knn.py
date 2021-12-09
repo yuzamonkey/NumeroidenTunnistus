@@ -40,9 +40,9 @@ class KNN:
         print("••• RANDOM TEST", use_random_test_set)
         print("••• RANDOM TRAIN", use_random_train_set)
 
-        test_set_images, test_set_labels = self._get_test_set(
+        test_set_images, test_set_labels = self.get_test_set(
             number_of_test_images, use_random_test_set, threshold)
-        train_set_images, train_set_labels = self._get_train_set(
+        train_set_images, train_set_labels = self.get_train_set(
             number_of_training_imgs, use_random_train_set, threshold)
 
         errors = []  # (result, index)
@@ -68,7 +68,7 @@ class KNN:
         correct_count = number_of_test_images - errors_count
         return correct_count, errors_count, errors
 
-    def _get_test_set(self, num_of_images, randomized, threshold):
+    def get_test_set(self, num_of_images, randomized, threshold):
         if randomized:
             random_indexes = random.sample(
                 range(len(self._test_imgs_data)), num_of_images)
@@ -80,7 +80,7 @@ class KNN:
             labels = self._test_labels[:num_of_images]
             return images_with_threshold(imgs, threshold), labels
 
-    def _get_train_set(self, num_of_images, randomized, threshold):
+    def get_train_set(self, num_of_images, randomized, threshold):
         if randomized:
             random_indexes = random.sample(
                 range(len(self._train_imgs_data)), num_of_images)
