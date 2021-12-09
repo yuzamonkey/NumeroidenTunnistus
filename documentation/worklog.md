@@ -49,7 +49,7 @@ Pvm       | h |  |
 
 Pvm       | h |  |
 -----------|------|--------|
-9.12.2021 | 2 | Mahdollisuus käyttää random settejä treeni- ja testidatassa, optimointi |
+9.12.2021 | 2.5 | Mahdollisuus käyttää random settejä treeni- ja testidatassa, optimointi, testien debiggausta |
 
 ## Yhteensä
 

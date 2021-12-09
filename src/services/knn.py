@@ -2,6 +2,7 @@ import random
 from math import sqrt
 from repositories.data_repository import data_repository as dr
 from utils.utils import as_2d_arrays, images_with_threshold
+from utils.constants import DISTANCE_MEASURES
 
 
 class KNN:
@@ -114,7 +115,7 @@ class KNN:
         Args:
             k (int): value of k
             test_image (int[][]): number to be classified as 2d array
-            train_set_images (list[int]): list training images as 1d arrays
+            train_set_images (list[int[]]): list training images as 1d arrays
             train_set_labels (int[]): list of labels in training images
             dist_measure (string): Distance between 2 images, D22 or D23
 
@@ -124,20 +125,18 @@ class KNN:
 
         k_nearest = []  # tuples: (value, index)
         for i in range(len(train_set_images)):  # pylint: disable=consider-using-enumerate
+            if dist_measure not in DISTANCE_MEASURES:
+                raise Exception("Not a valid distance measure")
             if dist_measure == "D22":
-                print("CALCULATING D22")
                 dist = self._compare_d22(
                     test_image,
                     as_2d_arrays(train_set_images[i])
                 )
-            elif dist_measure == "D23":
-                print("CALCULATING D23")
+            if dist_measure == "D23":
                 dist = self._compare_d23(
                     test_image,
                     as_2d_arrays(train_set_images[i])
                 )
-            else:
-                raise Exception("Not a valid distance measure")
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
         result = self._result_from_k_nearest(k_nearest, train_set_labels)
