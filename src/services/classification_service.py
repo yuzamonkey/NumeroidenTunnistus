@@ -13,19 +13,24 @@ class ClassificationService:
     def get_image(self, image):
         return image_as_2d_string(image)
 
-    def start_knn_classification(self, k, threshold, distance_measure, test_size, train_size, use_random_test_set, use_random_train_set):
-        print("\nSTART KNN WITH PARAMS")
-        print("K ", k)
-        print("THRESHOLD ", threshold)
-        print("DIST ", distance_measure)
-        print("TEST_SIZE ", test_size)
-        print("TRAIN_SIZE ", train_size)
-        print("RANDOM TEST", use_random_test_set)
-        print("RANDOM TRAIN", use_random_train_set)
-        print("")
+    def start_knn_classification(
+            self,
+            k,
+            threshold,
+            distance_measure,
+            test_size,
+            train_size,
+            use_random_test_set,
+            use_random_train_set):
 
         correct_count, errors_count, errors = knn.classify_set_of_numbers(
-            k, threshold, test_size, train_size, distance_measure, use_random_test_set, use_random_train_set)
+            k,
+            threshold,
+            test_size,
+            train_size,
+            distance_measure,
+            use_random_test_set,
+            use_random_train_set)
         results.set_correct_count(correct_count)
         results.set_errors_count(errors_count)
         results.set_errors(errors)

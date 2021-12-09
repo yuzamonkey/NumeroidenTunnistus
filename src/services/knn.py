@@ -1,7 +1,7 @@
 import random
 from math import sqrt
 from repositories.data_repository import data_repository as dr
-from utils.utils import as_2d_arrays, images_with_threshold, print_2d_array, print_image_and_result
+from utils.utils import as_2d_arrays, images_with_threshold
 
 
 class KNN:
@@ -20,7 +20,15 @@ class KNN:
         self._dr = dr
         self._train_imgs_data, self._train_labels, self._test_imgs_data, self._test_labels = self._dr.get_all_data()
 
-    def classify_set_of_numbers(self, k, threshold, number_of_test_images, number_of_training_imgs, dist_measure="D22", use_random_test_set=False, use_random_train_set=False):
+    def classify_set_of_numbers(
+            self,
+            k,
+            threshold,
+            number_of_test_images,
+            number_of_training_imgs,
+            dist_measure="D22",
+            use_random_test_set=False,
+            use_random_train_set=False):
         """Classifies a set of data with given parameters with k-nearest neighbor method
 
         Args:
@@ -37,33 +45,21 @@ class KNN:
         Returns:
             int, int, tuple: correct classifications, error classifications, errors as a tuple of result and index
         """
-        print("••• RANDOM TEST", use_random_test_set)
-        print("••• RANDOM TRAIN", use_random_train_set)
 
         test_set_images, test_set_labels = self.get_test_set(
             number_of_test_images, use_random_test_set, threshold)
         train_set_images, train_set_labels = self.get_train_set(
             number_of_training_imgs, use_random_train_set, threshold)
 
-        errors = []  # (result, index)
-        for i in range(len(test_set_images)):
+        errors = []
+        for i in range(len(test_set_images)):  # pylint: disable=consider-using-enumerate
             label = test_set_labels[i]
             image = as_2d_arrays(test_set_images[i])
             result = self.classify_number(
                 k, image, train_set_images, train_set_labels, dist_measure)
             if result != label:
-                print_2d_array(image)
-                result_text = f"This image of {label} was classified as {result}."
-                print(result_text)
-                print("")
-                errors.append((result, label, image)) # result was _, when it should have been _, image
-        #     print(f"{i+1}/{number_of_test_images}")
+                errors.append((result, label, image))
 
-        # percentage = (1 - (len(errors) / number_of_test_images)) * 100
-        # print(
-        #     f"""PERCENTAGE: {percentage}%
-        #     ({number_of_test_images - len(errors)} / {number_of_test_images})""")
-        # # return percentage
         errors_count = len(errors)
         correct_count = number_of_test_images - errors_count
         return correct_count, errors_count, errors
@@ -75,10 +71,10 @@ class KNN:
             imgs = [self._test_imgs_data[i] for i in random_indexes]
             labels = [self._test_labels[i] for i in random_indexes]
             return images_with_threshold(imgs, threshold), labels
-        else:
-            imgs = self._test_imgs_data[:num_of_images]
-            labels = self._test_labels[:num_of_images]
-            return images_with_threshold(imgs, threshold), labels
+
+        imgs = self._test_imgs_data[:num_of_images]
+        labels = self._test_labels[:num_of_images]
+        return images_with_threshold(imgs, threshold), labels
 
     def get_train_set(self, num_of_images, randomized, threshold):
         if randomized:
@@ -87,10 +83,10 @@ class KNN:
             imgs = [self._train_imgs_data[i] for i in random_indexes]
             labels = [self._train_labels[i] for i in random_indexes]
             return images_with_threshold(imgs, threshold), labels
-        else:
-            imgs = self._train_imgs_data[:num_of_images]
-            labels = self._train_labels[:num_of_images]
-            return images_with_threshold(imgs, threshold), labels
+
+        imgs = self._train_imgs_data[:num_of_images]
+        labels = self._train_labels[:num_of_images]
+        return images_with_threshold(imgs, threshold), labels
 
     def classify_number(self, k, test_image, train_set_images, train_set_labels, dist_measure="D22"):
         """Classifies a number with given parameters with k-nearest neighbor method
@@ -107,7 +103,7 @@ class KNN:
         """
         #test_image = as_2d_arrays(test_image)
         k_nearest = []  # tuples: (value, index)
-        for i in range(len(train_set_images)):
+        for i in range(len(train_set_images)):  # pylint: disable=consider-using-enumerate
             if dist_measure == "D22":
                 dist = self._compare_d22(
                     test_image,
