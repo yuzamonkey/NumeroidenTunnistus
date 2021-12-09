@@ -21,7 +21,6 @@ class ParamsWidget:
         return self.layout
 
     def _update_classifier(self):
-        print("CLASSIFIER ", self.classifier_options.get_current_text())
         self._remove_current_classifier_options()
         selection = self.classifier_options.get_current_text()
         if selection == CLASSIFIERS[0]:

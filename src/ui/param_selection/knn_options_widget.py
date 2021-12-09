@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QComboBox, QLabel, QSlider, QVBoxLayout, QHBoxLayout, QWidget, QGroupBox, QCheckBox)
 from ui.params import params
-from utils.constants import DISTANCE_MEASURES, DISTANCE_MEASURES_ADDRESS
+from utils.constants import DISTANCE_MEASURES, DISTANCE_MEASURES_URL
 
 
 class KNNOptionsWidget:
@@ -60,7 +60,7 @@ class DistanceMeasureSelector:
             self._update_distance_measure)
 
         self.link_label = HyperlinkLabel(
-            "Distance measure: ", DISTANCE_MEASURES_ADDRESS)
+            "Distance measure: ", DISTANCE_MEASURES_URL)
 
         self.layout.addWidget(self.link_label.get_label())
         self.layout.addWidget(self.selector)
@@ -69,7 +69,6 @@ class DistanceMeasureSelector:
         return self.widget
 
     def _update_distance_measure(self):
-        print("DIST MEASURE ", self.selector.currentText())
         params.set_distance_measure(self.selector.currentText())
 
 
@@ -95,7 +94,6 @@ class KValueSelector:
         return self.widget
 
     def _update_k(self):
-        print("K ", self.slider.value())
         params.set_k(self.slider.value())
         self.label.setText(f"K: {params.get_k()}")
 
@@ -124,7 +122,6 @@ class ThresholdSelector:
         return self.widget
 
     def _update_grayscale_threshold(self):
-        print("GRAYSCALE ", self.slider.value())
         params.set_grayscale_threshold(self.slider.value())
         self.label.setText(
             f"Grayscale threshold: {self.slider.value()}")
@@ -160,7 +157,6 @@ class TestDataSizeSelector:
         return self.widget
 
     def _update_test_data_size(self):
-        print("TEST DATA SIZE ", self.slider.value())
         params.set_test_data_size(self.slider.value())
         self.size_label.setText(
             f"Test dataset size: {params.get_test_data_size()}")
@@ -199,7 +195,6 @@ class TrainDataSizeSelector:
         return self.widget
 
     def _update_train_data_size(self):
-        print("TRAIN DATA SIZE ", self.slider.value())
         params.set_train_data_size(self.slider.value())
         self.label.setText(
             f"Train dataset size: {params.get_train_data_size()}")
