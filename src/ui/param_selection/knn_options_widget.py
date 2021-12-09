@@ -149,7 +149,8 @@ class TestDataSizeSelector:
             f"Test dataset size: {params.get_test_data_size()}")
         self.random_set_label = QLabel("Randomized")
         self.checkbox = QCheckBox()
-        
+        self.checkbox.stateChanged.connect(self._handle_checkbox_state_change)
+
         self.layout.addWidget(self.size_label)
         self.layout.addWidget(self.slider)
         self.layout.addWidget(self.random_set_label)
@@ -164,6 +165,9 @@ class TestDataSizeSelector:
         self.size_label.setText(
             f"Test dataset size: {params.get_test_data_size()}")
         self.update_time_estimate()
+
+    def _handle_checkbox_state_change(self):
+        params.set_use_random_test_set(self.checkbox.isChecked())
 
 
 class TrainDataSizeSelector:
@@ -184,6 +188,7 @@ class TrainDataSizeSelector:
             f"Train dataset size: {params.get_train_data_size()}")
         self.random_set_label = QLabel("Randomized")
         self.checkbox = QCheckBox()
+        self.checkbox.stateChanged.connect(self._handle_checkbox_state_change)
 
         self.layout.addWidget(self.label)
         self.layout.addWidget(self.slider)
@@ -199,3 +204,6 @@ class TrainDataSizeSelector:
         self.label.setText(
             f"Train dataset size: {params.get_train_data_size()}")
         self.update_time_estimate()
+
+    def _handle_checkbox_state_change(self):
+        params.set_use_random_train_set(self.checkbox.isChecked())

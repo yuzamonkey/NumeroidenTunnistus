@@ -84,7 +84,9 @@ class KNNClassificationThread(QRunnable):
             params.get_grayscale_threshold(),
             params.get_distance_measure(),
             params.get_test_data_size(),
-            params.get_train_data_size()
+            params.get_train_data_size(),
+            params.get_use_random_test_set(),
+            params.get_use_random_train_set()
         )
         #print(f"--- classification took {(time.time() - start_time)} seconds ---")
         self.show_results_widget()

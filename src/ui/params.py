@@ -13,6 +13,8 @@ class Params:
         self.test_data_size = 20
         self.train_data_size = 50
         self.rand_int = random.randint(0, 1000)
+        self.use_random_test_set = False
+        self.use_random_train_set = False
 
     def get_classifier(self):
         return self.classifier
@@ -46,6 +48,18 @@ class Params:
 
     def set_train_data_size(self, size):
         self.train_data_size = size
+
+    def get_use_random_test_set(self):
+        return self.use_random_test_set
+    
+    def set_use_random_test_set(self, value):
+        self.use_random_test_set = value
+
+    def get_use_random_train_set(self):
+        return self.use_random_train_set
+    
+    def set_use_random_train_set(self, value):
+        self.use_random_train_set = value
 
     def get_random_integer(self):
         return self.rand_int

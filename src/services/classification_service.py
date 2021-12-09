@@ -10,13 +10,15 @@ class ClassificationService:
         img = as_2d_arrays(image_with_threshold(imgs[idx], threshold))
         return image_as_2d_string(img)
 
-    def start_knn_classification(self, k, threshold, distance_measure, test_size, train_size):
+    def start_knn_classification(self, k, threshold, distance_measure, test_size, train_size, use_random_test_set, use_random_train_set):
         print("\nSTART KNN WITH PARAMS")
         print("K ", k)
         print("THRESHOLD ", threshold)
         print("DIST ", distance_measure)
         print("TEST_SIZE ", test_size)
         print("TRAIN_SIZE ", train_size)
+        print("RANDOM TEST", use_random_test_set)
+        print("RANDOM TRAIN", use_random_train_set)
         print("")
 
         correct_count, errors_count, errors = knn.classify_set_of_numbers(
