@@ -22,7 +22,7 @@ class ClassificationService:
         print("")
 
         correct_count, errors_count, errors = knn.classify_set_of_numbers(
-            k, threshold, test_size, train_size, distance_measure)
+            k, threshold, test_size, train_size, distance_measure, use_random_test_set, use_random_train_set)
         results.set_correct_count(correct_count)
         results.set_errors_count(errors_count)
         results.set_errors(errors)

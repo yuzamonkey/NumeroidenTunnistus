@@ -21,7 +21,7 @@ class KNN:
         self._train_imgs = images_with_threshold(self.train_imgs_data, 140)
         self._test_imgs = images_with_threshold(self.test_imgs_data, 140)
 
-    def classify_set_of_numbers(self, k, threshold, number_of_test_images, number_of_training_imgs, dist_measure="D22"):
+    def classify_set_of_numbers(self, k, threshold, number_of_test_images, number_of_training_imgs, dist_measure="D22", use_random_test_set=False, use_random_train_set=False):
         """Classifies a set of data with given parameters with k-nearest neighbor method
 
         Args:
@@ -32,10 +32,15 @@ class KNN:
             number_of_training_imgs (int): number of how many training images are used.
             Range between 1-60_000
             dist_measure (string): Distance between 2 images, D22 or D23
+            use_random_test_set (bool): Use test set that is randomized
+            use_random_train_set (bool): Use training set that is randomized
 
         Returns:
             float: Success percentage
         """
+        print("••• RANDOM TEST", use_random_test_set)
+        print("••• RANDOM TRAIN", use_random_train_set)
+
         self._train_imgs = images_with_threshold(
             self.train_imgs_data, threshold)
         self._test_imgs = images_with_threshold(self.test_imgs_data, threshold)
