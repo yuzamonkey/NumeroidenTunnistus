@@ -30,21 +30,22 @@ class KNN:
             dist_measure="D22",
             use_random_test_set=False,
             use_random_train_set=False):
-        """Classifies a set of data with given parameters with k-nearest neighbor method
+        """Classifies a set of numbers with given parameters with k-nearest neighbor method
 
         Args:
             k (int): value of k
             threshold (int): grayscale threshold. Value between 1-255
-            number_of_test_images (int): number of how many test images are wanted to be tested.
-            Range between 1-10_000
-            number_of_training_imgs (int): number of how many training images are used.
-            Range between 1-60_000
+            number_of_test_images (int): number of test images to be classified. Range between 1-10_000
+            number_of_training_imgs (int): number of training images used for comparing test images. Range between 1-60_000
             dist_measure (string): Distance between 2 images, D22 or D23
             use_random_test_set (bool): Use test set that is randomized
             use_random_train_set (bool): Use training set that is randomized
 
         Returns:
-            int, int, tuple: correct classifications, error classifications, errors as a tuple of result and index
+            tuple(int, int, tuple): 
+            number of correct classifications, 
+            number of error classifications, 
+            errors as a tuple of result and correct label and image
         """
 
         test_set_images, test_set_labels = self.get_test_set(
@@ -114,8 +115,8 @@ class KNN:
 
         Args:
             k (int): value of k
-            test_image (int[][]): number to be classified as 2d array
-            train_set_images (list[int[]]): list training images as 1d arrays
+            test_image (int[][]): number to be classified as two dimensional array
+            train_set_images (list[int[]]): list training images as one dimensional arrays
             train_set_labels (int[]): list of labels in training images
             dist_measure (string): Distance between 2 images, D22 or D23
 
@@ -123,20 +124,18 @@ class KNN:
             int: classification value
         """
 
-        k_nearest = []  # tuples: (value, index)
+        k_nearest = []
         for i in range(len(train_set_images)):  # pylint: disable=consider-using-enumerate
             if dist_measure not in DISTANCE_MEASURES:
                 raise Exception("Not a valid distance measure")
+
+            train_image = as_2d_arrays(train_set_images[i])
+
             if dist_measure == "D22":
-                dist = self._compare_d22(
-                    test_image,
-                    as_2d_arrays(train_set_images[i])
-                )
+                dist = self._compare_d22(test_image, train_image)
             if dist_measure == "D23":
-                dist = self._compare_d23(
-                    test_image,
-                    as_2d_arrays(train_set_images[i])
-                )
+                dist = self._compare_d23(test_image, train_image)
+
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
 
         result = self._result_from_k_nearest(k_nearest, train_set_labels)
@@ -167,6 +166,7 @@ class KNN:
 
         Args:
             k_nearest (tuple(distance, index)[]): current k-nearest neighbors
+            train_set_labels (int[]): train set labels used in classification
 
         Returns:
             int: classification value
@@ -187,7 +187,6 @@ class KNN:
         Returns:
             float: distance between two images
         """
-        ### f_2 = max(d(A, B), d(B, A))
         return max(self._set_dist(img1, img2), self._set_dist(img2, img1))
 
     def _compare_d23(self, img1, img2):
@@ -201,7 +200,6 @@ class KNN:
         Returns:
             float: distance between two images
         """
-        ### f_3 = (d(A,B) + d(B, A)) / 2
         return (self._set_dist(img1, img2) + self._set_dist(img2, img1)) / 2
 
     def _set_dist(self, A, B):
@@ -215,7 +213,6 @@ class KNN:
         Returns:
             float: distance between two datasets
         """
-        # d_6 = 1/N_a * ∑(a ∈ A) d(a, B)
         N_a = len(A) * len(A[0])
         sum_of_distances = 0.0
         for i in range(len(A)):  # pylint: disable=consider-using-enumerate
