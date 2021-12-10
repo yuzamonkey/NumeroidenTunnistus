@@ -133,9 +133,9 @@ class KNN:
 
             train_image = as_2d_arrays(train_set_images[i])
 
-            if dist_measure == "D22":
+            if dist_measure == DISTANCE_MEASURES[0]:
                 dist = self._compare_d22(test_image, train_image)
-            if dist_measure == "D23":
+            if dist_measure == DISTANCE_MEASURES[1]:
                 dist = self._compare_d23(test_image, train_image)
 
             k_nearest = self._update_k_nearest(k, k_nearest, (dist, i))
