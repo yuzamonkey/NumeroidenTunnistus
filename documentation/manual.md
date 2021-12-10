@@ -21,4 +21,3 @@ tai
 ```
 poetry run invoke start
 ```
-Komento `python3 src/index.py` on suositeltava tässä vaiheessa projektia, jotta jotkin tulostukset näkyvät reaaliaikaisesti konsolissa.
