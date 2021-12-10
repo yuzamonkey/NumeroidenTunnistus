@@ -80,7 +80,6 @@ def image_as_2d_string(image):
             char = "○"
             if image[i][j] == 1:
                 char = "●"
-            retval += "{0:>2}".format(
-                char)  # pylint: disable=consider-using-f-string
+            retval += "{0:>2}".format(char)  # pylint: disable=consider-using-f-string
         retval += "\n"
     return retval

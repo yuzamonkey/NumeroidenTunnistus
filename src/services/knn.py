@@ -35,16 +35,18 @@ class KNN:
         Args:
             k (int): value of k
             threshold (int): grayscale threshold. Value between 1-255
-            number_of_test_images (int): number of test images to be classified. Range between 1-10_000
-            number_of_training_imgs (int): number of training images used for comparing test images. Range between 1-60_000
+            number_of_test_images (int): number of test images to be classified.
+            Range between 1-10_000
+            number_of_training_imgs (int): number of training images used for comparing test images.
+            Range between 1-60_000
             dist_measure (string): Distance between 2 images, D22 or D23
             use_random_test_set (bool): Use test set that is randomized
             use_random_train_set (bool): Use training set that is randomized
 
         Returns:
-            tuple(int, int, tuple): 
-            number of correct classifications, 
-            number of error classifications, 
+            tuple(int, int, tuple):
+            number of correct classifications,
+            number of error classifications,
             errors as a tuple of result and correct label and image
         """
 
