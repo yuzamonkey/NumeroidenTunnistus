@@ -35,7 +35,9 @@ function classify_set_of_numbers:
 ```
 MNIST-luokka palauttaa kuvat 784-alkioisina taulukkoina, mutta ohjelma muuttaa ne 28*28 taulukoiksi. Tämän vuoksi yhden numeron tunnistamisen aikavaativuus voidaan myös tulkita olevan O(n^3) ja useamman numeron tunnistaminen O(n^4).
 
-Funktio [_point_to_set_dist](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py) hakee joukossa A olevan pisteen lähimmän pisteen joukosta B. Usein tämän aikavaativuus on O(1), mutta pahimmassa tapauksessa jokainen joukon B alkio täytyy käydä läpi. Tätä funktiota ei ole vielä täysin optimoitu.
+Funktio [_point_to_set_dist](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py) hakee joukossa A olevan pisteen lähimmän pisteen joukosta B. Usein tämän aikavaativuus on O(1), mutta pahimmassa tapauksessa jokainen joukon B alkio täytyy käydä läpi.
+
+Algoritmin tilavaativuus on O(n), sillä funktio [_point_to_set_dist](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py) käyttää aputaulukkoa lyhimmän etäisyyden etsimiseen.
 
 ## Puutteita
 
