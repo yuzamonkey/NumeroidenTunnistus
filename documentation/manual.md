@@ -35,7 +35,7 @@ Dropdown valikosta voi valita mitä luokitinta käyttää. Tämän työn palautu
 * K:n arvo määrittää kuinka monta naapuria yhden numeron tunnistamiseen käytetään.
 * Grayscale threshold määrittelee kynnyksen harmaasävylle. Kuvien pikseliarvot ovat harmaasävyarvoja välillä 1-255. Käyttäjän syöttämä arvo asetaa kynnyksen, ja vain kynnystä suuremmat arvot otetaan huomioon. Esimerkiksi arvolla 150 otetaan huomioon vain sellaiset pikselit, joiden harmaasävyarvo on suurempaa tai yhtäsuurta kuin 150. Esimerkkikuva päivittyy, kun arvoa muutetaan.
 * Test dataset size määrittää kuinka monta numeroa haluaan luokitella. 
-* Train dataset size määrittää kuinka montaa numeroa käytetään testattan numeron luokittelemiseksi.
+* Train dataset size määrittää kuinka montaa numeroa käytetään testattvan numeron luokittelemiseksi.
 * Randomized-checkbox määrittää, käytetäänkö sattumanvaraisia numeroita, vai datajoukon ensimmäisiä alkioita.
 
 ### ⚠
@@ -57,3 +57,5 @@ Luokittelun jälkeen avautuu seuraava näkymä:
 ![](./images/manual/results.png)
 
 Ohjelma näyttää luokittelun tuloksen prosentteina, sekä kuvat niistä numeroista, joiden luokittelu meni pieleen.
+
+End-nappulaa painamalla pääsee takaisin aloitusnäkymään.
