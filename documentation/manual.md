@@ -25,11 +25,11 @@ Ohjelma käynnistyy seuraavaan näkymään:
 
 ## Parametrien valinta
 
-![](.images/manual/classifier.png)
+![](./images/manual/classifier.png)
 
 Dropdown valikosta voi valita mitä luokitinta käyttää. Tämän työn palautuksessa on vain k:n lähimmän naapurin menetelmällä toteutettu luokitin.
 
-![](.images/manual/params.png)
+![](./images/manual/params.png)
 
 * Distance measure määrittää miten kahden numeron välinen etäisyys lasketaan. Linkki avaa selaimessa etäisyysmittojen määritelmät.
 * K:n arvo määrittää kuinka monta naapuria yhden numeron tunnistamiseen käytetään.
@@ -41,7 +41,6 @@ Dropdown valikosta voi valita mitä luokitinta käyttää. Tämän työn palautu
 ### ⚠
 * Sliderit toimivat parhaiten skrollaamalla.
 * Ota huomioon aika-arvio. Vaikka sulkisit ikkunan, ohjelma jatkaa taustalla niin pitkään, että luokittelu loppuu.
-### ⚠
 
 ## Laskenta käynnissä
 
