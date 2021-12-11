@@ -12,7 +12,7 @@ class Params:
         self.grayscale_threshold = 150
         self.test_data_size = 20
         self.train_data_size = 50
-        self.rand_int = random.randint(0, 1000)
+        self.example_image_index = random.randint(0, 1000)
         self.use_random_test_set = False
         self.use_random_train_set = False
 
@@ -61,8 +61,8 @@ class Params:
     def set_use_random_train_set(self, value):
         self.use_random_train_set = value
 
-    def get_random_integer(self):
-        return self.rand_int
+    def get_example_image_index(self):
+        return self.example_image_index
 
     def get_time_estimate(self):
         time_estimate = math.ceil(

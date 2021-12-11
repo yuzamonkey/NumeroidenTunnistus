@@ -13,7 +13,7 @@ class ExampleNumberImage:
 
         self.label = QLabel("")
         self.img = cs.get_image_from_test_data(
-            params.get_random_integer(),
+            params.get_example_image_index(),
             params.get_grayscale_threshold()
         )
         self.label.setText(self.img)
@@ -26,7 +26,7 @@ class ExampleNumberImage:
 
     def update(self):
         self.img = cs.get_image_from_test_data(
-            params.get_random_integer(),
+            params.get_example_image_index(),
             params.get_grayscale_threshold()
         )
         self.label.setText(self.img)
