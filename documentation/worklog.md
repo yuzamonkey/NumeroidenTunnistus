@@ -51,6 +51,7 @@ Pvm       | h |  |
 -----------|------|--------|
 9.12.2021 | 2.5 | Mahdollisuus käyttää random settejä treeni- ja testidatassa, optimointi, testien debiggausta |
 10.12.2021 | 0.5 | Siistimistä |
+11.12.2021 |  |  |
 
 ## Yhteensä
 

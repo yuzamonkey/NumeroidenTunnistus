@@ -13,28 +13,32 @@ class TestNumberClassifier(unittest.TestCase):
             10, True, 140)
 
     def test_get_test_set_returns_correct_number_of_items_when_random(self):
+        num_of_items = 200
         test_set_imgs, test_set_labels = knn.get_test_set(
-            140, False, 140)
-        self.assertEqual(len(test_set_imgs), 140)
-        self.assertEqual(len(test_set_labels), 140)
+            num_of_items, False, 140)
+        self.assertEqual(len(test_set_imgs), num_of_items)
+        self.assertEqual(len(test_set_labels), num_of_items)
 
     def test_get_train_set_returns_correct_number_of_items_when_random(self):
+        num_of_items = 200
         train_set_imgs, train_set_labels = knn.get_train_set(
-            140, False, 140)
-        self.assertEqual(len(train_set_imgs), 140)
-        self.assertEqual(len(train_set_labels), 140)
+            num_of_items, False, 140)
+        self.assertEqual(len(train_set_imgs), num_of_items)
+        self.assertEqual(len(train_set_labels), num_of_items)
 
     def test_get_test_set_returns_correct_number_of_items_when_not_random(self):
+        num_of_items = 200
         test_set_imgs, test_set_labels = knn.get_test_set(
-            140, True, 140)
-        self.assertEqual(len(test_set_imgs), 140)
-        self.assertEqual(len(test_set_labels), 140)
+            num_of_items, True, 140)
+        self.assertEqual(len(test_set_imgs), num_of_items)
+        self.assertEqual(len(test_set_labels), num_of_items)
 
     def test_get_train_set_returns_correct_number_of_items_when_not_random(self):
+        num_of_items = 200
         train_set_imgs, train_set_labels = knn.get_train_set(
-            140, True, 140)
-        self.assertEqual(len(train_set_imgs), 140)
-        self.assertEqual(len(train_set_labels), 140)
+            num_of_items, True, 140)
+        self.assertEqual(len(train_set_imgs), num_of_items)
+        self.assertEqual(len(train_set_labels), num_of_items)
 
     def test_classify_set_returns_tuple(self):
         result = self._knn.classify_set_of_numbers(3, 144, 3, 10)
