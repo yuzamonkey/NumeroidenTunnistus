@@ -66,7 +66,7 @@ def image_with_threshold(image, threshold=1):
 
 
 def image_as_2d_string(image):
-    """Takes two-dimensional image and returns it as 28*28 string
+    """Takes two-dimensional image of ones and zeros, and returns the image as 28*28 string
 
     Args:
         image (int[][]): Image as two-dimensional array

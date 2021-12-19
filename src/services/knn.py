@@ -47,7 +47,7 @@ class KNN:
             tuple(int, int, tuple):
             number of correct classifications,
             number of error classifications,
-            errors as a tuple of result and correct label and image
+            errors as a tuple of result label, correct label and image
         """
 
         test_set_images, test_set_labels = self.get_test_set(
@@ -120,7 +120,8 @@ class KNN:
             test_image (int[][]): number to be classified as two dimensional array
             train_set_images (list[int[]]): list training images as one dimensional arrays
             train_set_labels (int[]): list of labels in training images
-            dist_measure (string): Distance between 2 images, D22 or D23
+            dist_measure (string): Distance measure between two images, D22 or D23.
+            Raises exception if measure is invalid
 
         Returns:
             int: classification value
