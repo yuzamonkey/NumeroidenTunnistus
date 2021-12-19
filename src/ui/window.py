@@ -61,8 +61,6 @@ class Window(QDialog):
         self.progress_widget.start_timer()
 
     def showResultsWidget(self):
-        # self.progress_widget.stop_timer()
-
         self.clearRightGroupBox()
         self.results_widget.update()
         self.mainLayout.addWidget(self.resultsGroupBox, 0, 1)

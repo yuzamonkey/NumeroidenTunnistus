@@ -42,7 +42,8 @@ Algoritmin tilavaativuus on O(n), sillä funktio [_point_to_set_dist](https://gi
 ## Puutteita
 
 * [KNN-luokan](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py) käyttö ei ole UI:n kannalta paras mahdollinen. Esimerkiksi luokittelun reealiaikainen seuranta ei oikein ole mahdollista, ja yksittäisen numeron tunnistamista varten olisi hyvä pystyä antamaan tietty datajoukko. 
-* [ProgressWidget](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/ui/result_widgets/progress_widget.py) pyörittää kelloa koko ohjelman ajon ajan, sillä sen pysäyttäminen toisesta luokasta tulostaa konsoliin varoituksen.
+* [ProgressWidget](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/ui/result_widgets/progress_widget.py) pyörittää kelloa koko ohjelman ajon ajan, sillä sen pysäyttäminen toisesta luokasta tulostaa konsoliin varoituksen. Varoitus on ilmestynyt välillä, jos luokittelu on mennyt 100% oikein.
+* Satunnaisesti ohjelma kaatuu seuraavaan virheeseen: `segmentation fault`. Säännöllisesti ohjelma kaatuu silloin, kun luokittelu aloitetaan treenidatan koon ollessa 1. Virhe ei esiinny, jos funktiota [classify_set_of_numbers](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py) kutsutaan ohjelman sisällä (esim `index.py`-tiedostossa), vaan pelkästään UI:n kautta syötettynä parametrina.
 
 ## Parannusehdotuksia
 

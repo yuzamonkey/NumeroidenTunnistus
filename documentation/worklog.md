@@ -53,6 +53,12 @@ Pvm       | h |  |
 10.12.2021 | 0.5 | Siistimistä |
 11.12.2021 | 0.5 | Käyttöohje, release |
 
+## Viikko 7
+
+Pvm       | h |  |
+-----------|------|--------|
+19.12.2021 | 1 | Dokumentaation päivittäminen, kosmetiikkaa |
+
 ## Yhteensä
 
 Viikko       | h | 
@@ -63,4 +69,5 @@ Viikko       | h |
 4| 10.5 |
 5| 10 |
 6| 3.5 |
-=| 49 |
+7| 1 |
+=| 50 |

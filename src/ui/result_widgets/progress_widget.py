@@ -22,7 +22,6 @@ class ProgressWidget:
         self.layout.addWidget(self.time_passed_label)
 
     def _update_time_passed(self):
-        #print("UPDATE TIME")
         self.time_passed += 1
         self._update_time_labels()
 

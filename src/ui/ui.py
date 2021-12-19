@@ -11,4 +11,3 @@ class UI:
         win.setWindowTitle("Number classifier")
         win.show()
         app.exec()
-        # sys.exit(app.exec())

@@ -6,7 +6,7 @@
 
 ### Mitä on testattu, miten tämä tehtiin?
 
-Yksikkötesteillä on testattu [KNN](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py)- ja [DataRepository](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/repositories/data_repository.py)-luokka, sekä [Utils](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/utils/utils.py)-tiedoston funktiot, poislukien tulostavat funktiot.
+Yksikkötesteillä on testattu [KNN](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py)- ja [DataRepository](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/repositories/data_repository.py)-luokka, sekä [Utils](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/utils/utils.py)-tiedoston funktiot. 
 
 Suorituskykytestausta on tehty manuaalisesti ajamalla KNN-luokan metodia [classify_number](https://github.com/yuzamonkey/NumeroidenTunnistus/blob/main/src/services/knn.py) eri syötteillä.
 
