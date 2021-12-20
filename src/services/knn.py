@@ -126,12 +126,11 @@ class KNN:
         Returns:
             int: classification value
         """
+        if dist_measure not in DISTANCE_MEASURES:
+            raise Exception("Not a valid distance measure")
 
         k_nearest = []
         for i in range(len(train_set_images)):  # pylint: disable=consider-using-enumerate
-            if dist_measure not in DISTANCE_MEASURES:
-                raise Exception("Not a valid distance measure")
-
             train_image = as_2d_arrays(train_set_images[i])
 
             if dist_measure == DISTANCE_MEASURES[0]:

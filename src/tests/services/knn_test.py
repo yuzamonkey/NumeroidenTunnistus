@@ -62,7 +62,7 @@ class TestNumberClassifier(unittest.TestCase):
         k = 3
         test_image = as_2d_arrays(self.test_set_imgs[0])
         self.assertRaises(
-            Exception, self._knn.classify_number, k, test_image, self.train_set_labels, "F00")
+            Exception, self._knn.classify_number, k, test_image, self.train_set_imgs, self.train_set_labels, "F00")
 
     def test_d22_returns_maximum_of_set_distances(self):
         set1 = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
